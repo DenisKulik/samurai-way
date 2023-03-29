@@ -1,11 +1,26 @@
 import './App.scss';
+import logo from './img/logo.png';
 
-function App() {
+const App = () => {
     return (
         <div className="App">
-            Hello, samurai! Let's go!
+            <header>
+                <img src={logo} alt="logotype" />
+            </header>
+            <nav>
+                <ul>
+                    <li>Profile</li>
+                    <li>Messages</li>
+                    <li>News</li>
+                    <li>Music</li>
+                    <li>Settings</li>
+                </ul>
+            </nav>
+            <main>
+                Main content
+            </main>
         </div>
     );
-}
+};
 
 export default App;
