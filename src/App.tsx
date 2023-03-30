@@ -9,7 +9,7 @@ const App = () => {
         <div className="App">
             <Header />
             <nav className="sidebar">
-                <ul className="nav">
+                <ul className="side-nav">
                     <li className="navItem"><a href="/#">Profile</a></li>
                     <li className="navItem"><a href="/#">Messages</a></li>
                     <li className="navItem"><a href="/#">News</a></li>
