@@ -12,11 +12,11 @@ const App = () => {
             </header>
             <nav className="sidebar">
                 <ul className="nav">
-                    <li className="navItem"><a href="#">Profile</a></li>
-                    <li className="navItem"><a href="#">Messages</a></li>
-                    <li className="navItem"><a href="#">News</a></li>
-                    <li className="navItem"><a href="#">Music</a></li>
-                    <li className="navItem"><a href="#">Settings</a></li>
+                    <li className="navItem"><a href="/#">Profile</a></li>
+                    <li className="navItem"><a href="/#">Messages</a></li>
+                    <li className="navItem"><a href="/#">News</a></li>
+                    <li className="navItem"><a href="/#">Music</a></li>
+                    <li className="navItem"><a href="/#">Settings</a></li>
                 </ul>
             </nav>
             <main className="content">
