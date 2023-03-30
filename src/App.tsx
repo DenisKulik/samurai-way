@@ -1,15 +1,13 @@
 import './App.scss';
-import logo from './img/logo.png';
 import background from './img/background.jpg';
 import user from './img/user.jpg';
+import Header from './components/Header';
 
 
 const App = () => {
     return (
         <div className="App">
-            <header className="header">
-                <img className="logo-img" src={logo} alt="logotype" />
-            </header>
+            <Header />
             <nav className="sidebar">
                 <ul className="nav">
                     <li className="navItem"><a href="/#">Profile</a></li>
