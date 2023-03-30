@@ -2,21 +2,14 @@ import './App.scss';
 import background from './img/background.jpg';
 import user from './img/user.jpg';
 import Header from './components/Header';
+import Sidebar from './components/Sidebar';
 
 
 const App = () => {
     return (
         <div className="App">
             <Header />
-            <nav className="sidebar">
-                <ul className="side-nav">
-                    <li className="navItem"><a href="/#">Profile</a></li>
-                    <li className="navItem"><a href="/#">Messages</a></li>
-                    <li className="navItem"><a href="/#">News</a></li>
-                    <li className="navItem"><a href="/#">Music</a></li>
-                    <li className="navItem"><a href="/#">Settings</a></li>
-                </ul>
-            </nav>
+            <Sidebar />
             <main className="content">
                 <div>
                     <div>
