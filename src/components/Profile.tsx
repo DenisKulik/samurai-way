@@ -1,17 +1,18 @@
+import styles from './Profile.module.scss';
 import background from '../img/background.jpg';
 import user from '../img/user.jpg';
 
 const Profile = () => {
     return (
-        <div className="content">
+        <div className={styles.content}>
             <div>
                 <div>
-                    <img className="backgroundImage" src={background}
+                    <img className={styles.backgroundImage} src={background}
                          alt="background" />
                 </div>
-                <div className="userInfo">
-                    <img className="userImg" src={user} alt="user" />
-                    <h2 className="username">Martin S.</h2>
+                <div className={styles.userInfo}>
+                    <img className={styles.userImg} src={user} alt="user" />
+                    <h2 className={styles.username}>Martin S.</h2>
                 </div>
                 <div>
                     <h3>My posts</h3>
