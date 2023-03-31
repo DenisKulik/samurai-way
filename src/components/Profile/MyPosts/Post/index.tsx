@@ -1,15 +1,21 @@
 import styles from './Post.module.scss';
 import user from '../../../../img/user.jpg';
 
-const Post = () => {
+type PostPropsType = {
+    message: string,
+    likeCount: number
+}
+
+const Post = (props: PostPropsType) => {
+    const { message, likeCount } = props;
+
     return (
         <div className={styles.item}>
             <img className={styles.userImg} src={user}
                  alt="user" />
             <div className={styles.message}>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                   Accusantium culpa debitis doloribus</p>
-                <span>like</span>
+                <p>{message}</p>
+                <span>like {likeCount}</span>
             </div>
         </div>
     );

@@ -11,7 +11,10 @@ const MyPosts = () => {
                 <button className={styles.redBtn}>Add post</button>
             </div>
             <div className={styles.posts}>
-                <Post />
+                <Post message={'Have fun creating amazing things!'}
+                      likeCount={3} />
+                <Post message={'JavaScript powers modern web development.'}
+                      likeCount={5} />
             </div>
         </div>
     );
