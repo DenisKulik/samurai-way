@@ -1,0 +1,26 @@
+.item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  .userImg {
+    height: 5rem;
+    border-radius: 50%;
+  }
+
+  .message {
+    width: 100%;
+    padding: 1rem;
+    background-color: lightgray;
+    border-radius: 1rem;
+
+    p {
+      color: #1E1F24;
+    }
+
+    span {
+      color: gray;
+    }
+  }
+}
+

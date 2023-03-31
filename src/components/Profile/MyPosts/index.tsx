@@ -1,5 +1,5 @@
 import styles from './MyPosts.module.scss';
-import user from '../../../img/user.jpg';
+import Post from './Post';
 
 const MyPosts = () => {
     return (
@@ -11,12 +11,7 @@ const MyPosts = () => {
                 <button className={styles.redBtn}>Add post</button>
             </div>
             <div className={styles.posts}>
-                <div className={styles.item}>
-                    <img className={styles.userImg} src={user}
-                         alt="user" />
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                       Accusantium culpa debitis doloribus</p>
-                </div>
+                <Post />
             </div>
         </div>
     );
