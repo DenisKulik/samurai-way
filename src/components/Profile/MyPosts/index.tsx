@@ -12,9 +12,9 @@ const MyPosts = () => {
             </div>
             <div className={styles.posts}>
                 <Post message={'Have fun creating amazing things!'}
-                      likeCount={3} />
+                      likesCount={3} />
                 <Post message={'JavaScript powers modern web development.'}
-                      likeCount={5} />
+                      likesCount={5} />
             </div>
         </div>
     );

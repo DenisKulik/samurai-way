@@ -3,11 +3,11 @@ import user from '../../../../img/user.jpg';
 
 type PostPropsType = {
     message: string,
-    likeCount: number
+    likesCount: number
 }
 
 const Post = (props: PostPropsType) => {
-    const { message, likeCount } = props;
+    const { message, likesCount } = props;
 
     return (
         <div className={styles.item}>
@@ -15,7 +15,7 @@ const Post = (props: PostPropsType) => {
                  alt="user" />
             <div className={styles.message}>
                 <p>{message}</p>
-                <span>like {likeCount}</span>
+                <span>like {likesCount}</span>
             </div>
         </div>
     );
