@@ -1,12 +1,12 @@
 import './App.scss';
-import Header from './components/Header/Header';
+import Index from './components/Header';
 import Sidebar from './components/Sidebar';
 import Profile from './components/Profile';
 
 const App = () => {
     return (
         <div className="App">
-            <Header />
+            <Index />
             <Sidebar />
             <Profile />
         </div>

@@ -1,7 +1,7 @@
 import styles from './Header.module.scss';
 import logo from '../../img/logo.png';
 
-const Header = () => {
+const Index = () => {
     return (
         <header className={styles.header}>
             <img className={styles.logo} src={logo} alt="logotype" />
@@ -9,4 +9,4 @@ const Header = () => {
     );
 };
 
-export default Header;
+export default Index;
