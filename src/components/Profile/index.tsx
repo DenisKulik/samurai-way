@@ -2,7 +2,7 @@ import styles from './Profile.module.scss';
 import background from '../../img/background.jpg';
 import user from '../../img/user.jpg';
 
-const Index = () => {
+const Profile = () => {
     return (
         <div className={styles.content}>
             <div>
@@ -33,4 +33,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Profile;

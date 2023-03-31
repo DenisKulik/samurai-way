@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.scss';
 
-const Index = () => {
+const Sidebar = () => {
     return (
         <nav className={styles.sidebar}>
             <ul className={styles.nav}>
@@ -16,4 +16,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Sidebar;
