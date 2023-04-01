@@ -1,4 +1,3 @@
-import React from 'react';
 import styles from './Post.module.scss';
 import user from '../../../../img/user.jpg';
 
@@ -7,7 +6,7 @@ type PostPropsType = {
     likesCount: number
 }
 
-const Post: React.FC<PostPropsType> = (props) => {
+const Post = (props: PostPropsType) => {
     const { message, likesCount } = props;
 
     return (
