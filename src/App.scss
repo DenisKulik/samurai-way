@@ -8,6 +8,12 @@
                        'sidebar content';
   margin: 0 auto;
   padding: 1rem;
+
+  .content {
+    grid-area: content;
+    font-size: 1.6rem;
+    color: white;
+  }
 }
 
 
