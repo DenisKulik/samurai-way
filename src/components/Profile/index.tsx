@@ -5,18 +5,17 @@ import MyPosts from './MyPosts';
 
 const Profile = () => {
     return (
-        <div className={styles.content}>
-            <div className={styles.header}>
-                <img className={styles.backgroundImage} src={background}
+        <>
+            <div className={ styles.header }>
+                <img className={ styles.backgroundImage } src={ background }
                      alt="background" />
-                <div className={styles.userInfo}>
-                    <img className={styles.userImg} src={user} alt="user" />
-                    <h2 className={styles.username}>Martin S.</h2>
+                <div className={ styles.userInfo }>
+                    <img className={ styles.userImg } src={ user } alt="user" />
+                    <h2 className={ styles.username }>Martin S.</h2>
                 </div>
             </div>
-
             <MyPosts />
-        </div>
+        </>
     );
 };
 
