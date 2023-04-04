@@ -11,6 +11,7 @@ const App = () => {
             <div className="content">
                 {/*hide profile*/ }
                 {/*hide profile*/ }
+                {/*hide profile*/ }
                 {/*<Profile />*/ }
                 <Dialogs />
             </div>
