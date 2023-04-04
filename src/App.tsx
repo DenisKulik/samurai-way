@@ -1,14 +1,15 @@
 import './App.scss';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import Profile from './components/Profile';
+import Dialogs from './components/Dialogs';
 
 const App = () => {
     return (
         <div className="App">
             <Header />
             <Sidebar />
-            <Profile />
+            {/*<Profile />*/ }
+            <Dialogs />
         </div>
     );
 };
