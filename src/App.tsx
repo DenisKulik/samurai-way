@@ -9,6 +9,7 @@ const App = () => {
             <Header />
             <Sidebar />
             <div className="content">
+                {/*hide profile*/ }
                 {/*<Profile />*/ }
                 <Dialogs />
             </div>
