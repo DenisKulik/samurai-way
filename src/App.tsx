@@ -10,6 +10,7 @@ const App = () => {
             <Sidebar />
             <div className="content">
                 {/*hide profile*/ }
+                {/*hide profile*/ }
                 {/*<Profile />*/ }
                 <Dialogs />
             </div>
