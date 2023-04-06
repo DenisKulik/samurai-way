@@ -1,44 +1,30 @@
-import { NavLink } from 'react-router-dom';
 import styles from './Dialogs.module.scss';
+import Dialog from './Dialog';
+import Message from './Message';
+
 
 const Dialogs = () => {
     return (
         <div className={ styles.dialogs }>
             <div className={ styles.dialogsItems }>
-                <div className={ `${ styles.item } ${ styles.active }` }>
-                    <NavLink to="/dialogs/1">William</NavLink>
-                </div>
-                <div className={ styles.item }>
-                    <NavLink to="/dialogs/2">Emma</NavLink>
-                </div>
-                <div className={ styles.item }>
-                    <NavLink to="/dialogs/3">James</NavLink>
-                </div>
-                <div className={ styles.item }>
-                    <NavLink to="/dialogs/4">Addison</NavLink>
-                </div>
-                <div className={ styles.item }>
-                    <NavLink to="/dialogs/5">Ethan</NavLink>
-                </div>
-                <div className={ styles.item }>
-                    <NavLink to="/dialogs/6">Hailey</NavLink>
-                </div>
+                <Dialog id={ 1 } name={ 'William' } isActive />
+                <Dialog id={ 2 } name={ 'Emma' } isActive={ false } />
+                <Dialog id={ 3 } name={ 'James' } isActive={ false } />
+                <Dialog id={ 4 } name={ 'Addison' } isActive={ false } />
+                <Dialog id={ 5 } name={ 'Ethan' } isActive={ false } />
+                <Dialog id={ 6 } name={ 'Hailey' } isActive={ false } />
             </div>
             <div className={ styles.dialogsMessages }>
-                <div className={ styles.message }>
-                    Hey, any advice for someone starting to learn programming?
-                </div>
-                <div className={ styles.message }>
-                    Sure! Start with a beginner-friendly language like
-                    JavaScript, and practice coding every day.
-                </div>
-                <div className={ styles.message }>
-                    Got it. Any specific resources you recommend?
-                </div>
-                <div className={ styles.message }>
-                    Codecademy and Udemy have great courses, and there are tons
-                    of coding blogs and YouTube tutorials out there too.
-                </div>
+                <Message
+                    message="Hey, any advice for someone starting to learn programming?" />
+                <Message
+                    message="Sure! Start with a beginner-friendly language like
+                    JavaScript, and practice coding every day." />
+                <Message
+                    message="Got it. Any specific resources you recommend?" />
+                <Message
+                    message="Codecademy and Udemy have great courses, and there are tons
+                    of coding blogs and YouTube tutorials out there too." />
             </div>
         </div>
     );
