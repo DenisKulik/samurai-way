@@ -2,7 +2,7 @@
   padding: 2rem;
 
   &.active {
-    background-color: #4f4f4f;
+    background-color: var(--color-primary-dark);
   }
 
   a {

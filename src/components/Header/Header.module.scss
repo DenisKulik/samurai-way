@@ -1,7 +1,7 @@
 .header {
   grid-area: header;
   overflow: hidden;
-  background-color: #333;
+  background-color: var(--color-secondary);
   border-radius: 2rem;
 
   .logo {

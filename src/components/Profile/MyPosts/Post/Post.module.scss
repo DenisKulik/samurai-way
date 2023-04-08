@@ -12,15 +12,15 @@
   .message {
     width: 100%;
     padding: 1rem;
-    background-color: lightgray;
+    background-color: var(--color-secondary-light);
     border-radius: 1rem;
 
     p {
-      color: #1E1F24;
+      color: var(--color-secondary-dark);
     }
 
     span {
-      color: gray;
+      color: var(--color-secondary-light);
     }
   }
 }

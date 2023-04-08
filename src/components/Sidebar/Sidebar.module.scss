@@ -2,7 +2,7 @@
   grid-area: sidebar;
   font-size: 1.6rem;
   color: white;
-  background-color: #333;
+  background-color: var(--color-secondary);
   border-radius: 2rem;
 
   .nav {
@@ -17,7 +17,7 @@
         text-decoration: none;
 
         &.active {
-          color: #eb2f64;
+          color: var(--color-primary);
         }
       }
     }

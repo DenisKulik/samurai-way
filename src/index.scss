@@ -1,3 +1,14 @@
+:root {
+  --color-primary: #ea2f64;
+  --color-primary-light: #ff2c60;
+  --color-primary-dark: #b02d59;
+
+  --color-secondary: #333333;
+  --color-secondary-light: #eeeeee;
+  --color-secondary-dark: #1E1F24;
+}
+
+
 *,
 *::before,
 *::after {
@@ -17,7 +28,7 @@ body {
   sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #1E1F24;
+  background-color: var(--color-secondary-dark);
 }
 
 code {
