@@ -10,7 +10,20 @@ const ProfileInfo = () => {
                      alt="background" />
                 <div className={ styles.user }>
                     <img className={ styles.userImg } src={ user } alt="user" />
-                    <h2 className={ styles.username }>Martin S.</h2>
+                    <div className={ styles.inner }>
+                        <h2 className={ styles.username }>
+                            Liam Reynolds
+                            <span>online</span>
+                        </h2>
+                        <p className={ styles.residence }>
+                            Huntington Beach, California
+                        </p>
+                        <p className={ styles.status }>
+                            Just spent the past 8 hours debugging my code.
+                            Finally found the issue and feeling like a
+                            programming wizard! 💻🧙‍♂️ #programmerlife #debugging
+                            #codingstruggles</p>
+                    </div>
                 </div>
             </div>
         )
