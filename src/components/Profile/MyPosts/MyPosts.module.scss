@@ -25,9 +25,23 @@
       padding: 1rem 2rem;
       font-size: 1.4rem;
       color: white;
+      cursor: pointer;
       border: none;
       border-radius: 50px;
       background-color: var(--color-primary);
+      transition: all .2s;
+
+      &:hover {
+        transform: translateY(-0.3rem);
+        box-shadow: 0 1.5rem 1rem rgb(0 0 0 / 20%);
+      }
+
+      &:active,
+      &:focus {
+        outline: 0;
+        transform: translateY(-0.1rem);
+        box-shadow: 0 0.75rem 0.5rem rgb(0 0 0 / 20%);
+      }
     }
   }
 
