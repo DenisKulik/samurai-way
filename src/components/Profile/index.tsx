@@ -1,6 +1,6 @@
-import { PostType } from '../../index';
 import MyPosts from './MyPosts';
 import ProfileInfo from './ProfileInfo';
+import { PostType } from '../../redux/state';
 
 type ProfilePropsType = {
     postsData: PostType[]

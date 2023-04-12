@@ -1,7 +1,7 @@
 import styles from './Dialogs.module.scss';
-import { DialogType, MessageType } from '../../index';
 import Dialog from './Dialog';
 import Message from './Message';
+import { DialogType, MessageType } from '../../redux/state';
 
 type DialogsPropsType = {
     dialogsData: DialogType[]

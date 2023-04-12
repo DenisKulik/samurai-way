@@ -1,6 +1,6 @@
 import styles from './MyPosts.module.scss';
-import { PostType } from '../../../index';
 import Post from './Post';
+import { PostType } from '../../../redux/state';
 
 type MyPostsPropsType = {
     postsData: PostType[]
