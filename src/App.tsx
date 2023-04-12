@@ -1,4 +1,4 @@
-import { BrowserRouter, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -15,21 +15,19 @@ const App = (props: AppPropsType) => {
     const { postsData } = props.state.profile;
 
     return (
-        <BrowserRouter>
-            <div className="App">
-                <Header />
-                <Sidebar />
-                <div className="content">
-                    <Route path="/profile" render={ () => (
-                        <Profile postsData={ postsData } />
-                    ) } />
-                    <Route path="/dialogs" render={ () => (
-                        <Dialogs dialogsData={ dialogsData }
-                                 messagesData={ messagesData } />
-                    ) } />
-                </div>
+        <div className="App">
+            <Header />
+            <Sidebar />
+            <div className="content">
+                <Route path="/profile" render={ () => (
+                    <Profile postsData={ postsData } />
+                ) } />
+                <Route path="/dialogs" render={ () => (
+                    <Dialogs dialogsData={ dialogsData }
+                             messagesData={ messagesData } />
+                ) } />
             </div>
-        </BrowserRouter>
+        </div>
     );
 };
 
