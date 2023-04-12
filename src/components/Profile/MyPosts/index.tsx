@@ -1,19 +1,13 @@
 import styles from './MyPosts.module.scss';
+import { PostType } from '../../../index';
 import Post from './Post';
 
-const MyPosts = () => {
-    const postsData = [
-        {
-            id: 1,
-            message: 'Have fun creating amazing things!',
-            likesCount: 3
-        },
-        {
-            id: 2,
-            message: 'JavaScript powers modern web development.',
-            likesCount: 5
-        },
-    ];
+type MyPostsPropsType = {
+    postsData: PostType[]
+}
+
+const MyPosts = (props: MyPostsPropsType) => {
+    const { postsData } = props;
 
     return (
         <div className={ styles.container }>

@@ -1,36 +1,15 @@
 import styles from './Dialogs.module.scss';
+import { DialogType, MessageType } from '../../index';
 import Dialog from './Dialog';
 import Message from './Message';
 
+type DialogsPropsType = {
+    dialogsData: DialogType[]
+    messagesData: MessageType[]
+}
 
-const Dialogs = () => {
-    const dialogsData = [
-        { id: 1, name: 'William' },
-        { id: 2, name: 'Emma' },
-        { id: 3, name: 'James' },
-        { id: 4, name: 'Addison' },
-        { id: 5, name: 'Ethan' },
-        { id: 6, name: 'Hailey' },
-    ];
-
-    const messagesData = [
-        {
-            id: 1,
-            message: 'Hey, any advice for someone starting to learn programming?'
-        },
-        {
-            id: 2,
-            message: 'Sure! Start with a beginner-friendly language like JavaScript, and practice coding every day.'
-        },
-        {
-            id: 3,
-            message: 'Got it. Any specific resources you recommend?'
-        },
-        {
-            id: 4,
-            message: 'Codecademy and Udemy have great courses, and there are tons of coding blogs and YouTube tutorials out there too.'
-        },
-    ];
+const Dialogs = (props: DialogsPropsType) => {
+    const { dialogsData, messagesData } = props;
 
     return (
         <div className={ styles.dialogs }>

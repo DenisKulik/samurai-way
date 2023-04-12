@@ -1,11 +1,18 @@
+import { PostType } from '../../index';
 import MyPosts from './MyPosts';
-import ProfileInfo from './Profile';
+import ProfileInfo from './ProfileInfo';
 
-const Profile = () => {
+type ProfilePropsType = {
+    postsData: PostType[]
+}
+
+const Profile = (props: ProfilePropsType) => {
+    const { postsData } = props;
+
     return (
         <>
             <ProfileInfo />
-            <MyPosts />
+            <MyPosts postsData={ postsData } />
         </>
     );
 };
