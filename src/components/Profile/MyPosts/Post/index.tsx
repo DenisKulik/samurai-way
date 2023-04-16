@@ -10,12 +10,12 @@ const Post = (props: PostPropsType) => {
     const { message, likesCount } = props;
 
     return (
-        <div className={styles.item}>
-            <img className={styles.userImg} src={user}
-                 alt="user" />
-            <div className={styles.message}>
-                <p>{message}</p>
-                <span>like {likesCount}</span>
+        <div className={ styles.item }>
+            <img className={ styles.userImg } src={ user }
+                 alt="user" width={ 50 } height={ 50 } />
+            <div className={ styles.message }>
+                <p>{ message }</p>
+                <span>like { likesCount }</span>
             </div>
         </div>
     );

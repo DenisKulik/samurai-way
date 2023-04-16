@@ -9,7 +9,8 @@ const ProfileInfo = () => {
                 <img className={ styles.backgroundImage } src={ background }
                      alt="background" />
                 <div className={ styles.user }>
-                    <img className={ styles.userImg } src={ user } alt="user" />
+                    <img className={ styles.userImg } src={ user } alt="user"
+                         width={ 100 } height={ 100 } />
                     <div className={ styles.inner }>
                         <h2 className={ styles.username }>
                             Liam Reynolds
