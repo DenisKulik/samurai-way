@@ -6,8 +6,8 @@ const ProfileInfo = () => {
     return (
         (
             <div className={ styles.profileInfo }>
-                <img className={ styles.backgroundImage } src={ background }
-                     alt="background" />
+                <div className={ styles.OwnerPageCover }
+                     style={ { backgroundImage: `url(${ background })` } }></div>
                 <div className={ styles.user }>
                     <img className={ styles.userImg } src={ user } alt="user"
                          width={ 100 } height={ 100 } />

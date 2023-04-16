@@ -4,11 +4,10 @@
   background-color: #333;
   border-radius: 2rem;
 
-  .backgroundImage {
-    width: 100%;
+  .OwnerPageCover {
     height: 15rem;
-    object-fit: cover;
-    object-position: top;
+    background-size: cover;
+    background-position: top;
     border-radius: 2rem;
   }
 
