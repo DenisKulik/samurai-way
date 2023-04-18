@@ -1,7 +1,9 @@
+import React from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
 import { DialogType, MessageType } from '../../redux/state';
+
 
 type DialogsPropsType = {
     dialogsData: DialogType[]
@@ -10,6 +12,13 @@ type DialogsPropsType = {
 
 const Dialogs = (props: DialogsPropsType) => {
     const { dialogsData, messagesData } = props;
+
+    const messageRef = React.createRef<HTMLTextAreaElement>();
+
+    const sendMessage = () => {
+        const newMessage = messageRef.current?.value;
+        alert(newMessage);
+    };
 
     return (
         <div className={ styles.dialogs }>
@@ -23,11 +32,21 @@ const Dialogs = (props: DialogsPropsType) => {
                 }
             </div>
             <div className={ styles.dialogsMessages }>
-                {
-                    messagesData.map(item => (
-                        <Message key={ item.id } message={ item.message } />
-                    ))
-                }
+                <div className={ styles.dialogWrapper }>
+                    {
+                        messagesData.map(item => (
+                            <Message key={ item.id } message={ item.message } />
+                        ))
+                    }
+                </div>
+                <div className={ styles.newMessage }>
+                    <textarea className={ styles.messageField }
+                              ref={ messageRef }
+                              rows={ 1 }></textarea>
+                    <button className={ styles.redBtn } onClick={ sendMessage }>
+                        Send
+                    </button>
+                </div>
             </div>
         </div>
     );
