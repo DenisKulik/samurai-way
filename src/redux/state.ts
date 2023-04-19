@@ -1,3 +1,5 @@
+import renderEntireTree from '../render';
+
 export type StateType = {
     profile: ProfileType
     messages: MessagesType
@@ -80,5 +82,6 @@ export const addPost = (postMessage: string): void => {
         likesCount: 0
     };
 
-    state.profile.postsData.push(newPost);
+    state.profile.postsData.unshift(newPost);
+    renderEntireTree(state);
 };

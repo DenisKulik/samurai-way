@@ -15,10 +15,11 @@ const MyPosts = (props: MyPostsPropsType) => {
 
     const addPostHandler = () => {
         if (postMessageRef.current) {
-            const postMessage = postMessageRef.current.value;
-            if (!postMessage.trim()) return;
+            const postMessage = postMessageRef.current.value.trim();
+            if (!postMessage) return;
 
             addPost(postMessage);
+            postMessageRef.current.value = '';
         }
     };
 
