@@ -4,10 +4,11 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
-import { StateType } from './redux/state';
+import { addPost, StateType } from './redux/state';
 
 type AppPropsType = {
     state: StateType
+    addPost: (postMessage: string) => void
 }
 
 const App = (props: AppPropsType) => {
@@ -20,7 +21,7 @@ const App = (props: AppPropsType) => {
             <Sidebar />
             <div className="content">
                 <Route path="/profile" render={ () => (
-                    <Profile postsData={ postsData } />
+                    <Profile postsData={ postsData } addPost={ addPost } />
                 ) } />
                 <Route path="/dialogs" render={ () => (
                     <Dialogs dialogsData={ dialogsData }

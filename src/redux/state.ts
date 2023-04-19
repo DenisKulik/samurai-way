@@ -72,3 +72,13 @@ export const state: StateType = {
         ],
     },
 };
+
+export const addPost = (postMessage: string): void => {
+    const newPost: PostType = {
+        id: new Date().getTime(),
+        message: postMessage,
+        likesCount: 0
+    };
+
+    state.profile.postsData.push(newPost);
+};
