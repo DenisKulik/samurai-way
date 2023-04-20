@@ -1,5 +1,6 @@
 import styles from './Post.module.scss';
 import user from '../../../../img/user.jpg';
+import { RiHeart3Line } from 'react-icons/ri';
 
 type PostPropsType = {
     message: string,
@@ -15,7 +16,10 @@ const Post = (props: PostPropsType) => {
                  alt="user" width={ 50 } height={ 50 } />
             <div className={ styles.message }>
                 <p>{ message }</p>
-                <span>like { likesCount }</span>
+                <div className={ styles.likesContainer }>
+                    <RiHeart3Line />
+                    { likesCount }
+                </div>
             </div>
         </div>
     );

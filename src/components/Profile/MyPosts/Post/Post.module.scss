@@ -15,13 +15,30 @@
     border-radius: 1rem;
 
     p {
+      margin-bottom: 0.5rem;
       color: var(--color-secondary-dark);
     }
 
-    span {
+    .likesContainer {
+      max-width: 2.5rem;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 3px;
+      margin-left: 0.5rem;
+      cursor: pointer;
       opacity: 0.5;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       color: var(--color-secondary-dark);
+
+      svg {
+        width: 1.4rem;
+        height: 1.4rem;
+      }
+
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }
