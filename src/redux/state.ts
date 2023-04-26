@@ -1,4 +1,4 @@
-import renderEntireTree from '../render';
+let renderEntireTree = (): void => {};
 
 export type StateType = {
     profile: ProfileType
@@ -79,6 +79,10 @@ export const state: StateType = {
     },
 };
 
+export const subscribe = (observer: () => void) => {
+    renderEntireTree = observer;
+};
+
 export const addMessage = (): void => {
     if (!state.messages.currentMessageText.trim()) return;
 
@@ -89,14 +93,13 @@ export const addMessage = (): void => {
 
     state.messages.messagesData.push(newMessage);
     state.messages.currentMessageText = '';
-    renderEntireTree(state);
+    renderEntireTree();
 };
 
 export const updateCurrentMessageText = (text: string): void => {
     state.messages.currentMessageText = text;
-    renderEntireTree(state);
+    renderEntireTree();
 };
-
 
 export const addPost = (): void => {
     if (!state.profile.currentPostText.trim()) return;
@@ -109,10 +112,10 @@ export const addPost = (): void => {
 
     state.profile.postsData.unshift(newPost);
     state.profile.currentPostText = '';
-    renderEntireTree(state);
+    renderEntireTree();
 };
 
 export const updateCurrentPostText = (text: string): void => {
     state.profile.currentPostText = text;
-    renderEntireTree(state);
+    renderEntireTree();
 };
