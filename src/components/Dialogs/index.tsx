@@ -1,4 +1,4 @@
-import React from 'react';
+import { ChangeEvent } from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
@@ -8,17 +8,28 @@ import { DialogType, MessageType } from '../../redux/state';
 type DialogsPropsType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
+    currentMessageText: string
+    addMessage: () => void
+    updateCurrentMessageText: (currentMessage: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-    const { dialogsData, messagesData } = props;
+    const {
+        dialogsData,
+        messagesData,
+        currentMessageText,
+        addMessage,
+        updateCurrentMessageText
+    } = props;
 
-    const messageRef = React.createRef<HTMLTextAreaElement>();
+    const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
+        let message = e.currentTarget.value;
+        if (!message) message = '';
 
-    const sendMessage = () => {
-        const newMessage = messageRef.current?.value;
-        alert(newMessage);
+        updateCurrentMessageText(message);
     };
+
+    const sendMessage = () => addMessage();
 
     return (
         <div className={ styles.dialogs }>
@@ -41,8 +52,9 @@ const Dialogs = (props: DialogsPropsType) => {
                 </div>
                 <div className={ styles.newMessage }>
                     <textarea className={ styles.messageField }
-                              ref={ messageRef }
-                              rows={ 1 }></textarea>
+                              onChange={ onChangeMessageHandler }
+                              value={ currentMessageText }
+                              rows={ 1 } />
                     <button className={ styles.redBtn } onClick={ sendMessage }>
                         Send
                     </button>

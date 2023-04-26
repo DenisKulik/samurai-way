@@ -8,14 +8,25 @@ import { StateType } from './redux/state';
 
 type AppPropsType = {
     state: StateType
+    addMessage: () => void
     addPost: () => void
+    updateCurrentMessageText: (currentMessage: string) => void
     updateCurrentPostText: (currentPost: string) => void
 }
 
 const App = (props: AppPropsType) => {
-    const { dialogsData, messagesData } = props.state.messages;
+    const {
+        dialogsData,
+        messagesData,
+        currentMessageText
+    } = props.state.messages;
     const { postsData, currentPostText } = props.state.profile;
-    const { addPost, updateCurrentPostText } = props;
+    const {
+        addMessage,
+        addPost,
+        updateCurrentMessageText,
+        updateCurrentPostText
+    } = props;
 
     return (
         <div className="App">
@@ -30,7 +41,10 @@ const App = (props: AppPropsType) => {
                 ) } />
                 <Route path="/dialogs" render={ () => (
                     <Dialogs dialogsData={ dialogsData }
-                             messagesData={ messagesData } />
+                             messagesData={ messagesData }
+                             currentMessageText={ currentMessageText }
+                             addMessage={ addMessage }
+                             updateCurrentMessageText={ updateCurrentMessageText } />
                 ) } />
             </div>
         </div>

@@ -13,6 +13,7 @@ type ProfileType = {
 type MessagesType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
+    currentMessageText: string
 }
 
 export type DialogType = {
@@ -45,7 +46,7 @@ export const state: StateType = {
                 likesCount: 5
             },
         ],
-        currentPostText: ''
+        currentPostText: '',
     },
     messages: {
         dialogsData: [
@@ -74,8 +75,28 @@ export const state: StateType = {
                 message: 'Codecademy and Udemy have great courses, and there are tons of coding blogs and YouTube tutorials out there too.'
             },
         ],
+        currentMessageText: '',
     },
 };
+
+export const addMessage = (): void => {
+    if (!state.messages.currentMessageText.trim()) return;
+
+    const newMessage: MessageType = {
+        id: new Date().getTime(),
+        message: state.messages.currentMessageText,
+    };
+
+    state.messages.messagesData.push(newMessage);
+    state.messages.currentMessageText = '';
+    renderEntireTree(state);
+};
+
+export const updateCurrentMessageText = (text: string): void => {
+    state.messages.currentMessageText = text;
+    renderEntireTree(state);
+};
+
 
 export const addPost = (): void => {
     if (!state.profile.currentPostText.trim()) return;
