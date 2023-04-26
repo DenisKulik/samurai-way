@@ -7,6 +7,7 @@ export type StateType = {
 
 type ProfileType = {
     postsData: PostType[]
+    currentPostText: string
 };
 
 type MessagesType = {
@@ -44,6 +45,7 @@ export const state: StateType = {
                 likesCount: 5
             },
         ],
+        currentPostText: ''
     },
     messages: {
         dialogsData: [
@@ -75,13 +77,21 @@ export const state: StateType = {
     },
 };
 
-export const addPost = (postMessage: string): void => {
+export const addPost = (): void => {
+    if (!state.profile.currentPostText.trim()) return;
+
     const newPost: PostType = {
         id: new Date().getTime(),
-        message: postMessage,
+        message: state.profile.currentPostText,
         likesCount: 0
     };
 
     state.profile.postsData.unshift(newPost);
+    state.profile.currentPostText = '';
+    renderEntireTree(state);
+};
+
+export const updateCurrentPostText = (text: string): void => {
+    state.profile.currentPostText = text;
     renderEntireTree(state);
 };

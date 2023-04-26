@@ -4,16 +4,18 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
-import { addPost, StateType } from './redux/state';
+import { StateType } from './redux/state';
 
 type AppPropsType = {
     state: StateType
-    addPost: (postMessage: string) => void
+    addPost: () => void
+    updateCurrentPostText: (currentPost: string) => void
 }
 
 const App = (props: AppPropsType) => {
     const { dialogsData, messagesData } = props.state.messages;
-    const { postsData } = props.state.profile;
+    const { postsData, currentPostText } = props.state.profile;
+    const { addPost, updateCurrentPostText } = props;
 
     return (
         <div className="App">
@@ -21,7 +23,10 @@ const App = (props: AppPropsType) => {
             <Sidebar />
             <div className="content">
                 <Route path="/profile" render={ () => (
-                    <Profile postsData={ postsData } addPost={ addPost } />
+                    <Profile postsData={ postsData }
+                             currentPostText={ currentPostText }
+                             addPost={ addPost }
+                             updateCurrentPostText={ updateCurrentPostText } />
                 ) } />
                 <Route path="/dialogs" render={ () => (
                     <Dialogs dialogsData={ dialogsData }

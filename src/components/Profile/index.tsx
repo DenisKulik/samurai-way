@@ -4,16 +4,25 @@ import { PostType } from '../../redux/state';
 
 type ProfilePropsType = {
     postsData: PostType[]
-    addPost: (postMessage: string) => void
+    currentPostText: string
+    addPost: () => void
+    updateCurrentPostText: (currentPost: string) => void
 }
 
 const Profile = (props: ProfilePropsType) => {
-    const { postsData, addPost } = props;
+    const {
+        postsData,
+        currentPostText,
+        addPost,
+        updateCurrentPostText
+    } = props;
 
     return (
         <>
             <ProfileInfo />
-            <MyPosts postsData={ postsData } addPost={ addPost } />
+            <MyPosts postsData={ postsData } currentPostText={ currentPostText }
+                     addPost={ addPost }
+                     updateCurrentPostText={ updateCurrentPostText } />
         </>
     );
 };
