@@ -2,15 +2,14 @@ import { ChangeEvent } from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
-import { DialogType, MessageType } from '../../redux/state';
+import { ActionType, DialogType, MessageType } from '../../redux/state';
 
 
 type DialogsPropsType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
     currentMessageText: string
-    addMessage: () => void
-    updateCurrentMessageText: (currentMessage: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -18,27 +17,27 @@ const Dialogs = (props: DialogsPropsType) => {
         dialogsData,
         messagesData,
         currentMessageText,
-        addMessage,
-        updateCurrentMessageText
+        dispatch
     } = props;
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let message = e.currentTarget.value;
         if (!message) message = '';
-
-        updateCurrentMessageText(message);
+        dispatch({ type: 'UPDATE-CURRENT-MESSAGE', message });
     };
 
-    const sendMessage = () => addMessage();
+    const sendMessage = () => dispatch({ type: 'ADD-MESSAGE' });
 
     return (
         <div className={ styles.dialogs }>
             <div className={ styles.dialogsItems }>
                 {
                     dialogsData.map(user => (
-                        <Dialog key={ user.id } id={ user.id }
-                                name={ user.name }
-                                isActive={ false } />
+                        <Dialog
+                            key={ user.id }
+                            id={ user.id }
+                            name={ user.name }
+                            isActive={ false } />
                     ))
                 }
             </div>
@@ -51,10 +50,11 @@ const Dialogs = (props: DialogsPropsType) => {
                     }
                 </div>
                 <div className={ styles.newMessage }>
-                    <textarea className={ styles.messageField }
-                              onChange={ onChangeMessageHandler }
-                              value={ currentMessageText }
-                              rows={ 1 } />
+                    <textarea
+                        className={ styles.messageField }
+                        onChange={ onChangeMessageHandler }
+                        value={ currentMessageText }
+                        rows={ 1 } />
                     <button className={ styles.redBtn } onClick={ sendMessage }>
                         Send
                     </button>

@@ -1,40 +1,38 @@
 import React, { ChangeEvent } from 'react';
 import styles from './MyPosts.module.scss';
-import { PostType } from '../../../redux/state';
+import { ActionType, PostType } from '../../../redux/state';
 import Post from './Post';
 
 type MyPostsPropsType = {
     postsData: PostType[]
     currentPostText: string
-    addPost: () => void
-    updateCurrentPostText: (currentPost: string) => void
+    dispatch: (action: ActionType) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
     const {
         postsData,
         currentPostText,
-        addPost,
-        updateCurrentPostText
+        dispatch
     } = props;
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let postMessage = e.currentTarget.value;
-        if (!postMessage) postMessage = '';
-
-        updateCurrentPostText(postMessage);
+        let postText = e.currentTarget.value;
+        if (!postText) postText = '';
+        dispatch({ type: 'UPDATE-CURRENT-POST-TEXT', postText });
     };
 
-    const addPostHandler = () => addPost();
+    const addPostHandler = () => dispatch({ type: 'ADD-POST' });
 
     return (
         <div className={ styles.container }>
             <h3 className={ styles.heading }>My posts</h3>
             <div className={ styles.postBox }>
-                <textarea className={ styles.postField }
-                          onChange={ onChangeInputHandler }
-                          value={ currentPostText }
-                          placeholder="Enter text" />
+                <textarea
+                    className={ styles.postField }
+                    onChange={ onChangeInputHandler }
+                    value={ currentPostText }
+                    placeholder="Enter text" />
                 <button className={ styles.redBtn } onClick={ addPostHandler }>
                     Add post
                 </button>
@@ -42,8 +40,11 @@ const MyPosts = (props: MyPostsPropsType) => {
             <div className={ styles.posts }>
                 {
                     postsData.map(post => (
-                        <Post key={ post.id } message={ post.message }
-                              likesCount={ post.likesCount } />
+                        <Post
+                            key={ post.id }
+                            message={ post.message }
+                            likesCount={ post.likesCount }
+                        />
                     ))
                 }
             </div>

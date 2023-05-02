@@ -30,15 +30,18 @@ export type StateType = {
     messages: MessagesType
 }
 
+export type ActionType = {
+    type: string
+    message?: string
+    postText?: string
+}
+
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
-    addPost: () => void
-    addMessage: () => void
-    updateCurrentPostText: (text: string) => void
-    updateCurrentMessageText: (text: string) => void
+    dispatch: (action: ActionType) => void
 };
 
 const store: StoreType = {
@@ -88,43 +91,51 @@ const store: StoreType = {
             currentMessageText: '',
         },
     },
+    _callSubscriber(): void {},
+
     getState() {
         return this._state;
     },
-    _callSubscriber(): void {},
     subscribe(observer: () => void): void {
         this._callSubscriber = observer;
     },
-    addPost(): void {
-        if (!this._state.profile.currentPostText.trim()) return;
-        const newPost: PostType = {
-            id: new Date().getTime(),
-            message: this._state.profile.currentPostText,
-            likesCount: 0
-        };
-        this._state.profile.postsData.unshift(newPost);
-        this._state.profile.currentPostText = '';
-        this._callSubscriber();
-    },
-    addMessage(): void {
-        if (!this._state.messages.currentMessageText.trim()) return;
 
-        const newMessage: MessageType = {
-            id: new Date().getTime(),
-            message: this._state.messages.currentMessageText,
-        };
-
-        this._state.messages.messagesData.push(newMessage);
-        this._state.messages.currentMessageText = '';
-        this._callSubscriber();
-    },
-    updateCurrentPostText(text: string): void {
-        this._state.profile.currentPostText = text;
-        this._callSubscriber();
-    },
-    updateCurrentMessageText(text: string): void {
-        this._state.messages.currentMessageText = text;
-        this._callSubscriber();
+    dispatch(action) {
+        switch (action.type) {
+            case 'ADD-POST':
+                if (!this._state.profile.currentPostText.trim()) return;
+                const newPost: PostType = {
+                    id: new Date().getTime(),
+                    message: this._state.profile.currentPostText,
+                    likesCount: 0
+                };
+                this._state.profile.postsData.unshift(newPost);
+                this._state.profile.currentPostText = '';
+                this._callSubscriber();
+                break;
+            case 'ADD-MESSAGE':
+                if (!this._state.messages.currentMessageText.trim()) return;
+                const newMessage: MessageType = {
+                    id: new Date().getTime(),
+                    message: this._state.messages.currentMessageText,
+                };
+                this._state.messages.messagesData.push(newMessage);
+                this._state.messages.currentMessageText = '';
+                this._callSubscriber();
+                break;
+            case 'UPDATE-CURRENT-POST-TEXT':
+                if (action.postText) {
+                    this._state.profile.currentPostText = action.postText;
+                }
+                this._callSubscriber();
+                break;
+            case 'UPDATE-CURRENT-MESSAGE':
+                if (action.message) {
+                    this._state.messages.currentMessageText = action.message;
+                }
+                this._callSubscriber();
+                break;
+        }
     }
 };
 
