@@ -13,15 +13,12 @@ type AppPropsType = {
 
 const App = (props: AppPropsType) => {
     const { store, dispatch } = props;
+    const { postsData, currentPostText } = store.getState().profile;
     const {
         dialogsData,
         messagesData,
         currentMessageText
     } = store.getState().messages;
-    const {
-        postsData,
-        currentPostText
-    } = store.getState().profile;
 
     return (
         <div className="App">

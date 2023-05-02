@@ -2,7 +2,10 @@ import { ChangeEvent } from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
-import { ActionType, DialogType, MessageType } from '../../redux/state';
+import {
+    ActionType, addMessageActionCreator, DialogType, MessageType,
+    updateNewMessageActionCreator
+} from '../../redux/state';
 
 
 type DialogsPropsType = {
@@ -23,10 +26,10 @@ const Dialogs = (props: DialogsPropsType) => {
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let message = e.currentTarget.value;
         if (!message) message = '';
-        dispatch({ type: 'UPDATE-CURRENT-MESSAGE', message });
+        dispatch(updateNewMessageActionCreator(message));
     };
 
-    const sendMessage = () => dispatch({ type: 'ADD-MESSAGE' });
+    const sendMessage = () => dispatch(addMessageActionCreator());
 
     return (
         <div className={ styles.dialogs }>

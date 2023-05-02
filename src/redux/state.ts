@@ -44,6 +44,16 @@ export type StoreType = {
     dispatch: (action: ActionType) => void
 };
 
+type ADD_POST_TYPE = 'ADD-POST';
+type ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
+type UPDATE_NEW_POST_TEXT_TYPE = 'UPDATE-NEW-POST-TEXT';
+type UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
+
+const ADD_POST: ADD_POST_TYPE = 'ADD-POST';
+const ADD_MESSAGE: ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
+const UPDATE_NEW_POST_TEXT: UPDATE_NEW_POST_TEXT_TYPE = 'UPDATE-NEW-POST-TEXT';
+const UPDATE_NEW_MESSAGE: UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
+
 const store: StoreType = {
     _state: {
         profile: {
@@ -102,7 +112,7 @@ const store: StoreType = {
 
     dispatch(action) {
         switch (action.type) {
-            case 'ADD-POST':
+            case ADD_POST:
                 if (!this._state.profile.currentPostText.trim()) return;
                 const newPost: PostType = {
                     id: new Date().getTime(),
@@ -113,7 +123,7 @@ const store: StoreType = {
                 this._state.profile.currentPostText = '';
                 this._callSubscriber();
                 break;
-            case 'ADD-MESSAGE':
+            case ADD_MESSAGE:
                 if (!this._state.messages.currentMessageText.trim()) return;
                 const newMessage: MessageType = {
                     id: new Date().getTime(),
@@ -123,13 +133,13 @@ const store: StoreType = {
                 this._state.messages.currentMessageText = '';
                 this._callSubscriber();
                 break;
-            case 'UPDATE-CURRENT-POST-TEXT':
+            case UPDATE_NEW_POST_TEXT:
                 if (action.postText) {
                     this._state.profile.currentPostText = action.postText;
                 }
                 this._callSubscriber();
                 break;
-            case 'UPDATE-CURRENT-MESSAGE':
+            case UPDATE_NEW_MESSAGE:
                 if (action.message) {
                     this._state.messages.currentMessageText = action.message;
                 }
@@ -138,5 +148,23 @@ const store: StoreType = {
         }
     }
 };
+
+type addPostActionType = { type: ADD_POST_TYPE }
+type addMessageActionType = { type: ADD_MESSAGE_TYPE }
+type updateNewPostTextActionType = {
+    type: UPDATE_NEW_POST_TEXT_TYPE,
+    postText: string
+}
+type updateNewMessageActionType = {
+    type: UPDATE_NEW_MESSAGE_TYPE,
+    message: string
+}
+
+export const addPostActionCreator = (): addPostActionType => ({ type: ADD_POST });
+export const addMessageActionCreator = (): addMessageActionType => ({ type: ADD_MESSAGE });
+export const updateNewPostTextActionCreator = (postText: string): updateNewPostTextActionType =>
+    ({ type: UPDATE_NEW_POST_TEXT, postText });
+export const updateNewMessageActionCreator = (message: string): updateNewMessageActionType =>
+    ({ type: UPDATE_NEW_MESSAGE, message });
 
 export default store;
