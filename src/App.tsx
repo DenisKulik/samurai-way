@@ -1,4 +1,4 @@
-import { Route } from 'react-router-dom';
+import { Redirect, Route } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -25,6 +25,7 @@ const App = (props: AppPropsType) => {
             <Header />
             <Sidebar />
             <div className="content">
+                <Route exact path="/"><Redirect to="/profile" /></Route>
                 <Route path="/profile" render={ () => (
                     <Profile
                         postsData={ postsData }
