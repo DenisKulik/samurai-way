@@ -1,10 +1,11 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Redirect, Route, useHistory } from 'react-router-dom';
 import './App.scss';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
 import { ActionType, StoreType } from './redux/state';
+import React from 'react';
 
 type AppPropsType = {
     store: StoreType
@@ -12,6 +13,11 @@ type AppPropsType = {
 }
 
 const App = (props: AppPropsType) => {
+    const history = useHistory();
+    React.useEffect(() => {
+        history.push('/profile');
+    }, [ history ]);
+
     const { store, dispatch } = props;
     const { postsData, currentPostText } = store.getState().profile;
     const {
