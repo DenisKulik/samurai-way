@@ -19,11 +19,11 @@ const App = (props: AppPropsType) => {
     }, [ history ]);
 
     const { store, dispatch } = props;
-    const { postsData, currentPostText } = store.getState().profile;
+    const { postsData, newPostText } = store.getState().profile;
     const {
         dialogsData,
         messagesData,
-        currentMessageText
+        newMessageText
     } = store.getState().messages;
 
     return (
@@ -35,7 +35,7 @@ const App = (props: AppPropsType) => {
                 <Route path="/profile" render={ () => (
                     <Profile
                         postsData={ postsData }
-                        currentPostText={ currentPostText }
+                        newPostText={ newPostText }
                         dispatch={ dispatch }
                     />
                 ) } />
@@ -43,7 +43,7 @@ const App = (props: AppPropsType) => {
                     <Dialogs
                         dialogsData={ dialogsData }
                         messagesData={ messagesData }
-                        currentMessageText={ currentMessageText }
+                        newMessageText={ newMessageText }
                         dispatch={ dispatch }
                     />
                 ) } />

@@ -4,14 +4,14 @@ import { ActionType, PostType } from '../../redux/state';
 
 type ProfilePropsType = {
     postsData: PostType[]
-    currentPostText: string
+    newPostText: string
     dispatch: (action: ActionType) => void
 }
 
 const Profile = (props: ProfilePropsType) => {
     const {
         postsData,
-        currentPostText,
+        newPostText,
         dispatch
     } = props;
 
@@ -20,7 +20,7 @@ const Profile = (props: ProfilePropsType) => {
             <ProfileInfo />
             <MyPosts
                 postsData={ postsData }
-                currentPostText={ currentPostText }
+                newPostText={ newPostText }
                 dispatch={ dispatch }
             />
         </>

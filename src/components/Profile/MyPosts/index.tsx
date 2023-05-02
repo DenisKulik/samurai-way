@@ -7,14 +7,14 @@ import Post from './Post';
 
 type MyPostsPropsType = {
     postsData: PostType[]
-    currentPostText: string
+    newPostText: string
     dispatch: (action: ActionType) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
     const {
         postsData,
-        currentPostText,
+        newPostText,
         dispatch
     } = props;
 
@@ -33,8 +33,9 @@ const MyPosts = (props: MyPostsPropsType) => {
                 <textarea
                     className={ styles.postField }
                     onChange={ onChangeInputHandler }
-                    value={ currentPostText }
-                    placeholder="Enter text" />
+                    value={ newPostText }
+                    placeholder="Enter text"
+                />
                 <button className={ styles.redBtn } onClick={ addPostHandler }>
                     Add post
                 </button>

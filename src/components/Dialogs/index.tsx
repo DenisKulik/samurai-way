@@ -11,7 +11,7 @@ import {
 type DialogsPropsType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
-    currentMessageText: string
+    newMessageText: string
     dispatch: (action: ActionType) => void
 }
 
@@ -19,7 +19,7 @@ const Dialogs = (props: DialogsPropsType) => {
     const {
         dialogsData,
         messagesData,
-        currentMessageText,
+        newMessageText,
         dispatch
     } = props;
 
@@ -28,37 +28,37 @@ const Dialogs = (props: DialogsPropsType) => {
         if (!message) message = '';
         dispatch(updateNewMessageActionCreator(message));
     };
+    const sendMessageHandler = () => dispatch(addMessageActionCreator());
 
-    const sendMessage = () => dispatch(addMessageActionCreator());
+    const dialogItems = dialogsData.map(user => (
+        <Dialog
+            key={ user.id }
+            id={ user.id }
+            name={ user.name }
+            isActive={ false }
+        />
+    ));
+    const messageItems = messagesData.map(item => (
+        <Message key={ item.id } message={ item.message } />
+    ));
 
     return (
         <div className={ styles.dialogs }>
             <div className={ styles.dialogsItems }>
-                {
-                    dialogsData.map(user => (
-                        <Dialog
-                            key={ user.id }
-                            id={ user.id }
-                            name={ user.name }
-                            isActive={ false } />
-                    ))
-                }
+                { dialogItems }
             </div>
             <div className={ styles.dialogsMessages }>
                 <div className={ styles.dialogWrapper }>
-                    {
-                        messagesData.map(item => (
-                            <Message key={ item.id } message={ item.message } />
-                        ))
-                    }
+                    { messageItems }
                 </div>
                 <div className={ styles.newMessage }>
                     <textarea
                         className={ styles.messageField }
                         onChange={ onChangeMessageHandler }
-                        value={ currentMessageText }
+                        value={ newMessageText }
                         rows={ 1 } />
-                    <button className={ styles.redBtn } onClick={ sendMessage }>
+                    <button className={ styles.redBtn }
+                            onClick={ sendMessageHandler }>
                         Send
                     </button>
                 </div>

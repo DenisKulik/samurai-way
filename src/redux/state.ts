@@ -16,13 +16,13 @@ export type PostType = {
 
 type ProfileType = {
     postsData: PostType[]
-    currentPostText: string
+    newPostText: string
 };
 
 type MessagesType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
-    currentMessageText: string
+    newMessageText: string
 }
 
 export type StateType = {
@@ -69,7 +69,7 @@ const store: StoreType = {
                     likesCount: 5
                 },
             ],
-            currentPostText: '',
+            newPostText: '',
         },
         messages: {
             dialogsData: [
@@ -98,7 +98,7 @@ const store: StoreType = {
                     message: 'Codecademy and Udemy have great courses, and there are tons of coding blogs and YouTube tutorials out there too.'
                 },
             ],
-            currentMessageText: '',
+            newMessageText: '',
         },
     },
     _callSubscriber(): void {},
@@ -113,35 +113,35 @@ const store: StoreType = {
     dispatch(action) {
         switch (action.type) {
             case ADD_POST:
-                if (!this._state.profile.currentPostText.trim()) return;
+                if (!this._state.profile.newPostText.trim()) return;
                 const newPost: PostType = {
                     id: new Date().getTime(),
-                    message: this._state.profile.currentPostText,
+                    message: this._state.profile.newPostText,
                     likesCount: 0
                 };
                 this._state.profile.postsData.unshift(newPost);
-                this._state.profile.currentPostText = '';
+                this._state.profile.newPostText = '';
                 this._callSubscriber();
                 break;
             case ADD_MESSAGE:
-                if (!this._state.messages.currentMessageText.trim()) return;
+                if (!this._state.messages.newMessageText.trim()) return;
                 const newMessage: MessageType = {
                     id: new Date().getTime(),
-                    message: this._state.messages.currentMessageText,
+                    message: this._state.messages.newMessageText,
                 };
                 this._state.messages.messagesData.push(newMessage);
-                this._state.messages.currentMessageText = '';
+                this._state.messages.newMessageText = '';
                 this._callSubscriber();
                 break;
             case UPDATE_NEW_POST_TEXT:
                 if (action.postText) {
-                    this._state.profile.currentPostText = action.postText;
+                    this._state.profile.newPostText = action.postText;
                 }
                 this._callSubscriber();
                 break;
             case UPDATE_NEW_MESSAGE:
                 if (action.message) {
-                    this._state.messages.currentMessageText = action.message;
+                    this._state.messages.newMessageText = action.message;
                 }
                 this._callSubscriber();
                 break;
