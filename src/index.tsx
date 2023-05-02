@@ -2,17 +2,12 @@ import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import './index.scss';
-import {
-    addMessage, addPost, state, subscribe, updateCurrentMessageText,
-    updateCurrentPostText
-} from './redux/state';
+import store from './redux/state';
 
 const renderEntireTree = () => {
     ReactDOM.render(
         <BrowserRouter>
-            <App state={ state } addMessage={ addMessage } addPost={ addPost }
-                 updateCurrentMessageText={ updateCurrentMessageText }
-                 updateCurrentPostText={ updateCurrentPostText } />
+            <App store={ store } />
         </BrowserRouter>,
         document.getElementById('root')
     );
@@ -20,4 +15,4 @@ const renderEntireTree = () => {
 
 renderEntireTree();
 
-subscribe(renderEntireTree);
+store.subscribe(renderEntireTree);

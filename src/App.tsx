@@ -4,29 +4,27 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
-import { StateType } from './redux/state';
+import { StoreType } from './redux/state';
 
-type AppPropsType = {
-    state: StateType
-    addMessage: () => void
-    addPost: () => void
-    updateCurrentMessageText: (currentMessage: string) => void
-    updateCurrentPostText: (currentPost: string) => void
-}
+type AppPropsType = { store: StoreType }
 
 const App = (props: AppPropsType) => {
+    const { store } = props;
     const {
         dialogsData,
         messagesData,
         currentMessageText
-    } = props.state.messages;
-    const { postsData, currentPostText } = props.state.profile;
+    } = store.getState().messages;
+    const {
+        postsData,
+        currentPostText
+    } = store.getState().profile;
     const {
         addMessage,
         addPost,
         updateCurrentMessageText,
         updateCurrentPostText
-    } = props;
+    } = store;
 
     return (
         <div className="App">
@@ -34,17 +32,21 @@ const App = (props: AppPropsType) => {
             <Sidebar />
             <div className="content">
                 <Route path="/profile" render={ () => (
-                    <Profile postsData={ postsData }
-                             currentPostText={ currentPostText }
-                             addPost={ addPost }
-                             updateCurrentPostText={ updateCurrentPostText } />
+                    <Profile
+                        postsData={ postsData }
+                        currentPostText={ currentPostText }
+                        addPost={ addPost.bind(store) }
+                        updateCurrentPostText={ updateCurrentPostText.bind(
+                            store) } />
                 ) } />
                 <Route path="/dialogs" render={ () => (
-                    <Dialogs dialogsData={ dialogsData }
-                             messagesData={ messagesData }
-                             currentMessageText={ currentMessageText }
-                             addMessage={ addMessage }
-                             updateCurrentMessageText={ updateCurrentMessageText } />
+                    <Dialogs
+                        dialogsData={ dialogsData }
+                        messagesData={ messagesData }
+                        currentMessageText={ currentMessageText }
+                        addMessage={ addMessage.bind(store) }
+                        updateCurrentMessageText={ updateCurrentMessageText.bind(
+                            store) } />
                 ) } />
             </div>
         </div>

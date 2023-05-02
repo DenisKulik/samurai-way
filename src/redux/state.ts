@@ -1,21 +1,3 @@
-let renderEntireTree = (): void => {};
-
-export type StateType = {
-    profile: ProfileType
-    messages: MessagesType
-}
-
-type ProfileType = {
-    postsData: PostType[]
-    currentPostText: string
-};
-
-type MessagesType = {
-    dialogsData: DialogType[]
-    messagesData: MessageType[]
-    currentMessageText: string
-}
-
 export type DialogType = {
     id: number
     name: string
@@ -32,90 +14,118 @@ export type PostType = {
     likesCount: number
 }
 
-export const state: StateType = {
-    profile: {
-        postsData: [
-            {
-                id: 1,
-                message: 'Have fun creating amazing things!',
-                likesCount: 3
-            },
-            {
-                id: 2,
-                message: 'JavaScript powers modern web development.',
-                likesCount: 5
-            },
-        ],
-        currentPostText: '',
+type ProfileType = {
+    postsData: PostType[]
+    currentPostText: string
+};
+
+type MessagesType = {
+    dialogsData: DialogType[]
+    messagesData: MessageType[]
+    currentMessageText: string
+}
+
+export type StateType = {
+    profile: ProfileType
+    messages: MessagesType
+}
+
+export type StoreType = {
+    _state: StateType
+    getState: () => StateType
+    _callSubscriber: () => void
+    subscribe: (observer: () => void) => void
+    addPost: () => void
+    addMessage: () => void
+    updateCurrentPostText: (text: string) => void
+    updateCurrentMessageText: (text: string) => void
+};
+
+const store: StoreType = {
+    _state: {
+        profile: {
+            postsData: [
+                {
+                    id: 1,
+                    message: 'Have fun creating amazing things!',
+                    likesCount: 3
+                },
+                {
+                    id: 2,
+                    message: 'JavaScript powers modern web development.',
+                    likesCount: 5
+                },
+            ],
+            currentPostText: '',
+        },
+        messages: {
+            dialogsData: [
+                { id: 1, name: 'William' },
+                { id: 2, name: 'Emma' },
+                { id: 3, name: 'James' },
+                { id: 4, name: 'Addison' },
+                { id: 5, name: 'Ethan' },
+                { id: 6, name: 'Hailey' },
+            ],
+            messagesData: [
+                {
+                    id: 1,
+                    message: 'Hey, any advice for someone starting to learn programming?'
+                },
+                {
+                    id: 2,
+                    message: 'Sure! Start with a beginner-friendly language like JavaScript, and practice coding every day.'
+                },
+                {
+                    id: 3,
+                    message: 'Got it. Any specific resources you recommend?'
+                },
+                {
+                    id: 4,
+                    message: 'Codecademy and Udemy have great courses, and there are tons of coding blogs and YouTube tutorials out there too.'
+                },
+            ],
+            currentMessageText: '',
+        },
     },
-    messages: {
-        dialogsData: [
-            { id: 1, name: 'William' },
-            { id: 2, name: 'Emma' },
-            { id: 3, name: 'James' },
-            { id: 4, name: 'Addison' },
-            { id: 5, name: 'Ethan' },
-            { id: 6, name: 'Hailey' },
-        ],
-        messagesData: [
-            {
-                id: 1,
-                message: 'Hey, any advice for someone starting to learn programming?'
-            },
-            {
-                id: 2,
-                message: 'Sure! Start with a beginner-friendly language like JavaScript, and practice coding every day.'
-            },
-            {
-                id: 3,
-                message: 'Got it. Any specific resources you recommend?'
-            },
-            {
-                id: 4,
-                message: 'Codecademy and Udemy have great courses, and there are tons of coding blogs and YouTube tutorials out there too.'
-            },
-        ],
-        currentMessageText: '',
+    getState() {
+        return this._state;
     },
+    _callSubscriber(): void {},
+    subscribe(observer: () => void): void {
+        this._callSubscriber = observer;
+    },
+    addPost(): void {
+        if (!this._state.profile.currentPostText.trim()) return;
+        const newPost: PostType = {
+            id: new Date().getTime(),
+            message: this._state.profile.currentPostText,
+            likesCount: 0
+        };
+        this._state.profile.postsData.unshift(newPost);
+        this._state.profile.currentPostText = '';
+        this._callSubscriber();
+    },
+    addMessage(): void {
+        if (!this._state.messages.currentMessageText.trim()) return;
+
+        const newMessage: MessageType = {
+            id: new Date().getTime(),
+            message: this._state.messages.currentMessageText,
+        };
+
+        this._state.messages.messagesData.push(newMessage);
+        this._state.messages.currentMessageText = '';
+        this._callSubscriber();
+    },
+    updateCurrentPostText(text: string): void {
+        this._state.profile.currentPostText = text;
+        this._callSubscriber();
+    },
+    updateCurrentMessageText(text: string): void {
+        this._state.messages.currentMessageText = text;
+        this._callSubscriber();
+    }
 };
 
-export const subscribe = (observer: () => void) => {
-    renderEntireTree = observer;
-};
-
-export const addMessage = (): void => {
-    if (!state.messages.currentMessageText.trim()) return;
-
-    const newMessage: MessageType = {
-        id: new Date().getTime(),
-        message: state.messages.currentMessageText,
-    };
-
-    state.messages.messagesData.push(newMessage);
-    state.messages.currentMessageText = '';
-    renderEntireTree();
-};
-
-export const updateCurrentMessageText = (text: string): void => {
-    state.messages.currentMessageText = text;
-    renderEntireTree();
-};
-
-export const addPost = (): void => {
-    if (!state.profile.currentPostText.trim()) return;
-
-    const newPost: PostType = {
-        id: new Date().getTime(),
-        message: state.profile.currentPostText,
-        likesCount: 0
-    };
-
-    state.profile.postsData.unshift(newPost);
-    state.profile.currentPostText = '';
-    renderEntireTree();
-};
-
-export const updateCurrentPostText = (text: string): void => {
-    state.profile.currentPostText = text;
-    renderEntireTree();
-};
+export default store;
