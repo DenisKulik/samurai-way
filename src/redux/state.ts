@@ -1,3 +1,6 @@
+import profileReducer from './profileReducer';
+import messagesReducer from './messagesReducer';
+
 export type DialogType = {
     id: number
     name: string
@@ -14,12 +17,12 @@ export type PostType = {
     likesCount: number
 }
 
-type ProfileType = {
+export type ProfileType = {
     postsData: PostType[]
     newPostText: string
 };
 
-type MessagesType = {
+export type MessagesType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
     newMessageText: string
@@ -43,16 +46,6 @@ export type StoreType = {
     subscribe: (observer: () => void) => void
     dispatch: (action: ActionType) => void
 };
-
-type ADD_POST_TYPE = 'ADD-POST';
-type ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
-type UPDATE_NEW_POST_TEXT_TYPE = 'UPDATE-NEW-POST-TEXT';
-type UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
-
-const ADD_POST: ADD_POST_TYPE = 'ADD-POST';
-const ADD_MESSAGE: ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
-const UPDATE_NEW_POST_TEXT: UPDATE_NEW_POST_TEXT_TYPE = 'UPDATE-NEW-POST-TEXT';
-const UPDATE_NEW_MESSAGE: UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
 
 const store: StoreType = {
     _state: {
@@ -111,60 +104,10 @@ const store: StoreType = {
     },
 
     dispatch(action) {
-        switch (action.type) {
-            case ADD_POST:
-                if (!this._state.profile.newPostText.trim()) return;
-                const newPost: PostType = {
-                    id: new Date().getTime(),
-                    message: this._state.profile.newPostText,
-                    likesCount: 0
-                };
-                this._state.profile.postsData.unshift(newPost);
-                this._state.profile.newPostText = '';
-                this._callSubscriber();
-                break;
-            case ADD_MESSAGE:
-                if (!this._state.messages.newMessageText.trim()) return;
-                const newMessage: MessageType = {
-                    id: new Date().getTime(),
-                    message: this._state.messages.newMessageText,
-                };
-                this._state.messages.messagesData.push(newMessage);
-                this._state.messages.newMessageText = '';
-                this._callSubscriber();
-                break;
-            case UPDATE_NEW_POST_TEXT:
-                if (action.postText) {
-                    this._state.profile.newPostText = action.postText;
-                }
-                this._callSubscriber();
-                break;
-            case UPDATE_NEW_MESSAGE:
-                if (action.message) {
-                    this._state.messages.newMessageText = action.message;
-                }
-                this._callSubscriber();
-                break;
-        }
+        this._state.profile = profileReducer(this._state.profile, action);
+        this._state.messages = messagesReducer(this._state.messages, action);
+        this._callSubscriber();
     }
 };
-
-type addPostActionType = { type: ADD_POST_TYPE }
-type addMessageActionType = { type: ADD_MESSAGE_TYPE }
-type updateNewPostTextActionType = {
-    type: UPDATE_NEW_POST_TEXT_TYPE,
-    postText: string
-}
-type updateNewMessageActionType = {
-    type: UPDATE_NEW_MESSAGE_TYPE,
-    message: string
-}
-
-export const addPostActionCreator = (): addPostActionType => ({ type: ADD_POST });
-export const addMessageActionCreator = (): addMessageActionType => ({ type: ADD_MESSAGE });
-export const updateNewPostTextActionCreator = (postText: string): updateNewPostTextActionType =>
-    ({ type: UPDATE_NEW_POST_TEXT, postText });
-export const updateNewMessageActionCreator = (message: string): updateNewMessageActionType =>
-    ({ type: UPDATE_NEW_MESSAGE, message });
 
 export default store;
