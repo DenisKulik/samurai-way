@@ -1,5 +1,9 @@
-import profileReducer from './profileReducer';
-import messagesReducer from './messagesReducer';
+import profileReducer, {
+    addPostActionCreator, updateNewPostTextActionCreator
+} from './profileReducer';
+import messagesReducer, {
+    addMessageActionCreator, updateNewMessageActionCreator
+} from './messagesReducer';
 
 export type DialogType = {
     id: number
@@ -33,18 +37,17 @@ export type StateType = {
     messages: MessagesType
 }
 
-export type ActionType = {
-    type: string
-    message?: string
-    postText?: string
-}
+export type ActionsTypes = ReturnType<typeof addMessageActionCreator>
+    | ReturnType<typeof updateNewMessageActionCreator>
+    | ReturnType<typeof addPostActionCreator>
+    | ReturnType<typeof updateNewPostTextActionCreator>
 
 export type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
     subscribe: (observer: () => void) => void
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsTypes) => void
 };
 
 const store: StoreType = {
@@ -94,12 +97,12 @@ const store: StoreType = {
             newMessageText: '',
         },
     },
-    _callSubscriber(): void {},
+    _callSubscriber() {},
 
     getState() {
         return this._state;
     },
-    subscribe(observer: () => void): void {
+    subscribe(observer) {
         this._callSubscriber = observer;
     },
 

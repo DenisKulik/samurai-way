@@ -1,21 +1,16 @@
-import { ActionType, MessagesType, MessageType, } from './state';
+import { ActionsTypes, MessagesType, MessageType, } from './state';
 
 type ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
 type UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
-type addMessageActionType = { type: ADD_MESSAGE_TYPE }
-type updateNewMessageActionType = {
-    type: UPDATE_NEW_MESSAGE_TYPE,
-    message: string
-}
 
 const ADD_MESSAGE: ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
 const UPDATE_NEW_MESSAGE: UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
-export const addMessageActionCreator = (): addMessageActionType => ({ type: ADD_MESSAGE });
-export const updateNewMessageActionCreator = (message: string): updateNewMessageActionType =>
-    ({ type: UPDATE_NEW_MESSAGE, message });
+export const addMessageActionCreator = () => ({ type: ADD_MESSAGE } as const);
+export const updateNewMessageActionCreator = (message: string) =>
+    ({ type: UPDATE_NEW_MESSAGE, message } as const);
 
 const messagesReducer = (state: MessagesType,
-                         action: ActionType): MessagesType => {
+                         action: ActionsTypes): MessagesType => {
     switch (action.type) {
         case ADD_MESSAGE:
             if (!state.newMessageText.trim()) return state;

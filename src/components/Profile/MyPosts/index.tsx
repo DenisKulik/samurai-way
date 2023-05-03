@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import styles from './MyPosts.module.scss';
-import { ActionType, PostType } from '../../../redux/state';
+import { ActionsTypes, PostType } from '../../../redux/state';
 import Post from './Post';
 import {
     addPostActionCreator, updateNewPostTextActionCreator
@@ -9,7 +9,7 @@ import {
 type MyPostsPropsType = {
     postsData: PostType[]
     newPostText: string
-    dispatch: (action: ActionType) => void
+    dispatch: (action: ActionsTypes) => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
