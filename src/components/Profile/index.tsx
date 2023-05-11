@@ -1,6 +1,7 @@
 import MyPosts from './MyPosts';
 import ProfileInfo from './ProfileInfo';
-import { ActionsTypes, PostType } from '../../redux/store';
+import { PostType } from '../../redux/profileReducer';
+import { ActionsTypes } from '../../redux/reduxStore';
 
 type ProfilePropsType = {
     postsData: PostType[]
@@ -19,9 +20,9 @@ const Profile = (props: ProfilePropsType) => {
         <>
             <ProfileInfo />
             <MyPosts
-                postsData={ postsData }
-                newPostText={ newPostText }
-                dispatch={ dispatch }
+                postsData={postsData}
+                newPostText={newPostText}
+                dispatch={dispatch}
             />
         </>
     );

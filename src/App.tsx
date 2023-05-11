@@ -4,11 +4,11 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
-import { ActionsTypes, StoreType } from './redux/store';
+import { ActionsTypes, StateType } from './redux/reduxStore';
 import React from 'react';
 
 type AppPropsType = {
-    store: StoreType
+    state: StateType
     dispatch: (action: ActionsTypes) => void
 }
 
@@ -18,13 +18,9 @@ const App = (props: AppPropsType) => {
         history.push('/profile');
     }, [ history ]);
 
-    const { store, dispatch } = props;
-    const { postsData, newPostText } = store.getState().profile;
-    const {
-        dialogsData,
-        messagesData,
-        newMessageText
-    } = store.getState().messages;
+    const { state, dispatch } = props;
+    const { postsData, newPostText } = state.profile;
+    const { dialogsData, messagesData, newMessageText } = state.messages;
 
     return (
         <div className="App">
@@ -32,21 +28,21 @@ const App = (props: AppPropsType) => {
             <Sidebar />
             <div className="content">
                 <Route exact path="/"><Redirect to="/profile" /></Route>
-                <Route path="/profile" render={ () => (
+                <Route path="/profile" render={() => (
                     <Profile
-                        postsData={ postsData }
-                        newPostText={ newPostText }
-                        dispatch={ dispatch }
+                        postsData={postsData}
+                        newPostText={newPostText}
+                        dispatch={dispatch}
                     />
-                ) } />
-                <Route path="/dialogs" render={ () => (
+                )} />
+                <Route path="/dialogs" render={() => (
                     <Dialogs
-                        dialogsData={ dialogsData }
-                        messagesData={ messagesData }
-                        newMessageText={ newMessageText }
-                        dispatch={ dispatch }
+                        dialogsData={dialogsData}
+                        messagesData={messagesData}
+                        newMessageText={newMessageText}
+                        dispatch={dispatch}
                     />
-                ) } />
+                )} />
             </div>
         </div>
     );

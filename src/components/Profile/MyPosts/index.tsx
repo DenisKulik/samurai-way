@@ -1,10 +1,10 @@
 import React, { ChangeEvent } from 'react';
 import styles from './MyPosts.module.scss';
-import { ActionsTypes, PostType } from '../../../redux/store';
 import Post from './Post';
 import {
-    addPostActionCreator, updateNewPostTextActionCreator
+    addPostActionCreator, PostType, updateNewPostTextActionCreator
 } from '../../../redux/profileReducer';
+import { ActionsTypes } from '../../../redux/reduxStore';
 
 type MyPostsPropsType = {
     postsData: PostType[]
@@ -28,26 +28,26 @@ const MyPosts = (props: MyPostsPropsType) => {
     const addPostHandler = () => dispatch(addPostActionCreator());
 
     return (
-        <div className={ styles.container }>
-            <h3 className={ styles.heading }>My posts</h3>
-            <div className={ styles.postBox }>
+        <div className={styles.container}>
+            <h3 className={styles.heading}>My posts</h3>
+            <div className={styles.postBox}>
                 <textarea
-                    className={ styles.postField }
-                    onChange={ onChangeInputHandler }
-                    value={ newPostText }
+                    className={styles.postField}
+                    onChange={onChangeInputHandler}
+                    value={newPostText}
                     placeholder="Enter text"
                 />
-                <button className={ styles.redBtn } onClick={ addPostHandler }>
+                <button className={styles.redBtn} onClick={addPostHandler}>
                     Add post
                 </button>
             </div>
-            <div className={ styles.posts }>
+            <div className={styles.posts}>
                 {
                     postsData.map(post => (
                         <Post
-                            key={ post.id }
-                            message={ post.message }
-                            likesCount={ post.likesCount }
+                            key={post.id}
+                            message={post.message}
+                            likesCount={post.likesCount}
                         />
                     ))
                 }

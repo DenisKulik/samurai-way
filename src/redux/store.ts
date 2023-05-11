@@ -1,48 +1,45 @@
+/* eslint-disable */
+// @ts-nocheck
+
 import profileReducer, {
-    addPostActionCreator, updateNewPostTextActionCreator
+    addPostActionCreator, PostType, updateNewPostTextActionCreator
 } from './profileReducer';
 import messagesReducer, {
     addMessageActionCreator, updateNewMessageActionCreator
 } from './messagesReducer';
 
-export type DialogType = {
-    id: number
-    name: string
-}
-
-export type MessageType = {
-    id: number
-    message: string
-}
-
-export type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
-
-export type ProfileType = {
+type ProfileType = {
     postsData: PostType[]
     newPostText: string
 };
 
-export type MessagesType = {
+type DialogType = {
+    id: number
+    name: string
+}
+
+type MessageType = {
+    id: number
+    message: string
+}
+
+type MessagesType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
     newMessageText: string
 }
 
-export type StateType = {
+type StateType = {
     profile: ProfileType
     messages: MessagesType
 }
 
-export type ActionsTypes = ReturnType<typeof addMessageActionCreator>
+type ActionsTypes = ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof updateNewMessageActionCreator>
     | ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
 
-export type StoreType = {
+type StoreType = {
     _state: StateType
     getState: () => StateType
     _callSubscriber: () => void
@@ -112,5 +109,3 @@ const store: StoreType = {
         this._callSubscriber();
     }
 };
-
-export default store;
