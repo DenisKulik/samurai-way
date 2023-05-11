@@ -1,4 +1,4 @@
-/* eslint-disable */
+// eslint-disable-file
 // @ts-nocheck
 
 import profileReducer, {
@@ -47,6 +47,7 @@ type StoreType = {
     dispatch: (action: ActionsTypes) => void
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const store: StoreType = {
     _state: {
         profile: {
