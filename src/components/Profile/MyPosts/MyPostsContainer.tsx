@@ -1,5 +1,5 @@
 import {
-    addPostActionCreator, PostType, updateNewPostTextActionCreator
+    addPostActionCreator, updateNewPostTextActionCreator
 } from '../../../redux/profileReducer';
 import { ActionsTypes, StateType } from '../../../redux/reduxStore';
 import MyPosts from './index';
