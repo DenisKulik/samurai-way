@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from 'redux';
+import { combineReducers, createStore, Store } from 'redux';
 import profileReducer, {
     addPostActionCreator, updateNewPostTextActionCreator
 } from './profileReducer';
@@ -19,6 +19,6 @@ const reducers = combineReducers({
 type ReducersType = typeof reducers;
 export type StateType = ReturnType<ReducersType>
 
-const store = createStore(reducers);
+const store: Store<StateType, ActionsTypes> = createStore(reducers);
 
 export default store;
