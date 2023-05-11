@@ -1,18 +1,19 @@
 import ReactDOM from 'react-dom';
 import { HashRouter } from 'react-router-dom';
+import { Store } from 'redux';
 import App from './App';
 import './index.scss';
-import store, { StateType } from './redux/reduxStore';
+import store, { ActionsTypes, StateType } from './redux/reduxStore';
 
-const renderEntireTree = (state: StateType) => {
+const renderEntireTree = (store: Store<StateType, ActionsTypes>) => {
     ReactDOM.render(
         <HashRouter>
-            <App state={state} dispatch={store.dispatch.bind(store)} />
+            <App store={store} />
         </HashRouter>,
         document.getElementById('root')
     );
 };
 
-renderEntireTree(store.getState());
+renderEntireTree(store);
 
-store.subscribe(() => renderEntireTree(store.getState()));
+store.subscribe(() => renderEntireTree(store));

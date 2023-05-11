@@ -1,31 +1,28 @@
 import React, { ChangeEvent } from 'react';
 import styles from './MyPosts.module.scss';
 import Post from './Post';
-import {
-    addPostActionCreator, PostType, updateNewPostTextActionCreator
-} from '../../../redux/profileReducer';
-import { ActionsTypes } from '../../../redux/reduxStore';
+import { PostType } from '../../../redux/profileReducer';
 
 type MyPostsPropsType = {
     postsData: PostType[]
     newPostText: string
-    dispatch: (action: ActionsTypes) => void
+    updateNewPostText: (postText: string) => void
+    addPost: () => void
 }
 
 const MyPosts = (props: MyPostsPropsType) => {
     const {
         postsData,
         newPostText,
-        dispatch
+        updateNewPostText,
+        addPost
     } = props;
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postText = e.currentTarget.value;
         if (!postText) postText = '';
-        dispatch(updateNewPostTextActionCreator(postText));
+        updateNewPostText(postText);
     };
-
-    const addPostHandler = () => dispatch(addPostActionCreator());
 
     return (
         <div className={styles.container}>
@@ -37,7 +34,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     value={newPostText}
                     placeholder="Enter text"
                 />
-                <button className={styles.redBtn} onClick={addPostHandler}>
+                <button className={styles.redBtn} onClick={addPost}>
                     Add post
                 </button>
             </div>

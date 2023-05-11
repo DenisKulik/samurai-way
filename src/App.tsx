@@ -1,26 +1,26 @@
 import { Redirect, Route, useHistory } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Store } from 'redux';
 import './App.scss';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
 import { ActionsTypes, StateType } from './redux/reduxStore';
-import React from 'react';
 
 type AppPropsType = {
-    state: StateType
-    dispatch: (action: ActionsTypes) => void
+    store: Store<StateType, ActionsTypes>
 }
 
-const App = (props: AppPropsType) => {
+const App = ({ store }: AppPropsType) => {
     const history = useHistory();
-    React.useEffect(() => {
-        history.push('/profile');
-    }, [ history ]);
+    useEffect(() => history.push('/profile'), [ history ]);
 
-    const { state, dispatch } = props;
-    const { postsData, newPostText } = state.profile;
-    const { dialogsData, messagesData, newMessageText } = state.messages;
+    const {
+        dialogsData,
+        messagesData,
+        newMessageText
+    } = store.getState().messages;
 
     return (
         <div className="App">
@@ -29,18 +29,14 @@ const App = (props: AppPropsType) => {
             <div className="content">
                 <Route exact path="/"><Redirect to="/profile" /></Route>
                 <Route path="/profile" render={() => (
-                    <Profile
-                        postsData={postsData}
-                        newPostText={newPostText}
-                        dispatch={dispatch}
-                    />
+                    <Profile store={store} />
                 )} />
                 <Route path="/dialogs" render={() => (
                     <Dialogs
                         dialogsData={dialogsData}
                         messagesData={messagesData}
                         newMessageText={newMessageText}
-                        dispatch={dispatch}
+                        dispatch={store.dispatch.bind(store)}
                     />
                 )} />
             </div>
