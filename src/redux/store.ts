@@ -47,7 +47,6 @@ type StoreType = {
     dispatch: (action: ActionsTypes) => void
 };
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const store: StoreType = {
     _state: {
         profile: {
@@ -110,3 +109,5 @@ const store: StoreType = {
         this._callSubscriber();
     }
 };
+
+console.log(store);
