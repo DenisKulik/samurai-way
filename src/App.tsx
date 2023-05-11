@@ -2,11 +2,11 @@ import { Redirect, Route, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import { Store } from 'redux';
 import './App.scss';
+import { ActionsTypes, StateType } from './redux/reduxStore';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
-import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
-import { ActionsTypes, StateType } from './redux/reduxStore';
+import DialogsContainer from './components/Dialogs/DialogContainer';
 
 type AppPropsType = {
     store: Store<StateType, ActionsTypes>
@@ -15,12 +15,6 @@ type AppPropsType = {
 const App = ({ store }: AppPropsType) => {
     const history = useHistory();
     useEffect(() => history.push('/profile'), [ history ]);
-
-    const {
-        dialogsData,
-        messagesData,
-        newMessageText
-    } = store.getState().messages;
 
     return (
         <div className="App">
@@ -32,12 +26,7 @@ const App = ({ store }: AppPropsType) => {
                     <Profile store={store} />
                 )} />
                 <Route path="/dialogs" render={() => (
-                    <Dialogs
-                        dialogsData={dialogsData}
-                        messagesData={messagesData}
-                        newMessageText={newMessageText}
-                        dispatch={store.dispatch.bind(store)}
-                    />
+                    <DialogsContainer store={store} />
                 )} />
             </div>
         </div>

@@ -2,18 +2,15 @@ import { ChangeEvent } from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
-import {
-    addMessageActionCreator, DialogType, MessageType,
-    updateNewMessageActionCreator
-} from '../../redux/messagesReducer';
-import { ActionsTypes } from '../../redux/reduxStore';
+import { DialogType, MessageType, } from '../../redux/messagesReducer';
 
 
 type DialogsPropsType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
     newMessageText: string
-    dispatch: (action: ActionsTypes) => void
+    sendMessage: () => void
+    updateNewMessage: (message: string) => void
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -21,15 +18,15 @@ const Dialogs = (props: DialogsPropsType) => {
         dialogsData,
         messagesData,
         newMessageText,
-        dispatch
+        sendMessage,
+        updateNewMessage
     } = props;
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let message = e.currentTarget.value;
         if (!message) message = '';
-        dispatch(updateNewMessageActionCreator(message));
+        updateNewMessage(message);
     };
-    const sendMessageHandler = () => dispatch(addMessageActionCreator());
 
     const dialogItems = dialogsData.map(user => (
         <Dialog
@@ -57,9 +54,9 @@ const Dialogs = (props: DialogsPropsType) => {
                         className={styles.messageField}
                         onChange={onChangeMessageHandler}
                         value={newMessageText}
-                        rows={1} />
-                    <button className={styles.redBtn}
-                            onClick={sendMessageHandler}>
+                        rows={1}
+                    />
+                    <button className={styles.redBtn} onClick={sendMessage}>
                         Send
                     </button>
                 </div>
