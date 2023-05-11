@@ -1,4 +1,4 @@
-import { ActionsTypes, PostType, ProfileType, } from './state';
+import { ActionsTypes, PostType, ProfileType, } from './store';
 
 type ADD_POST_TYPE = 'ADD-POST';
 type UPDATE_NEW_POST_TEXT_TYPE = 'UPDATE-NEW-POST-TEXT';

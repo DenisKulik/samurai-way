@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from 'react';
 import styles from './MyPosts.module.scss';
-import { ActionsTypes, PostType } from '../../../redux/state';
+import { ActionsTypes, PostType } from '../../../redux/store';
 import Post from './Post';
 import {
     addPostActionCreator, updateNewPostTextActionCreator

@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
-import { ActionsTypes, DialogType, MessageType } from '../../redux/state';
+import { ActionsTypes, DialogType, MessageType } from '../../redux/store';
 import {
     addMessageActionCreator, updateNewMessageActionCreator
 } from '../../redux/messagesReducer';

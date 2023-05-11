@@ -4,7 +4,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Dialogs from './components/Dialogs';
 import Profile from './components/Profile';
-import { ActionsTypes, StoreType } from './redux/state';
+import { ActionsTypes, StoreType } from './redux/store';
 import React from 'react';
 
 type AppPropsType = {

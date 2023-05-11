@@ -1,4 +1,4 @@
-import { ActionsTypes, MessagesType, MessageType, } from './state';
+import { ActionsTypes, MessagesType, MessageType, } from './store';
 
 type ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
 type UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
