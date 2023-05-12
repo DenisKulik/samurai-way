@@ -3,14 +3,14 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 import './index.scss';
 import store, { StoreType } from './redux/reduxStore';
-import StoreContext from './StoreContext';
+import { Provider } from './StoreContext';
 
 const renderEntireTree = (store: StoreType) => {
     ReactDOM.render(
         <HashRouter>
-            <StoreContext.Provider value={store}>
+            <Provider store={store}>
                 <App />
-            </StoreContext.Provider>
+            </Provider>
         </HashRouter>,
         document.getElementById('root')
     );
