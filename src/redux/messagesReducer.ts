@@ -10,7 +10,7 @@ export type MessageType = {
     message: string
 }
 
-type MessagesType = {
+export type InitialMessagesStateType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
     newMessageText: string
@@ -19,7 +19,7 @@ type MessagesType = {
 type ADD_MESSAGE_TYPE = 'ADD-MESSAGE';
 type UPDATE_NEW_MESSAGE_TYPE = 'UPDATE-NEW-MESSAGE';
 
-const initialState: MessagesType = {
+const initialState: InitialMessagesStateType = {
     dialogsData: [
         { id: 1, name: 'William' },
         { id: 2, name: 'Emma' },
@@ -55,8 +55,9 @@ export const addMessageActionCreator = () => ({ type: ADD_MESSAGE } as const);
 export const updateNewMessageActionCreator = (message: string) =>
     ({ type: UPDATE_NEW_MESSAGE, message } as const);
 
-const messagesReducer = (state: MessagesType = initialState,
-                         action: ActionsTypes): MessagesType => {
+const messagesReducer = (
+    state: InitialMessagesStateType = initialState, action: ActionsTypes
+): InitialMessagesStateType => {
     switch (action.type) {
         case ADD_MESSAGE:
             if (!state.newMessageText.trim()) return state;

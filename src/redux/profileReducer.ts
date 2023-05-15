@@ -6,7 +6,7 @@ export type PostType = {
     likesCount: number
 }
 
-type ProfileType = {
+export type InitialProfileStateType = {
     postsData: PostType[]
     newPostText: string
 };
@@ -14,7 +14,7 @@ type ProfileType = {
 type ADD_POST_TYPE = 'ADD-POST';
 type UPDATE_NEW_POST_TEXT_TYPE = 'UPDATE-NEW-POST-TEXT';
 
-const initialState: ProfileType = {
+const initialState: InitialProfileStateType = {
     postsData: [
         {
             id: 1,
@@ -36,8 +36,9 @@ export const addPostActionCreator = () => ({ type: ADD_POST } as const);
 export const updateNewPostTextActionCreator = (postText: string) =>
     ({ type: UPDATE_NEW_POST_TEXT, postText } as const);
 
-const profileReducer = (state: ProfileType = initialState,
-                        action: ActionsTypes): ProfileType => {
+const profileReducer = (
+    state: InitialProfileStateType = initialState, action: ActionsTypes
+): InitialProfileStateType => {
     switch (action.type) {
         case ADD_POST:
             if (!state.newPostText.trim()) return state;

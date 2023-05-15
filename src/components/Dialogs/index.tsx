@@ -2,16 +2,7 @@ import { ChangeEvent } from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
-import { DialogType, MessageType, } from '../../redux/messagesReducer';
-
-
-type DialogsPropsType = {
-    dialogsData: DialogType[]
-    messagesData: MessageType[]
-    newMessageText: string
-    sendMessage: () => void
-    updateNewMessage: (message: string) => void
-}
+import { DialogsPropsType } from './DialogContainer';
 
 const Dialogs = (props: DialogsPropsType) => {
     const {

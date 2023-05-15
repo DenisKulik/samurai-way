@@ -3,7 +3,7 @@ import { HashRouter } from 'react-router-dom';
 import App from './App';
 import './index.scss';
 import store, { StoreType } from './redux/reduxStore';
-import { Provider } from './StoreContext';
+import { Provider } from 'react-redux';
 
 const renderEntireTree = (store: StoreType) => {
     ReactDOM.render(

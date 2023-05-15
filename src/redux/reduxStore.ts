@@ -11,15 +11,15 @@ export type ActionsTypes = ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof addPostActionCreator>
     | ReturnType<typeof updateNewPostTextActionCreator>
 
-const reducers = combineReducers({
+const rootReducer = combineReducers({
     profile: profileReducer,
     messages: messagesReducer
 });
 
-type ReducersType = typeof reducers;
-export type StateType = ReturnType<ReducersType>
-export type StoreType = Store<StateType, ActionsTypes>
+type RootReducerType = typeof rootReducer;
+export type AppStateType = ReturnType<RootReducerType>
+export type StoreType = Store<AppStateType, ActionsTypes>
 
-const store: StoreType = createStore(reducers);
+const store: StoreType = createStore(rootReducer);
 
 export default store;
