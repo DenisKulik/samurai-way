@@ -7,18 +7,20 @@ import {
 import { AppStateType } from '../../redux/reduxStore';
 import Dialogs from './index';
 
-export type DialogsPropsType = InitialMessagesStateType & MapDispatchToPropsType
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+type MapStateToPropsType = {
+    messages: InitialMessagesStateType
+}
 
 type MapDispatchToPropsType = {
     sendMessage: () => void
     updateNewMessage: (message: string) => void
 }
 
-const mapStateToProps = (state: AppStateType): InitialMessagesStateType => {
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        dialogsData: state.messages.dialogsData,
-        messagesData: state.messages.messagesData,
-        newMessageText: state.messages.newMessageText,
+        messages: state.messages
     };
 };
 

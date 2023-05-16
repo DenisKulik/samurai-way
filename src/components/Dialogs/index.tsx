@@ -5,13 +5,7 @@ import Message from './Message';
 import { DialogsPropsType } from './DialogContainer';
 
 const Dialogs = (props: DialogsPropsType) => {
-    const {
-        dialogsData,
-        messagesData,
-        newMessageText,
-        sendMessage,
-        updateNewMessage
-    } = props;
+    const { messages, sendMessage, updateNewMessage } = props;
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let message = e.currentTarget.value;
@@ -19,7 +13,7 @@ const Dialogs = (props: DialogsPropsType) => {
         updateNewMessage(message);
     };
 
-    const dialogItems = dialogsData.map(user => (
+    const dialogItems = messages.dialogsData.map(user => (
         <Dialog
             key={user.id}
             id={user.id}
@@ -27,7 +21,7 @@ const Dialogs = (props: DialogsPropsType) => {
             isActive={false}
         />
     ));
-    const messageItems = messagesData.map(item => (
+    const messageItems = messages.messagesData.map(item => (
         <Message key={item.id} message={item.message} />
     ));
 
@@ -44,7 +38,7 @@ const Dialogs = (props: DialogsPropsType) => {
                     <textarea
                         className={styles.messageField}
                         onChange={onChangeMessageHandler}
-                        value={newMessageText}
+                        value={messages.newMessageText}
                         rows={1}
                     />
                     <button className={styles.redBtn} onClick={sendMessage}>
