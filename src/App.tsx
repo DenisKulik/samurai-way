@@ -5,6 +5,7 @@ import Header from './components/Header';
 import Sidebar from './components/Sidebar';
 import Profile from './components/Profile';
 import DialogsContainer from './components/Dialogs/DialogContainer';
+import UsersContainer from './components/Users/UsersContainer';
 
 const App = () => {
     const history = useHistory();
@@ -16,12 +17,9 @@ const App = () => {
             <Sidebar />
             <div className="content">
                 <Route exact path="/"><Redirect to="/profile" /></Route>
-                <Route path="/profile" render={() => (
-                    <Profile />
-                )} />
-                <Route path="/dialogs" render={() => (
-                    <DialogsContainer />
-                )} />
+                <Route path="/profile" render={() => <Profile />} />
+                <Route path="/dialogs" render={() => <DialogsContainer />} />
+                <Route path="/users" render={() => <UsersContainer />} />
             </div>
         </div>
     );
