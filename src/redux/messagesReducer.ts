@@ -60,15 +60,19 @@ const messagesReducer = (
                 id: new Date().getTime(),
                 message: state.newMessageText,
             };
-            state.messagesData.push(newMessage);
-            state.newMessageText = '';
-            break;
+            return {
+                ...state,
+                messagesData: [ ...state.messagesData, newMessage ],
+                newMessageText: ''
+            };
         case 'UPDATE-NEW-MESSAGE':
-            if (action.message) state.newMessageText = action.message;
-            break;
+            return {
+                ...state,
+                newMessageText: action.message
+            };
+        default:
+            return state;
     }
-
-    return state;
 };
 
 export default messagesReducer;
