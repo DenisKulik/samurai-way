@@ -42,15 +42,19 @@ const profileReducer = (
                 message: state.newPostText,
                 likesCount: 0
             };
-            state.postsData.unshift(newPost);
-            state.newPostText = '';
-            break;
+            return {
+                ...state,
+                postsData: [ newPost, ...state.postsData ],
+                newPostText: ''
+            };
         case 'UPDATE-NEW-POST-TEXT':
-            if (action.postText) state.newPostText = action.postText;
-            break;
+            return {
+                ...state,
+                newPostText: action.postText
+            };
+        default:
+            return state;
     }
-
-    return state;
 };
 
 export default profileReducer;
