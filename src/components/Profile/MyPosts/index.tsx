@@ -4,12 +4,7 @@ import { MyPostsPropsType } from './MyPostsContainer';
 import Post from './Post';
 
 const MyPosts = (props: MyPostsPropsType) => {
-    const {
-        postsData,
-        newPostText,
-        updateNewPostText,
-        addPost
-    } = props;
+    const { profile, updateNewPostText, addPost } = props;
 
     const onChangeInputHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let postText = e.currentTarget.value;
@@ -24,7 +19,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                 <textarea
                     className={styles.postField}
                     onChange={onChangeInputHandler}
-                    value={newPostText}
+                    value={profile.newPostText}
                     placeholder="Enter text"
                 />
                 <button className={styles.redBtn} onClick={addPost}>
@@ -33,7 +28,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
             <div className={styles.posts}>
                 {
-                    postsData.map(post => (
+                    profile.postsData.map(post => (
                         <Post
                             key={post.id}
                             message={post.message}
