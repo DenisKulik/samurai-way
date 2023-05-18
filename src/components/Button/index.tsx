@@ -13,7 +13,7 @@ const Button = (props: ButtonPropsType) => {
     const { title, callback, ...rest } = props;
 
     return (
-        <button className={styles.Button} onClick={callback}{...rest}>
+        <button className={styles.button} onClick={callback}{...rest}>
             {title}
         </button>
     );
