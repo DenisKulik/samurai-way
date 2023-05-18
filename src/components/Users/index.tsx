@@ -1,11 +1,12 @@
 import { UsersPropsType } from './UsersContainer';
+import styles from './Users.module.scss';
 
 const Users = (props: UsersPropsType) => {
     const { usersPage, followUser, unfollowUser } = props;
 
     const userItems = usersPage.users.map((user) => (
-        <div key={user.id}>
-            <div>
+        <div key={user.id} className={styles.userItem}>
+            <div className={styles.userSubsBlock}>
                 <img
                     src={user.photoUrl}
                     alt={user.fullName}
@@ -24,20 +25,20 @@ const Users = (props: UsersPropsType) => {
                     )
                 }
             </div>
-            <div>
-                <div>
-                    <h3>{user.fullName}</h3>
-                    <p>{user.status}</p>
+            <div className={styles.userInfo}>
+                <div className={styles.userDetails}>
+                    <h3 className={styles.username}>{user.fullName}</h3>
+                    <p className={styles.userStatus}>{user.status}</p>
                 </div>
-                <div>
+                <p className={styles.userLocation}>
                     {`${user.location.city}, ${user.location.country}`}
-                </div>
+                </p>
             </div>
         </div>
     ));
 
     return (
-        <div>
+        <div className={styles.users}>
             {userItems}
         </div>
     );
