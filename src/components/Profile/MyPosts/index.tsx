@@ -2,6 +2,7 @@ import React, { ChangeEvent } from 'react';
 import styles from './MyPosts.module.scss';
 import { MyPostsPropsType } from './MyPostsContainer';
 import Post from './Post';
+import Button from '../../Button';
 
 const MyPosts = (props: MyPostsPropsType) => {
     const { profile, updateNewPostText, addPost } = props;
@@ -22,9 +23,7 @@ const MyPosts = (props: MyPostsPropsType) => {
                     value={profile.newPostText}
                     placeholder="Enter text"
                 />
-                <button className={styles.redBtn} onClick={addPost}>
-                    Add post
-                </button>
+                <Button title={'Add post'} callback={addPost} />
             </div>
             <div className={styles.posts}>
                 {

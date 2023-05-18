@@ -3,6 +3,7 @@ import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
 import { DialogsPropsType } from './DialogContainer';
+import Button from '../Button';
 
 const Dialogs = (props: DialogsPropsType) => {
     const { messages, sendMessage, updateNewMessage } = props;
@@ -41,9 +42,7 @@ const Dialogs = (props: DialogsPropsType) => {
                         value={messages.newMessageText}
                         rows={1}
                     />
-                    <button className={styles.redBtn} onClick={sendMessage}>
-                        Send
-                    </button>
+                    <Button title={'Send'} callback={sendMessage} />
                 </div>
             </div>
         </div>
