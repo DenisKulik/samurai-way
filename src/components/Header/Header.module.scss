@@ -15,10 +15,15 @@
   a {
     padding: 0.5rem 1rem;
     font-size: 1.4rem;
-    color: white;
+    font-weight: 600;
+    color: var(--color-secondary);
     text-decoration: none;
-    background-color: #414141;
+    background-color: white;
     border-radius: 5rem;
+
+    &:hover {
+      opacity: 0.8;
+    }
 
     &.active {
       color: var(--color-primary);
