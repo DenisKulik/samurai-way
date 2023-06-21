@@ -1,18 +1,14 @@
 import { ActionsTypes } from './reduxStore';
-import userDefault from '../img/user-default.png';
-
-type LocationType = {
-    city: string,
-    country: string
-}
 
 export type UserType = {
-    id: number,
-    fullName: string,
-    photoUrl: string
-    status: string,
+    id: number
+    name: string
+    status: string
+    photos: {
+        large: string
+        small: string
+    }
     followed: boolean
-    location: LocationType
 }
 
 export type InitialUsersStateType = {
@@ -20,52 +16,7 @@ export type InitialUsersStateType = {
 };
 
 const initialState: InitialUsersStateType = {
-    users: [
-        {
-            id: 1,
-            fullName: 'John Smith',
-            photoUrl: userDefault,
-            status: 'Currently employed',
-            followed: true,
-            location: {
-                city: 'New York City',
-                country: 'USA'
-            }
-        },
-        {
-            id: 2,
-            fullName: 'Luisa Hernandez',
-            photoUrl: userDefault,
-            status: 'Freelance designer',
-            followed: false,
-            location: {
-                city: 'Mexico City',
-                country: 'Mexico'
-            }
-        },
-        {
-            id: 3,
-            fullName: 'Hiroshi Tanaka',
-            photoUrl: userDefault,
-            status: 'Entrepreneur',
-            followed: false,
-            location: {
-                city: 'Tokyo',
-                country: 'Japan'
-            }
-        },
-        {
-            id: 4,
-            fullName: 'Maria Garcia',
-            photoUrl: userDefault,
-            status: 'Recent college graduate',
-            followed: false,
-            location: {
-                city: 'Madrid',
-                country: 'Spain'
-            }
-        },
-    ]
+    users: []
 };
 
 export const followUserAC = (userId: number) =>
