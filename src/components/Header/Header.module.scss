@@ -11,29 +11,4 @@
   .logo {
     height: 6rem;
   }
-
-  a {
-    padding: 0.5rem 1rem;
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--color-secondary);
-    text-decoration: none;
-    background-color: white;
-    border-radius: 5rem;
-
-    &:hover {
-      opacity: 0.8;
-    }
-
-    &.active {
-      color: var(--color-primary);
-    }
-
-    svg {
-      width: 1.5rem;
-      height: 1.5rem;
-      margin-right: 1rem;
-      margin-bottom: -2px;
-    }
-  }
 }
