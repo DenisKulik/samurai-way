@@ -6,9 +6,12 @@ import {
     setUsersAC,
     unfollowUserAC, UserType
 } from '../../redux/usersReducer';
-import Users from './index';
+import { Component } from 'react';
+import axios from 'axios';
+import { Users } from './index';
 
-export type UsersPropsType = MapStateToPropsType & MapDispatchToPropsType
+export type UsersContainerPropsType = MapStateToPropsType
+    & MapDispatchToPropsType
 
 type MapStateToPropsType = {
     usersPage: InitialUsersStateType
@@ -40,6 +43,29 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     };
 };
 
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(Users);
+class UsersContainer extends Component<UsersContainerPropsType> {
+    componentDidMount() {
+        axios.get(
+            `https://social-network.samuraijs.com/api/1.0/users?page=${
+                this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
+             .then((response) => {
+                 this.props.setUsers(response.data.items);
+                 this.props.setTotalUsersCount(response.data.totalCount);
+             });
+    }
 
-export default UsersContainer;
+    changePageNumber = (page: number) => {
+        this.props.setCurrentPage(page);
+
+        axios.get(
+            `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${
+                this.props.usersPage.pageSize}`)
+             .then((response) => this.props.setUsers(response.data.items));
+    };
+
+    render = () => (
+        <Users changePageNumber={this.changePageNumber} {...this.props} />
+    );
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
