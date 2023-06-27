@@ -7,6 +7,7 @@ import messagesReducer, {
 } from './messagesReducer';
 import usersReducer, {
     followUserAC, setCurrentPageAC, setTotalUsersCountAC, setUsersAC,
+    toggleIsFetchingAC,
     unfollowUserAC
 } from './usersReducer';
 
@@ -19,6 +20,7 @@ export type ActionsTypes = ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof setUsersAC>
     | ReturnType<typeof setCurrentPageAC>
     | ReturnType<typeof setTotalUsersCountAC>
+    | ReturnType<typeof toggleIsFetchingAC>
 
 const rootReducer = combineReducers({
     profile: profileReducer,
