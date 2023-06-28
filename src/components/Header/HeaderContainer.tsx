@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import Header from './index';
 import { AppStateType } from '../../redux/reduxStore';
 import {
     InitialAuthUserDataStateType, ResponseAuthUserDataType, setUserData
 } from '../../redux/authReducer';
+import { socialNetworkAPI } from '../../api/socialNetworkAPI';
 
 export type HeaderContainerPropsType = MapStateToPropsType
     & MapDispatchToPropsType
@@ -24,14 +24,10 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 class HeaderContainer extends Component<HeaderContainerPropsType> {
     componentDidMount() {
-        axios.get('https://social-network.samuraijs.com/api/1.0/auth/me', {
-            withCredentials: true
-        })
-             .then((response) => {
-                 if (response.data.resultCode === 0) {
-                     this.props.setUserData(response.data.data);
-                 }
-             });
+        socialNetworkAPI
+            .getAuthUser()
+            .then(data => data.resultCode === 0 &&
+                this.props.setUserData(data.data));
     }
 
     render = () => (

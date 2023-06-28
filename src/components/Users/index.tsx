@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './Users.module.scss';
 import userDefault from '../../img/user-default.png';
 import { UsersContainerPropsType } from './UsersContainer';
-import axios from 'axios';
+import { socialNetworkAPI } from '../../api/socialNetworkAPI';
 
 type UsersPropsType = UsersContainerPropsType & {
     changePageNumber: (page: number) => void
@@ -16,29 +16,15 @@ export const Users = (props: UsersPropsType) => {
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
     const followUserHandler = (userId: number) => {
-        axios.post(
-            `https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {},
-            {
-                withCredentials: true
-            })
-             .then(response => {
-                 if (response.data.resultCode === 0) {
-                     followUser(userId);
-                 }
-             });
+        socialNetworkAPI
+            .followUser(userId)
+            .then(data => data.resultCode === 0 && followUser(userId));
     };
 
     const unfollowUserHandler = (userId: number) => {
-        axios.delete(
-            `https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
-            {
-                withCredentials: true
-            })
-             .then(response => {
-                 if (response.data.resultCode === 0) {
-                     unfollowUser(userId);
-                 }
-             });
+        socialNetworkAPI
+            .unfollowUser(userId)
+            .then(data => data.resultCode === 0 && unfollowUser(userId));
     };
 
     return (

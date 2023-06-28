@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import axios from 'axios';
 import styles from './Users.module.scss';
 import { AppStateType } from '../../redux/reduxStore';
 import {
@@ -9,6 +8,7 @@ import {
 import { Component } from 'react';
 import { Users } from './index';
 import { Preloader } from '../common/Preloader';
+import { socialNetworkAPI } from '../../api/socialNetworkAPI';
 
 export type UsersContainerPropsType = MapStateToPropsType
     & MapDispatchToPropsType
@@ -34,30 +34,26 @@ class UsersContainer extends Component<UsersContainerPropsType> {
     componentDidMount() {
         this.props.toggleIsFetching(true);
 
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${
-                this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`,
-            {
-                withCredentials: true
-            })
-             .then((response) => {
-                 this.props.toggleIsFetching(false);
-                 this.props.setUsers(response.data.items);
-                 this.props.setTotalUsersCount(response.data.totalCount);
-             });
+        socialNetworkAPI
+            .getUsers(this.props.usersPage.currentPage,
+                this.props.usersPage.pageSize)
+            .then(data => {
+                this.props.toggleIsFetching(false);
+                this.props.setUsers(data.items);
+                this.props.setTotalUsersCount(data.totalCount);
+            });
     }
 
     changePageNumber = (page: number) => {
         this.props.toggleIsFetching(true);
         this.props.setCurrentPage(page);
 
-        axios.get(
-            `https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${
-                this.props.usersPage.pageSize}`)
-             .then((response) => {
-                 this.props.toggleIsFetching(false);
-                 this.props.setUsers(response.data.items);
-             });
+        socialNetworkAPI
+            .getUsers(page, this.props.usersPage.pageSize)
+            .then(data => {
+                this.props.toggleIsFetching(false);
+                this.props.setUsers(data.items);
+            });
     };
 
     render = () => (
