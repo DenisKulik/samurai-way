@@ -26,11 +26,9 @@ type MapDispatchToPropsType = {
     toggleIsFetching: (isFetchingAC: boolean) => void
 }
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        usersPage: state.usersPage
-    };
-};
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    usersPage: state.usersPage
+});
 
 class UsersContainer extends Component<UsersContainerPropsType> {
     componentDidMount() {
