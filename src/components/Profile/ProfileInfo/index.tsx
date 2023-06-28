@@ -11,7 +11,6 @@ type ProfileInfoPropsType = {
 const ProfileInfo = ({ profile }: ProfileInfoPropsType) => {
     if (!profile) return <Preloader />;
 
-
     return (
         <div className={styles.profileInfo}>
             <div className={styles.OwnerPageCover}
@@ -29,9 +28,11 @@ const ProfileInfo = ({ profile }: ProfileInfoPropsType) => {
                         <span>online</span>
                     </h2>
                     <p className={styles.isLookingForAJob}>
-                        Looking for a job: {profile.lookingForAJob ?
-                                            'yes 🐱‍👤' :
-                                            'no 🙅‍♂️'}
+                        Looking for a job: {
+                        profile.lookingForAJob ?
+                        'yes 🐱‍👤' :
+                        'no 🙅‍♂️'
+                    }
                     </p>
                     <p className={styles.status}>
                         {profile.lookingForAJobDescription}
