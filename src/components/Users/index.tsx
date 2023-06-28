@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import styles from './Users.module.scss';
 import userDefault from '../../img/user-default.png';
 import { UsersContainerPropsType } from './UsersContainer';
+import axios from 'axios';
 
 type UsersPropsType = UsersContainerPropsType & {
     changePageNumber: (page: number) => void
@@ -13,6 +14,32 @@ export const Users = (props: UsersPropsType) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
+
+    const followUserHandler = (userId: number) => {
+        axios.post(
+            `https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {},
+            {
+                withCredentials: true
+            })
+             .then(response => {
+                 if (response.data.resultCode === 0) {
+                     followUser(userId);
+                 }
+             });
+    };
+
+    const unfollowUserHandler = (userId: number) => {
+        axios.delete(
+            `https://social-network.samuraijs.com/api/1.0/follow/${userId}`,
+            {
+                withCredentials: true
+            })
+             .then(response => {
+                 if (response.data.resultCode === 0) {
+                     unfollowUser(userId);
+                 }
+             });
+    };
 
     return (
         <>
@@ -34,15 +61,15 @@ export const Users = (props: UsersPropsType) => {
                                 {
                                     user.followed ? (
                                         <button onClick={() =>
-                                            unfollowUser(user.id)}
+                                            unfollowUserHandler(user.id)}
                                         >
-                                            Follow
+                                            Unfollow
                                         </button>
                                     ) : (
                                         <button onClick={() =>
-                                            followUser(user.id)}
+                                            followUserHandler(user.id)}
                                         >
-                                            Unfollow
+                                            Follow
                                         </button>
                                     )
                                 }
