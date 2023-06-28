@@ -9,6 +9,7 @@ import usersReducer, {
     followUser, setCurrentPage, setTotalUsersCount, setUsers, toggleIsFetching,
     unfollowUser
 } from './usersReducer';
+import authReducer, { setUserData } from './authReducer';
 
 export type ActionsTypes = ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof updateNewMessageActionCreator>
@@ -21,11 +22,13 @@ export type ActionsTypes = ReturnType<typeof addMessageActionCreator>
     | ReturnType<typeof setCurrentPage>
     | ReturnType<typeof setTotalUsersCount>
     | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof setUserData>
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
     messages: messagesReducer,
     usersPage: usersReducer,
+    auth: authReducer
 });
 
 type RootReducerType = typeof rootReducer;
