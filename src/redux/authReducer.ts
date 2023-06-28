@@ -1,33 +1,36 @@
 import { ActionsTypes } from './reduxStore';
 
-type ResponseType = {
+export type ResponseAuthUserDataType = {
     id: number | null
     email: string | null
     login: string | null
 }
 
-export type InitialUsersStateType = ResponseType & {
+export type InitialAuthUserDataStateType = ResponseAuthUserDataType & {
+    isAuth: boolean
     isFetching: boolean
 };
 
-const initialState: InitialUsersStateType = {
+const initialState: InitialAuthUserDataStateType = {
     id: null,
     email: null,
     login: null,
+    isAuth: false,
     isFetching: true
 };
 
-export const setUserData = (data: ResponseType) =>
+export const setUserData = (data: ResponseAuthUserDataType) =>
     ({ type: 'SET-USER-DATA', data } as const);
 
 const authReducer = (
-    state: InitialUsersStateType = initialState, action: ActionsTypes
-): InitialUsersStateType => {
+    state: InitialAuthUserDataStateType = initialState, action: ActionsTypes
+): InitialAuthUserDataStateType => {
     switch (action.type) {
         case 'SET-USER-DATA':
             return {
                 ...state,
-                ...action.data
+                ...action.data,
+                isAuth: true
             };
         default:
             return state;

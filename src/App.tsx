@@ -1,7 +1,7 @@
 import { Redirect, Route, useHistory } from 'react-router-dom';
 import { useEffect } from 'react';
 import './App.scss';
-import Header from './components/Header';
+import HeaderContainer from './components/Header/HeaderContainer';
 import Sidebar from './components/Sidebar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import DialogsContainer from './components/Dialogs/DialogContainer';
@@ -13,7 +13,7 @@ const App = () => {
 
     return (
         <div className="App">
-            <Header />
+            <HeaderContainer />
             <Sidebar />
             <div className="content">
                 <Route exact path="/"><Redirect to="/profile" /></Route>

@@ -11,4 +11,32 @@
   .logo {
     height: 6rem;
   }
+
+  .login {
+
+    a {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: white;
+      font-size: 1.4rem;
+      text-decoration: none;
+
+      &.active {
+        color: var(--color-primary);
+      }
+
+      svg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin-right: 1rem;
+        margin-bottom: -2px;
+      }
+    }
+  }
+
+  .user {
+    color: white;
+    font-size: 1.4rem;
+  }
 }
