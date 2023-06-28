@@ -1,33 +1,44 @@
 import styles from './ProfileInfo.module.scss';
-import user from '../../../img/user.jpg';
+import userDefault from '../../../img/user-default.png';
 import background from '../../../img/background.jpg';
+import { ProfileType } from '../../../redux/profileReducer';
+import { Preloader } from '../../common/Preloader';
 
-const ProfileInfo = () => {
+type ProfileInfoPropsType = {
+    profile: ProfileType
+}
+
+const ProfileInfo = ({ profile }: ProfileInfoPropsType) => {
+    if (!profile) return <Preloader />;
+
+
     return (
-        (
-            <div className={ styles.profileInfo }>
-                <div className={ styles.OwnerPageCover }
-                     style={ { backgroundImage: `url(${ background })` } }></div>
-                <div className={ styles.user }>
-                    <img className={ styles.userImg } src={ user } alt="user"
-                         width={ 100 } height={ 100 } />
-                    <div className={ styles.inner }>
-                        <h2 className={ styles.username }>
-                            Liam Reynolds
-                            <span>online</span>
-                        </h2>
-                        <p className={ styles.residence }>
-                            Huntington Beach, California
-                        </p>
-                        <p className={ styles.status }>
-                            Just spent the past 8 hours debugging my code.
-                            Finally found the issue and feeling like a
-                            programming wizard! 💻🧙‍♂️ #programmerlife #debugging
-                            #codingstruggles</p>
-                    </div>
+        <div className={styles.profileInfo}>
+            <div className={styles.OwnerPageCover}
+                 style={{ backgroundImage: `url(${background})` }}></div>
+            <div className={styles.user}>
+                <img className={styles.userImg}
+                     src={profile.photos?.large || userDefault}
+                     alt="user"
+                     width={100}
+                     height={100}
+                />
+                <div className={styles.inner}>
+                    <h2 className={styles.username}>
+                        {profile.fullName}
+                        <span>online</span>
+                    </h2>
+                    <p className={styles.isLookingForAJob}>
+                        Looking for a job: {profile.lookingForAJob ?
+                                            'yes 🐱‍👤' :
+                                            'no 🙅‍♂️'}
+                    </p>
+                    <p className={styles.status}>
+                        {profile.lookingForAJobDescription}
+                    </p>
                 </div>
             </div>
-        )
+        </div>
     );
 };
 

@@ -6,12 +6,37 @@ export type PostType = {
     likesCount: number
 }
 
+type ContactsType = {
+    github: string
+    vk: string
+    facebook: string
+    instagram: string
+    twitter: string
+    website: string
+    youtube: string
+    mainLink: string
+}
+
+export type ProfileType = {
+    userId: number
+    lookingForAJob: boolean
+    lookingForAJobDescription: string
+    fullName: string
+    contacts: ContactsType
+    photos: {
+        small: string | null
+        large: string | null
+    }
+}
+
 export type InitialProfileStateType = {
+    profile: ProfileType
     postsData: PostType[]
     newPostText: string
 };
 
 const initialState: InitialProfileStateType = {
+    profile: {} as ProfileType,
     postsData: [
         {
             id: 1,
@@ -27,9 +52,11 @@ const initialState: InitialProfileStateType = {
     newPostText: '',
 };
 
-export const addPostActionCreator = () => ({ type: 'ADD-POST' } as const);
-export const updateNewPostTextActionCreator = (postText: string) =>
+export const addPost = () => ({ type: 'ADD-POST' } as const);
+export const updateNewPostText = (postText: string) =>
     ({ type: 'UPDATE-NEW-POST-TEXT', postText } as const);
+export const setUserProfile = (profile: ProfileType) =>
+    ({ type: 'SET-USER-PROFILE', profile } as const);
 
 const profileReducer = (
     state: InitialProfileStateType = initialState, action: ActionsTypes
@@ -52,6 +79,12 @@ const profileReducer = (
                 ...state,
                 newPostText: action.postText
             };
+        case 'SET-USER-PROFILE': {
+            return {
+                ...state,
+                profile: action.profile
+            };
+        }
         default:
             return state;
     }

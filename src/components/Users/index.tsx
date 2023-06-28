@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styles from './Users.module.scss';
 import userDefault from '../../img/user-default.png';
 import { UsersContainerPropsType } from './UsersContainer';
@@ -20,14 +21,16 @@ export const Users = (props: UsersPropsType) => {
                     users.map((user) => (
                         <div key={user.id} className={styles.userItem}>
                             <div className={styles.userSubsBlock}>
-                                <img
-                                    src={user.photos.large ?
-                                         user.photos.large :
-                                         userDefault}
-                                    alt={user.name}
-                                    width={50}
-                                    height={50}
-                                />
+                                <NavLink to={`/profile/${user.id}`}>
+                                    <img
+                                        src={user.photos.large ?
+                                             user.photos.large :
+                                             userDefault}
+                                        alt={user.name}
+                                        width={50}
+                                        height={50}
+                                    />
+                                </NavLink>
                                 {
                                     user.followed ? (
                                         <button onClick={() =>

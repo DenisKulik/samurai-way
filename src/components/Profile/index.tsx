@@ -1,14 +1,16 @@
 import ProfileInfo from './ProfileInfo';
 import MyPostsContainer from './MyPosts/MyPostsContainer';
+import { ProfileContainerPropsType } from './ProfileContainer';
 
-const Profile = () => {
+type ProfilePropsType = ProfileContainerPropsType
+
+export const Profile = (props: ProfilePropsType) => {
+    const { profile } = props.profilePage;
 
     return (
         <>
-            <ProfileInfo />
+            <ProfileInfo profile={profile} />
             <MyPostsContainer />
         </>
     );
 };
-
-export default Profile;

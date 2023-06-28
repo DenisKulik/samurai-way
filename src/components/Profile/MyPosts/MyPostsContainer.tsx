@@ -1,8 +1,8 @@
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
 import {
-    addPostActionCreator, InitialProfileStateType,
-    updateNewPostTextActionCreator
+    addPost, InitialProfileStateType,
+    updateNewPostText
 } from '../../../redux/profileReducer';
 import { AppStateType } from '../../../redux/reduxStore';
 import MyPosts from './index';
@@ -20,15 +20,15 @@ type MapDispatchToPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        profile: state.profile
+        profile: state.profilePage
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     return {
-        addPost: () => dispatch(addPostActionCreator()),
+        addPost: () => dispatch(addPost()),
         updateNewPostText: (postText: string) => {
-            dispatch(updateNewPostTextActionCreator(postText));
+            dispatch(updateNewPostText(postText));
         },
     };
 };
