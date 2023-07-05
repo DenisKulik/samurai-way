@@ -1,4 +1,5 @@
 import { ChangeEvent } from 'react';
+import { Redirect } from 'react-router-dom';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
@@ -6,7 +7,9 @@ import { DialogsPropsType } from './DialogContainer';
 import Button from '../Button';
 
 const Dialogs = (props: DialogsPropsType) => {
-    const { messages, sendMessage, updateNewMessage } = props;
+    const { messages, auth, sendMessage, updateNewMessage } = props;
+
+    if (!auth.isAuth) return <Redirect to="/login" />;
 
     const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let message = e.currentTarget.value;

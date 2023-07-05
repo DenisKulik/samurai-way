@@ -29,7 +29,7 @@ export const setUserData = (data: ResponseAuthUserDataType) =>
 export const getAuthUser = (): AppThunkType => async (dispatch: Dispatch<AppActionsType>) => {
     try {
         const res = await socialNetworkAPI.getAuthUser();
-        dispatch(setUserData(res.data));
+        res.resultCode === 0 && dispatch(setUserData(res.data));
     } catch (e) {
         console.error(e);
     }

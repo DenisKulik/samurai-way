@@ -6,6 +6,7 @@ import Sidebar from './components/Sidebar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import DialogsContainer from './components/Dialogs/DialogContainer';
 import UsersContainer from './components/Users/UsersContainer';
+import { Login } from './components/Login';
 
 const App = () => {
     const history = useHistory();
@@ -17,6 +18,7 @@ const App = () => {
             <Sidebar />
             <div className="content">
                 <Route exact path="/"><Redirect to="/profile" /></Route>
+                <Route path="/login" render={() => <Login />} />
                 <Route
                     path="/profile/:userId?"
                     render={() => <ProfileContainer />}

@@ -6,11 +6,13 @@ import {
 } from '../../redux/messagesReducer';
 import { AppStateType } from '../../redux/reduxStore';
 import Dialogs from './index';
+import { InitialAuthUserDataStateType } from '../../redux/authReducer';
 
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 type MapStateToPropsType = {
     messages: InitialMessagesStateType
+    auth: InitialAuthUserDataStateType
 }
 
 type MapDispatchToPropsType = {
@@ -20,7 +22,8 @@ type MapDispatchToPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        messages: state.messages
+        messages: state.messages,
+        auth: state.auth
     };
 };
 
