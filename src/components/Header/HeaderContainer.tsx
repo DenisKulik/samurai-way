@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import Header from './index';
 import { AppStateType } from '../../redux/reduxStore';
 import {
-    InitialAuthUserDataStateType, ResponseAuthUserDataType, setUserData
+    getAuthUser, InitialAuthUserDataStateType
 } from '../../redux/authReducer';
-import { socialNetworkAPI } from '../../api/socialNetworkAPI';
 
 export type HeaderContainerPropsType = MapStateToPropsType
     & MapDispatchToPropsType
@@ -15,7 +14,7 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    setUserData: (data: ResponseAuthUserDataType) => void
+    getAuthUser: () => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
@@ -24,10 +23,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 class HeaderContainer extends Component<HeaderContainerPropsType> {
     componentDidMount() {
-        socialNetworkAPI
-            .getAuthUser()
-            .then(data => data.resultCode === 0 &&
-                this.props.setUserData(data.data));
+        this.props.getAuthUser();
     }
 
     render = () => (
@@ -35,4 +31,4 @@ class HeaderContainer extends Component<HeaderContainerPropsType> {
     );
 }
 
-export default connect(mapStateToProps, { setUserData })(HeaderContainer);
+export default connect(mapStateToProps, { getAuthUser })(HeaderContainer);
