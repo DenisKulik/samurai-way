@@ -1,45 +1,5 @@
 import { ActionsTypes } from './reduxStore';
 
-export type UserType = {
-    id: number
-    name: string
-    status: string
-    photos: {
-        large: string
-        small: string
-    }
-    followed: boolean
-}
-
-export type InitialUsersStateType = {
-    users: UserType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-};
-
-const initialState: InitialUsersStateType = {
-    users: [],
-    pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 1,
-    isFetching: true
-};
-
-export const followUser = (userId: number) =>
-    ({ type: 'FOLLOW', userId } as const);
-export const unfollowUser = (userId: number) =>
-    ({ type: 'UNFOLLOW', userId } as const);
-export const setUsers = (users: UserType[]) =>
-    ({ type: 'SET-USERS', users } as const);
-export const setCurrentPage = (currentPage: number) =>
-    ({ type: 'SET-CURRENT-PAGE', currentPage } as const);
-export const setTotalUsersCount = (totalUsersCount: number) =>
-    ({ type: 'SET-TOTAL-USERS-COUNT', totalUsersCount } as const);
-export const toggleIsFetching = (isFetching: boolean) =>
-    ({ type: 'TOGGLE-IS-FETCHING', isFetching } as const);
-
 const usersReducer = (
     state: InitialUsersStateType = initialState, action: ActionsTypes
 ): InitialUsersStateType => {
@@ -64,9 +24,69 @@ const usersReducer = (
             return { ...state, totalUsersCount: action.totalUsersCount };
         case 'TOGGLE-IS-FETCHING':
             return { ...state, isFetching: action.isFetching };
+        case 'TOGGLE-IS-FOLLOWING-PROGRESS':
+            return {
+                ...state,
+                isFollowingInProgress: action.isFollowingInProgress ?
+                    [ ...state.isFollowingInProgress, action.userId ] :
+                    state.isFollowingInProgress.filter(
+                        id => id !== action.userId)
+            };
         default:
             return state;
     }
+};
+
+// actions
+export const followUser = (userId: number) =>
+    ({ type: 'FOLLOW', userId } as const);
+export const unfollowUser = (userId: number) =>
+    ({ type: 'UNFOLLOW', userId } as const);
+export const setUsers = (users: UserType[]) =>
+    ({ type: 'SET-USERS', users } as const);
+export const setCurrentPage = (currentPage: number) =>
+    ({ type: 'SET-CURRENT-PAGE', currentPage } as const);
+export const setTotalUsersCount = (totalUsersCount: number) =>
+    ({ type: 'SET-TOTAL-USERS-COUNT', totalUsersCount } as const);
+export const toggleIsFetching = (isFetching: boolean) =>
+    ({ type: 'TOGGLE-IS-FETCHING', isFetching } as const);
+export const toggleIsFollowingProgress = (
+    isFollowingInProgress: boolean,
+    userId: number
+) => ({
+    type: 'TOGGLE-IS-FOLLOWING-PROGRESS',
+    isFollowingInProgress,
+    userId
+} as const);
+
+// types
+export type UserType = {
+    id: number
+    name: string
+    status: string
+    photos: {
+        large: string
+        small: string
+    }
+    followed: boolean
+}
+
+export type InitialUsersStateType = {
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFetching: boolean
+    isFollowingInProgress: number[]
+};
+
+const initialState: InitialUsersStateType = {
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: true,
+    isFollowingInProgress: []
 };
 
 export default usersReducer;

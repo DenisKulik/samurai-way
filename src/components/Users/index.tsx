@@ -9,22 +9,42 @@ type UsersPropsType = UsersContainerPropsType & {
 }
 
 export const Users = (props: UsersPropsType) => {
-    const { usersPage, unfollowUser, followUser, changePageNumber } = props;
-    const { users, totalUsersCount, pageSize, currentPage } = usersPage;
+    const {
+        usersPage,
+        unfollowUser,
+        followUser,
+        changePageNumber,
+        toggleIsFollowingProgress
+    } = props;
+    const {
+        users,
+        totalUsersCount,
+        pageSize,
+        currentPage,
+        isFollowingInProgress
+    } = usersPage;
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
     const followUserHandler = (userId: number) => {
+        toggleIsFollowingProgress(true, userId);
         socialNetworkAPI
             .followUser(userId)
-            .then(data => data.resultCode === 0 && followUser(userId));
+            .then(data => {
+                data.resultCode === 0 && followUser(userId);
+                toggleIsFollowingProgress(false, userId);
+            });
     };
 
     const unfollowUserHandler = (userId: number) => {
+        toggleIsFollowingProgress(true, userId);
         socialNetworkAPI
             .unfollowUser(userId)
-            .then(data => data.resultCode === 0 && unfollowUser(userId));
+            .then(data => {
+                data.resultCode === 0 && unfollowUser(userId);
+                toggleIsFollowingProgress(false, userId);
+            });
     };
 
     return (
@@ -46,14 +66,20 @@ export const Users = (props: UsersPropsType) => {
                                 </NavLink>
                                 {
                                     user.followed ? (
-                                        <button onClick={() =>
-                                            unfollowUserHandler(user.id)}
+                                        <button
+                                            disabled={isFollowingInProgress.some(
+                                                id => user.id === id)}
+                                            onClick={() =>
+                                                unfollowUserHandler(user.id)}
                                         >
                                             Unfollow
                                         </button>
                                     ) : (
-                                        <button onClick={() =>
-                                            followUserHandler(user.id)}
+                                        <button
+                                            disabled={isFollowingInProgress.some(
+                                                id => user.id === id)}
+                                            onClick={() =>
+                                                followUserHandler(user.id)}
                                         >
                                             Follow
                                         </button>

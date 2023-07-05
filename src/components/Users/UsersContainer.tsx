@@ -3,7 +3,8 @@ import styles from './Users.module.scss';
 import { AppStateType } from '../../redux/reduxStore';
 import {
     followUser, InitialUsersStateType, setCurrentPage, setTotalUsersCount,
-    setUsers, toggleIsFetching, unfollowUser, UserType
+    setUsers, toggleIsFetching, toggleIsFollowingProgress, unfollowUser,
+    UserType
 } from '../../redux/usersReducer';
 import { Component } from 'react';
 import { Users } from './index';
@@ -24,6 +25,8 @@ type MapDispatchToPropsType = {
     setCurrentPage: (currentPage: number) => void
     setTotalUsersCount: (totalUsersCount: number) => void
     toggleIsFetching: (isFetchingAC: boolean) => void
+    toggleIsFollowingProgress: (isFollowingInProgress: boolean,
+        userId: number) => void
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
@@ -77,4 +80,5 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching,
+    toggleIsFollowingProgress
 })(UsersContainer);
