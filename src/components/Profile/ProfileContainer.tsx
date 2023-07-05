@@ -3,37 +3,16 @@ import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Profile } from './index';
 import {
-    InitialProfileStateType, ProfileType, setUserProfile
+    getUserProfile, InitialProfileStateType
 } from '../../redux/profileReducer';
 import { AppStateType } from '../../redux/reduxStore';
-import { socialNetworkAPI } from '../../api/socialNetworkAPI';
-
-type MapStateToPropsType = {
-    profilePage: InitialProfileStateType
-}
-
-type PathParamsType = {
-    userId: string
-}
-
-type ownProfileContainerPropsType = MapStateToPropsType
-    & MapDispatchToPropsType
-
-export type ProfileContainerPropsType = RouteComponentProps<PathParamsType>
-    & ownProfileContainerPropsType
-
-type MapDispatchToPropsType = {
-    setUserProfile: (profile: ProfileType) => void
-}
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
         let { userId } = this.props.match.params;
         if (!userId) userId = '2';
 
-        socialNetworkAPI
-            .getUserProfile(userId)
-            .then(data => this.props.setUserProfile(data));
+        this.props.getUserProfile(userId);
     }
 
     render = () => (
@@ -47,5 +26,24 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 
 const withUrlDataContainer = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, { setUserProfile })(
+export default connect(mapStateToProps, { getUserProfile })(
     withUrlDataContainer);
+
+// types
+type MapStateToPropsType = {
+    profilePage: InitialProfileStateType
+}
+
+type MapDispatchToPropsType = {
+    getUserProfile: (userId: string) => void
+}
+
+type PathParamsType = {
+    userId: string
+}
+
+type ownProfileContainerPropsType = MapStateToPropsType
+    & MapDispatchToPropsType
+
+export type ProfileContainerPropsType = RouteComponentProps<PathParamsType>
+    & ownProfileContainerPropsType
