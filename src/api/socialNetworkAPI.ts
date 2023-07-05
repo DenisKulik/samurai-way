@@ -21,14 +21,14 @@ export const socialNetworkAPI = {
             .get(`profile/${userId}`)
             .then(response => response.data);
     },
-    followUser(userId: number) {
+    follow(userId: number) {
         return instance
-            .post(`follow/${userId}`, {},)
+            .post(`follow/${userId}`, {})
             .then(response => response.data);
     },
-    unfollowUser(userId: number) {
+    unfollow(userId: number) {
         return instance
-            .delete(`follow/${userId}`, {},)
+            .delete(`follow/${userId}`, {})
             .then(response => response.data);
     },
 };

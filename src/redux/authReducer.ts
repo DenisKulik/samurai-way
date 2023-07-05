@@ -1,4 +1,4 @@
-import { ActionsTypes } from './reduxStore';
+import { AppActionsType } from './reduxStore';
 
 export type ResponseAuthUserDataType = {
     id: number | null
@@ -23,7 +23,7 @@ export const setUserData = (data: ResponseAuthUserDataType) =>
     ({ type: 'SET-USER-DATA', data } as const);
 
 const authReducer = (
-    state: InitialAuthUserDataStateType = initialState, action: ActionsTypes
+    state: InitialAuthUserDataStateType = initialState, action: AppActionsType
 ): InitialAuthUserDataStateType => {
     switch (action.type) {
         case 'SET-USER-DATA':

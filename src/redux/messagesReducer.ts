@@ -1,4 +1,4 @@
-import { ActionsTypes } from './reduxStore';
+import { AppActionsType } from './reduxStore';
 
 export type DialogType = {
     id: number
@@ -51,7 +51,7 @@ export const updateNewMessageActionCreator = (message: string) =>
     ({ type: 'UPDATE-NEW-MESSAGE', message } as const);
 
 const messagesReducer = (
-    state: InitialMessagesStateType = initialState, action: ActionsTypes
+    state: InitialMessagesStateType = initialState, action: AppActionsType
 ): InitialMessagesStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE':

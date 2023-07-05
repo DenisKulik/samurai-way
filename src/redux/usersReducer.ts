@@ -1,7 +1,9 @@
-import { ActionsTypes } from './reduxStore';
+import { AppActionsType, AppThunkType } from './reduxStore';
+import { Dispatch } from 'redux';
+import { socialNetworkAPI } from '../api/socialNetworkAPI';
 
 const usersReducer = (
-    state: InitialUsersStateType = initialState, action: ActionsTypes
+    state: InitialUsersStateType = initialState, action: AppActionsType
 ): InitialUsersStateType => {
     switch (action.type) {
         case 'FOLLOW':
@@ -38,9 +40,9 @@ const usersReducer = (
 };
 
 // actions
-export const followUser = (userId: number) =>
+export const follow = (userId: number) =>
     ({ type: 'FOLLOW', userId } as const);
-export const unfollowUser = (userId: number) =>
+export const unfollow = (userId: number) =>
     ({ type: 'UNFOLLOW', userId } as const);
 export const setUsers = (users: UserType[]) =>
     ({ type: 'SET-USERS', users } as const);
@@ -54,10 +56,59 @@ export const toggleIsFollowingProgress = (
     isFollowingInProgress: boolean,
     userId: number
 ) => ({
-    type: 'TOGGLE-IS-FOLLOWING-PROGRESS',
-    isFollowingInProgress,
-    userId
+    type: 'TOGGLE-IS-FOLLOWING-PROGRESS', isFollowingInProgress, userId
 } as const);
+
+// thunks
+export const getUsers = (
+    currentPage: number,
+    pageSize: number
+): AppThunkType => async (
+    dispatch: Dispatch<AppActionsType>
+) => {
+    try {
+        dispatch(toggleIsFetching(true));
+        const res = await socialNetworkAPI.getUsers(currentPage, pageSize);
+        dispatch(setUsers(res.items));
+        dispatch(setTotalUsersCount(res.totalCount));
+    } catch (e) {
+        console.error(e);
+    } finally {
+        dispatch(toggleIsFetching(false));
+    }
+};
+
+export const followUser = (
+    userId: number,
+): AppThunkType => async (
+    dispatch: Dispatch<AppActionsType>
+) => {
+    try {
+        dispatch(toggleIsFollowingProgress(true, userId));
+        const res = await socialNetworkAPI.follow(userId);
+        res.resultCode === 0 && dispatch(follow(userId));
+    } catch (e) {
+        console.error(e);
+    } finally {
+        dispatch(toggleIsFollowingProgress(false, userId));
+    }
+};
+
+export const unfollowUser = (
+    userId: number,
+): AppThunkType => async (
+    dispatch: Dispatch<AppActionsType>
+) => {
+    try {
+        dispatch(toggleIsFollowingProgress(true, userId));
+        const res = await socialNetworkAPI.unfollow(userId);
+        res.resultCode === 0 && dispatch(unfollow(userId));
+    } catch (e) {
+        console.error(e);
+    } finally {
+        dispatch(toggleIsFollowingProgress(false, userId));
+    }
+};
 
 // types
 export type UserType = {

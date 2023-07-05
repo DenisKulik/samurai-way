@@ -2,7 +2,6 @@ import { NavLink } from 'react-router-dom';
 import styles from './Users.module.scss';
 import userDefault from '../../img/user-default.png';
 import { UsersContainerPropsType } from './UsersContainer';
-import { socialNetworkAPI } from '../../api/socialNetworkAPI';
 
 type UsersPropsType = UsersContainerPropsType & {
     changePageNumber: (page: number) => void
@@ -13,8 +12,7 @@ export const Users = (props: UsersPropsType) => {
         usersPage,
         unfollowUser,
         followUser,
-        changePageNumber,
-        toggleIsFollowingProgress
+        changePageNumber
     } = props;
     const {
         users,
@@ -27,26 +25,6 @@ export const Users = (props: UsersPropsType) => {
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
-    const followUserHandler = (userId: number) => {
-        toggleIsFollowingProgress(true, userId);
-        socialNetworkAPI
-            .followUser(userId)
-            .then(data => {
-                data.resultCode === 0 && followUser(userId);
-                toggleIsFollowingProgress(false, userId);
-            });
-    };
-
-    const unfollowUserHandler = (userId: number) => {
-        toggleIsFollowingProgress(true, userId);
-        socialNetworkAPI
-            .unfollowUser(userId)
-            .then(data => {
-                data.resultCode === 0 && unfollowUser(userId);
-                toggleIsFollowingProgress(false, userId);
-            });
-    };
-
     return (
         <>
             <div className={styles.users}>
@@ -57,8 +35,8 @@ export const Users = (props: UsersPropsType) => {
                                 <NavLink to={`/profile/${user.id}`}>
                                     <img
                                         src={user.photos.large ?
-                                             user.photos.large :
-                                             userDefault}
+                                            user.photos.large :
+                                            userDefault}
                                         alt={user.name}
                                         width={50}
                                         height={50}
@@ -69,8 +47,8 @@ export const Users = (props: UsersPropsType) => {
                                         <button
                                             disabled={isFollowingInProgress.some(
                                                 id => user.id === id)}
-                                            onClick={() =>
-                                                unfollowUserHandler(user.id)}
+                                            onClick={() => unfollowUser(
+                                                user.id)}
                                         >
                                             Unfollow
                                         </button>
@@ -78,8 +56,7 @@ export const Users = (props: UsersPropsType) => {
                                         <button
                                             disabled={isFollowingInProgress.some(
                                                 id => user.id === id)}
-                                            onClick={() =>
-                                                followUserHandler(user.id)}
+                                            onClick={() => followUser(user.id)}
                                         >
                                             Follow
                                         </button>
@@ -105,8 +82,8 @@ export const Users = (props: UsersPropsType) => {
                                   className={`${styles.page} ${
                                       currentPage ===
                                       page ?
-                                      styles.selectedPage :
-                                      ''}`}
+                                          styles.selectedPage :
+                                          ''}`}
                                   onClick={() => changePageNumber(page)}
                             >
                                 {page}

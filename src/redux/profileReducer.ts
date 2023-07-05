@@ -1,4 +1,4 @@
-import { ActionsTypes } from './reduxStore';
+import { AppActionsType } from './reduxStore';
 
 export type PostType = {
     id: number
@@ -59,7 +59,7 @@ export const setUserProfile = (profile: ProfileType) =>
     ({ type: 'SET-USER-PROFILE', profile } as const);
 
 const profileReducer = (
-    state: InitialProfileStateType = initialState, action: ActionsTypes
+    state: InitialProfileStateType = initialState, action: AppActionsType
 ): InitialProfileStateType => {
     switch (action.type) {
         case 'ADD-POST':
