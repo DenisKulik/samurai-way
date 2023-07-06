@@ -6,7 +6,7 @@ import {
     getUserProfile, InitialProfileStateType
 } from '../../redux/profileReducer';
 import { AppStateType } from '../../redux/reduxStore';
-import { InitialAuthUserDataStateType } from '../../redux/authReducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
@@ -23,18 +23,16 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profilePage: state.profilePage,
-    auth: state.auth
 });
 
 const withUrlDataContainer = withRouter(ProfileContainer);
 
-export default connect(mapStateToProps, { getUserProfile })(
-    withUrlDataContainer);
+export default withAuthRedirect(connect(mapStateToProps, { getUserProfile })(
+    withUrlDataContainer));
 
 // types
 type MapStateToPropsType = {
     profilePage: InitialProfileStateType
-    auth: InitialAuthUserDataStateType
 }
 
 type MapDispatchToPropsType = {

@@ -6,13 +6,12 @@ import {
 } from '../../redux/messagesReducer';
 import { AppStateType } from '../../redux/reduxStore';
 import Dialogs from './index';
-import { InitialAuthUserDataStateType } from '../../redux/authReducer';
+import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 type MapStateToPropsType = {
     messages: InitialMessagesStateType
-    auth: InitialAuthUserDataStateType
 }
 
 type MapDispatchToPropsType = {
@@ -22,8 +21,7 @@ type MapDispatchToPropsType = {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
-        messages: state.messages,
-        auth: state.auth
+        messages: state.messages
     };
 };
 
@@ -36,6 +34,5 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     };
 };
 
-const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
-
-export default DialogsContainer;
+export default withAuthRedirect(
+    connect(mapStateToProps, mapDispatchToProps)(Dialogs));
