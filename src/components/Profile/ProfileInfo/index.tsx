@@ -3,6 +3,7 @@ import userDefault from '../../../img/user-default.png';
 import background from '../../../img/background.jpg';
 import { ProfileType } from '../../../redux/profileReducer';
 import { Preloader } from '../../common/Preloader';
+import { ProfileStatus } from './ProfileStatus';
 
 type ProfileInfoPropsType = {
     profile: ProfileType
@@ -27,16 +28,12 @@ const ProfileInfo = ({ profile }: ProfileInfoPropsType) => {
                         {profile.fullName}
                         <span>online</span>
                     </h2>
-                    <p className={styles.isLookingForAJob}>
-                        Looking for a job: {
-                        profile.lookingForAJob ?
-                        'yes 🐱‍👤' :
-                        'no 🙅‍♂️'
-                    }
-                    </p>
-                    <p className={styles.status}>
-                        {profile.lookingForAJobDescription}
-                    </p>
+                    <ProfileStatus status={'Hello'} />
+                </div>
+                <div className={styles.jobInfo}>
+                    <p>Looking for a job: {profile.lookingForAJob ? 'yes 🐱‍👤'
+                        : 'no 🙅‍♂️'}</p>
+                    <p>{profile.lookingForAJobDescription}</p>
                 </div>
             </div>
         </div>
