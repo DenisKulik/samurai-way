@@ -1,4 +1,5 @@
-import { Component } from 'react';
+import { Component, ComponentType } from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import { Profile } from './index';
@@ -25,10 +26,11 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profilePage: state.profilePage,
 });
 
-const withUrlDataContainer = withRouter(ProfileContainer);
-
-export default withAuthRedirect(connect(mapStateToProps, { getUserProfile })(
-    withUrlDataContainer));
+export default compose<ComponentType>(
+    connect(mapStateToProps, { getUserProfile }),
+    withRouter,
+    withAuthRedirect
+)(ProfileContainer);
 
 // types
 type MapStateToPropsType = {

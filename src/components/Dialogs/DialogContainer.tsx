@@ -1,5 +1,6 @@
+import { ComponentType } from 'react';
 import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { compose, Dispatch } from 'redux';
 import {
     addMessageActionCreator, InitialMessagesStateType,
     updateNewMessageActionCreator
@@ -7,17 +8,6 @@ import {
 import { AppStateType } from '../../redux/reduxStore';
 import Dialogs from './index';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
-
-export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
-
-type MapStateToPropsType = {
-    messages: InitialMessagesStateType
-}
-
-type MapDispatchToPropsType = {
-    sendMessage: () => void
-    updateNewMessage: (message: string) => void
-}
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
     return {
@@ -34,5 +24,19 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
     };
 };
 
-export default withAuthRedirect(
-    connect(mapStateToProps, mapDispatchToProps)(Dialogs));
+export default compose<ComponentType>(
+    connect(mapStateToProps, mapDispatchToProps),
+    withAuthRedirect
+)(Dialogs);
+
+// types
+export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+type MapStateToPropsType = {
+    messages: InitialMessagesStateType
+}
+
+type MapDispatchToPropsType = {
+    sendMessage: () => void
+    updateNewMessage: (message: string) => void
+}
