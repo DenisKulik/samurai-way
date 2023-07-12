@@ -11,6 +11,7 @@ import {
     toggleIsFetching, toggleIsFollowingProgress, unfollow
 } from './usersReducer';
 import { authReducer, setUserData } from './authReducer';
+import { reducer as formReducer } from 'redux-form';
 
 export type AppActionsType =
     | ReturnType<typeof addMessageActionCreator>
@@ -32,7 +33,8 @@ const rootReducer = combineReducers({
     profilePage: profileReducer,
     messages: messagesReducer,
     usersPage: usersReducer,
-    auth: authReducer
+    auth: authReducer,
+    form: formReducer
 });
 
 const store: StoreType = createStore(rootReducer,
