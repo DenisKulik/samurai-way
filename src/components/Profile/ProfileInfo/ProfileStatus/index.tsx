@@ -12,6 +12,17 @@ export class ProfileStatus extends Component<ProfileStatusPropsType> {
         status: this.props.status
     };
 
+    componentDidUpdate(
+        prevProps: Readonly<ProfileStatusPropsType>,
+        prevState: Readonly<ProfileStatusPropsType>
+    ) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({
+                status: this.props.status
+            });
+        }
+    }
+
     activateEditMode = () => {
         this.setState({
             editMode: true
