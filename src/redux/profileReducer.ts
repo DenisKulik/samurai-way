@@ -1,6 +1,6 @@
 import { AppActionsType, AppThunkType } from './reduxStore';
 import { Dispatch } from 'redux';
-import { socialNetworkAPI } from '../api/socialNetworkAPI';
+import { profileAPI, ProfileType } from '../api/socialNetworkAPI';
 
 const initialState: InitialProfileStateType = {
     profile: {} as ProfileType,
@@ -17,9 +17,10 @@ const initialState: InitialProfileStateType = {
         },
     ],
     newPostText: '',
+    status: ''
 };
 
-const profileReducer = (
+export const profileReducer = (
     state: InitialProfileStateType = initialState, action: AppActionsType
 ): InitialProfileStateType => {
     switch (action.type) {
@@ -40,12 +41,16 @@ const profileReducer = (
                 ...state,
                 newPostText: action.postText
             };
-        case 'SET-USER-PROFILE': {
+        case 'SET-USER-PROFILE':
             return {
                 ...state,
                 profile: action.profile
             };
-        }
+        case 'SET-USER-STATUS':
+            return {
+                ...state,
+                status: action.status
+            };
         default:
             return state;
     }
@@ -57,18 +62,45 @@ export const updateNewPostText = (postText: string) =>
     ({ type: 'UPDATE-NEW-POST-TEXT', postText } as const);
 export const setUserProfile = (profile: ProfileType) =>
     ({ type: 'SET-USER-PROFILE', profile } as const);
+export const setUserStatus = (status: string) =>
+    ({ type: 'SET-USER-STATUS', status } as const);
 
 // thunks
 export const getUserProfile = (userId: string): AppThunkType => async (
     dispatch: Dispatch<AppActionsType>
 ) => {
     try {
-        const res = await socialNetworkAPI.getUserProfile(userId);
+        const res = await profileAPI.getUserProfile(userId);
         dispatch(setUserProfile(res));
     } catch (e) {
         console.error(e);
     }
 };
+
+export const getUserStatus = (userId: string): AppThunkType => async (
+    dispatch: Dispatch<AppActionsType>
+) => {
+    try {
+        const res = await profileAPI.getUserStatus(userId);
+        dispatch(setUserStatus(res));
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+export const updateUserStatus = (status: string): AppThunkType => async (
+    dispatch: Dispatch<AppActionsType>
+) => {
+    try {
+        const res = await profileAPI.updateUserStatus(status);
+        if (res.resultCode === 0) {
+            dispatch(setUserStatus(status));
+        }
+    } catch (e) {
+        console.error(e);
+    }
+};
+
 
 // types
 export type PostType = {
@@ -77,33 +109,9 @@ export type PostType = {
     likesCount: number
 }
 
-type ContactsType = {
-    github: string
-    vk: string
-    facebook: string
-    instagram: string
-    twitter: string
-    website: string
-    youtube: string
-    mainLink: string
-}
-
-export type ProfileType = {
-    userId: number
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
-    fullName: string
-    contacts: ContactsType
-    photos: {
-        small: string | null
-        large: string | null
-    }
-}
-
 export type InitialProfileStateType = {
     profile: ProfileType
     postsData: PostType[]
     newPostText: string
+    status: string
 };
-
-export default profileReducer;

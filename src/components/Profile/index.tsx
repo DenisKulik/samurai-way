@@ -4,12 +4,16 @@ import { ProfileContainerPropsType } from './ProfileContainer';
 
 type ProfilePropsType = ProfileContainerPropsType
 
-export const Profile = ({ profilePage }: ProfilePropsType) => {
-    const { profile } = profilePage;
+export const Profile = (props: ProfilePropsType) => {
+    const { profile, status, updateUserStatus } = props;
 
     return (
         <>
-            <ProfileInfo profile={profile} />
+            <ProfileInfo
+                profile={profile}
+                status={status}
+                updateUserStatus={updateUserStatus}
+            />
             <MyPostsContainer />
         </>
     );

@@ -1,6 +1,6 @@
 import { AppActionsType, AppThunkType } from './reduxStore';
 import { Dispatch } from 'redux';
-import { socialNetworkAPI } from '../api/socialNetworkAPI';
+import { authAPI } from '../api/socialNetworkAPI';
 
 const initialState: InitialAuthUserDataStateType = {
     id: null,
@@ -10,7 +10,7 @@ const initialState: InitialAuthUserDataStateType = {
     isFetching: true
 };
 
-const authReducer = (
+export const authReducer = (
     state: InitialAuthUserDataStateType = initialState, action: AppActionsType
 ): InitialAuthUserDataStateType => {
     switch (action.type) {
@@ -28,7 +28,7 @@ export const setUserData = (data: ResponseAuthUserDataType) =>
 // thunks
 export const getAuthUser = (): AppThunkType => async (dispatch: Dispatch<AppActionsType>) => {
     try {
-        const res = await socialNetworkAPI.getAuthUser();
+        const res = await authAPI.getAuthUser();
         res.resultCode === 0 && dispatch(setUserData(res.data));
     } catch (e) {
         console.error(e);
@@ -46,5 +46,3 @@ export type InitialAuthUserDataStateType = ResponseAuthUserDataType & {
     isAuth: boolean
     isFetching: boolean
 };
-
-export default authReducer;

@@ -1,15 +1,21 @@
 import styles from './ProfileInfo.module.scss';
 import userDefault from '../../../img/user-default.png';
 import background from '../../../img/background.jpg';
-import { ProfileType } from '../../../redux/profileReducer';
+import { ProfileType } from '../../../api/socialNetworkAPI';
 import { Preloader } from '../../common/Preloader';
 import { ProfileStatus } from './ProfileStatus';
 
 type ProfileInfoPropsType = {
     profile: ProfileType
+    status: string
+    updateUserStatus: (status: string) => void
 }
 
-const ProfileInfo = ({ profile }: ProfileInfoPropsType) => {
+const ProfileInfo = ({
+    profile,
+    status,
+    updateUserStatus
+}: ProfileInfoPropsType) => {
     if (!profile) return <Preloader />;
 
     return (
@@ -28,7 +34,10 @@ const ProfileInfo = ({ profile }: ProfileInfoPropsType) => {
                         {profile.fullName}
                         <span>online</span>
                     </h2>
-                    <ProfileStatus status={'Hello'} />
+                    <ProfileStatus
+                        status={status}
+                        updateUserStatus={updateUserStatus}
+                    />
                 </div>
                 <div className={styles.jobInfo}>
                     <p>Looking for a job: {profile.lookingForAJob ? 'yes 🐱‍👤'

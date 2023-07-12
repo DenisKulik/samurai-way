@@ -1,8 +1,17 @@
 import { AppActionsType, AppThunkType } from './reduxStore';
 import { Dispatch } from 'redux';
-import { socialNetworkAPI } from '../api/socialNetworkAPI';
+import { usersAPI, UserType } from '../api/socialNetworkAPI';
 
-const usersReducer = (
+const initialState: InitialUsersStateType = {
+    users: [],
+    pageSize: 5,
+    totalUsersCount: 0,
+    currentPage: 1,
+    isFetching: true,
+    isFollowingInProgress: []
+};
+
+export const usersReducer = (
     state: InitialUsersStateType = initialState, action: AppActionsType
 ): InitialUsersStateType => {
     switch (action.type) {
@@ -68,7 +77,7 @@ export const getUsers = (
 ) => {
     try {
         dispatch(toggleIsFetching(true));
-        const res = await socialNetworkAPI.getUsers(currentPage, pageSize);
+        const res = await usersAPI.getUsers(currentPage, pageSize);
         dispatch(setUsers(res.items));
         dispatch(setTotalUsersCount(res.totalCount));
     } catch (e) {
@@ -85,7 +94,7 @@ export const followUser = (
 ) => {
     try {
         dispatch(toggleIsFollowingProgress(true, userId));
-        const res = await socialNetworkAPI.follow(userId);
+        const res = await usersAPI.follow(userId);
         res.resultCode === 0 && dispatch(follow(userId));
     } catch (e) {
         console.error(e);
@@ -101,7 +110,7 @@ export const unfollowUser = (
 ) => {
     try {
         dispatch(toggleIsFollowingProgress(true, userId));
-        const res = await socialNetworkAPI.unfollow(userId);
+        const res = await usersAPI.unfollow(userId);
         res.resultCode === 0 && dispatch(unfollow(userId));
     } catch (e) {
         console.error(e);
@@ -111,17 +120,6 @@ export const unfollowUser = (
 };
 
 // types
-export type UserType = {
-    id: number
-    name: string
-    status: string
-    photos: {
-        large: string
-        small: string
-    }
-    followed: boolean
-}
-
 export type InitialUsersStateType = {
     users: UserType[]
     pageSize: number
@@ -130,14 +128,3 @@ export type InitialUsersStateType = {
     isFetching: boolean
     isFollowingInProgress: number[]
 };
-
-const initialState: InitialUsersStateType = {
-    users: [],
-    pageSize: 5,
-    totalUsersCount: 0,
-    currentPage: 1,
-    isFetching: true,
-    isFollowingInProgress: []
-};
-
-export default usersReducer;

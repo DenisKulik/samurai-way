@@ -1,13 +1,15 @@
-import { Component } from 'react';
+import { ChangeEvent, Component } from 'react';
 import styles from './ProfileStatus.module.scss';
 
 type ProfileStatusPropsType = {
     status: string
+    updateUserStatus: (status: string) => void
 }
 
 export class ProfileStatus extends Component<ProfileStatusPropsType> {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     };
 
     activateEditMode = () => {
@@ -20,6 +22,13 @@ export class ProfileStatus extends Component<ProfileStatusPropsType> {
         this.setState({
             editMode: false
         });
+        this.props.updateUserStatus(this.state.status);
+    };
+
+    onChangeStatus = (e: ChangeEvent<HTMLInputElement>) => {
+        this.setState({
+            status: e.currentTarget.value
+        });
     };
 
     render = () => (
@@ -27,12 +36,13 @@ export class ProfileStatus extends Component<ProfileStatusPropsType> {
             {
                 this.state.editMode ?
                     <input
+                        onChange={this.onChangeStatus}
                         onBlur={this.deactivateEditMode}
-                        value={this.props.status}
+                        value={this.state.status}
                         autoFocus
                     /> :
                     <span onDoubleClick={this.activateEditMode}>
-                        {this.props.status}
+                        {this.props.status || 'Add status'}
                     </span>
             }
         </div>
