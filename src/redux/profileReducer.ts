@@ -16,30 +16,22 @@ const initialState: InitialProfileStateType = {
             likesCount: 5
         },
     ],
-    newPostText: '',
     status: ''
 };
 
 export const profileReducer = (
-    state: InitialProfileStateType = initialState, action: AppActionsType
+    state: InitialProfileStateType = initialState, action: ProfileActionsType
 ): InitialProfileStateType => {
     switch (action.type) {
         case 'ADD-POST':
-            if (!state.newPostText.trim()) return state;
-            const newPost: PostType = {
-                id: new Date().getTime(),
-                message: state.newPostText,
-                likesCount: 0
-            };
+            debugger
             return {
                 ...state,
-                postsData: [ newPost, ...state.postsData ],
-                newPostText: ''
-            };
-        case 'UPDATE-NEW-POST-TEXT':
-            return {
-                ...state,
-                newPostText: action.postText
+                postsData: [ {
+                    id: new Date().getTime(),
+                    message: action.post,
+                    likesCount: 0
+                }, ...state.postsData ]
             };
         case 'SET-USER-PROFILE':
             return {
@@ -57,9 +49,7 @@ export const profileReducer = (
 };
 
 // actions
-export const addPost = () => ({ type: 'ADD-POST' } as const);
-export const updateNewPostText = (postText: string) =>
-    ({ type: 'UPDATE-NEW-POST-TEXT', postText } as const);
+export const addPost = (post: string) => ({ type: 'ADD-POST', post } as const);
 export const setUserProfile = (profile: ProfileType) =>
     ({ type: 'SET-USER-PROFILE', profile } as const);
 export const setUserStatus = (status: string) =>
@@ -101,7 +91,6 @@ export const updateUserStatus = (status: string): AppThunkType => async (
     }
 };
 
-
 // types
 export type PostType = {
     id: number
@@ -112,6 +101,10 @@ export type PostType = {
 export type InitialProfileStateType = {
     profile: ProfileType
     postsData: PostType[]
-    newPostText: string
     status: string
 };
+
+export type ProfileActionsType =
+    | ReturnType<typeof addPost>
+    | ReturnType<typeof setUserProfile>
+    | ReturnType<typeof setUserStatus>

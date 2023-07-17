@@ -1,9 +1,9 @@
-import { applyMiddleware, combineReducers, createStore, Store } from 'redux';
+import {
+    AnyAction, applyMiddleware, combineReducers, createStore, Store
+} from 'redux';
 import thunkMiddleware, { ThunkAction } from 'redux-thunk';
 import { reducer as formReducer } from 'redux-form';
-import {
-    profileReducer, addPost, updateNewPostText, setUserProfile, setUserStatus
-} from './profileReducer';
+import { profileReducer, ProfileActionsType } from './profileReducer';
 import messagesReducer, { addMessage } from './messagesReducer';
 import {
     usersReducer, follow, setCurrentPage, setTotalUsersCount, setUsers,
@@ -12,10 +12,8 @@ import {
 import { authReducer, setUserData } from './authReducer';
 
 export type AppActionsType =
+    | ProfileActionsType
     | ReturnType<typeof addMessage>
-    | ReturnType<typeof addPost>
-    | ReturnType<typeof updateNewPostText>
-    | ReturnType<typeof setUserProfile>
     | ReturnType<typeof follow>
     | ReturnType<typeof unfollow>
     | ReturnType<typeof setUsers>
@@ -24,7 +22,7 @@ export type AppActionsType =
     | ReturnType<typeof toggleIsFetching>
     | ReturnType<typeof setUserData>
     | ReturnType<typeof toggleIsFollowingProgress>
-    | ReturnType<typeof setUserStatus>
+
 
 const rootReducer = combineReducers({
     profilePage: profileReducer,
@@ -39,7 +37,7 @@ const store: StoreType = createStore(rootReducer,
 
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>
-export type StoreType = Store<AppStateType, AppActionsType>
+export type StoreType = Store<AppStateType, AppActionsType | AnyAction>
 export type AppThunkType<ReturnType = void> = ThunkAction<
     ReturnType,
     AppStateType,
