@@ -14,10 +14,11 @@ const rootReducer = combineReducers({
     form: formReducer
 });
 
-const store: StoreType = createStore(rootReducer,
-    applyMiddleware(thunkMiddleware));
+const store: StoreType = createStore(
+    rootReducer, applyMiddleware(thunkMiddleware)
+);
 
-type RootReducerType = typeof rootReducer;
+export default store;
 
 // types
 export type AppActionsType =
@@ -26,6 +27,7 @@ export type AppActionsType =
     | UsersActionsType
     | AuthActionsType
     | FormAction
+type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>
 export type StoreType = Store<AppStateType, AppActionsType>
 export type AppThunkType<ReturnType = void> = ThunkAction<
@@ -34,5 +36,3 @@ export type AppThunkType<ReturnType = void> = ThunkAction<
     unknown,
     AppActionsType
 >
-
-export default store;
