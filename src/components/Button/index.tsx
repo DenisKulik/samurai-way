@@ -6,7 +6,7 @@ type DefaultInputProps = DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButton
 
 type ButtonPropsType = DefaultInputProps & {
     title: string
-    callback: () => void
+    callback?: () => void
 };
 
 const Button = (props: ButtonPropsType) => {
