@@ -11,7 +11,7 @@ const initialState: InitialAuthUserDataStateType = {
 };
 
 export const authReducer = (
-    state: InitialAuthUserDataStateType = initialState, action: AppActionsType
+    state: InitialAuthUserDataStateType = initialState, action: AuthActionsType
 ): InitialAuthUserDataStateType => {
     switch (action.type) {
         case 'SET-USER-DATA':
@@ -46,3 +46,5 @@ export type InitialAuthUserDataStateType = ResponseAuthUserDataType & {
     isAuth: boolean
     isFetching: boolean
 };
+
+export type AuthActionsType = ReturnType<typeof setUserData>

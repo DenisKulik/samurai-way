@@ -24,7 +24,6 @@ export const profileReducer = (
 ): InitialProfileStateType => {
     switch (action.type) {
         case 'ADD-POST':
-            debugger
             return {
                 ...state,
                 postsData: [ {

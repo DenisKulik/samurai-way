@@ -12,7 +12,7 @@ const initialState: InitialUsersStateType = {
 };
 
 export const usersReducer = (
-    state: InitialUsersStateType = initialState, action: AppActionsType
+    state: InitialUsersStateType = initialState, action: UsersActionsType
 ): InitialUsersStateType => {
     switch (action.type) {
         case 'FOLLOW':
@@ -127,4 +127,13 @@ export type InitialUsersStateType = {
     currentPage: number
     isFetching: boolean
     isFollowingInProgress: number[]
-};
+}
+
+export type UsersActionsType =
+    | ReturnType<typeof follow>
+    | ReturnType<typeof unfollow>
+    | ReturnType<typeof setUsers>
+    | ReturnType<typeof setCurrentPage>
+    | ReturnType<typeof setTotalUsersCount>
+    | ReturnType<typeof toggleIsFetching>
+    | ReturnType<typeof toggleIsFollowingProgress>

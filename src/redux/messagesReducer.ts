@@ -1,5 +1,3 @@
-import { AppActionsType } from './reduxStore';
-
 const initialState: InitialMessagesStateType = {
     dialogsData: [
         { id: 1, name: 'William' },
@@ -10,27 +8,15 @@ const initialState: InitialMessagesStateType = {
         { id: 6, name: 'Hailey' },
     ],
     messagesData: [
-        {
-            id: 1,
-            message: 'Hey, any advice for someone starting to learn programming?'
-        },
-        {
-            id: 2,
-            message: 'Sure! Start with a beginner-friendly language like JavaScript, and practice coding every day.'
-        },
-        {
-            id: 3,
-            message: 'Got it. Any specific resources you recommend?'
-        },
-        {
-            id: 4,
-            message: 'Codecademy and Udemy have great courses, and there are tons of coding blogs and YouTube tutorials out there too.'
-        },
+        { id: 1, message: 'Any advice for a programming beginner?' },
+        { id: 2, message: 'Start with JavaScript and code every day.' },
+        { id: 3, message: 'Any recommended resources?' },
+        { id: 4, message: 'Udemy and YouTube tutorials are great resources.' }
     ]
 };
 
 const messagesReducer = (
-    state: InitialMessagesStateType = initialState, action: AppActionsType
+    state: InitialMessagesStateType = initialState, action: MessagesActionsType
 ): InitialMessagesStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
@@ -70,3 +56,5 @@ export type InitialMessagesStateType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
 }
+
+export type MessagesActionsType = ReturnType<typeof addMessage>
