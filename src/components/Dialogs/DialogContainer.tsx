@@ -2,27 +2,19 @@ import { ComponentType } from 'react';
 import { connect } from 'react-redux';
 import { compose, Dispatch } from 'redux';
 import {
-    addMessageActionCreator, InitialMessagesStateType,
-    updateNewMessageActionCreator
+    addMessage, InitialMessagesStateType,
 } from '../../redux/messagesReducer';
 import { AppStateType } from '../../redux/reduxStore';
 import Dialogs from './index';
 import { withAuthRedirect } from '../../hoc/withAuthRedirect';
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        messages: state.messages
-    };
-};
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    messages: state.messages
+});
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => {
-    return {
-        sendMessage: () => dispatch(addMessageActionCreator()),
-        updateNewMessage: (message: string) => {
-            dispatch(updateNewMessageActionCreator(message));
-        },
-    };
-};
+const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
+    sendMessage: (message) => dispatch(addMessage(message)),
+});
 
 export default compose<ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
@@ -37,6 +29,5 @@ type MapStateToPropsType = {
 }
 
 type MapDispatchToPropsType = {
-    sendMessage: () => void
-    updateNewMessage: (message: string) => void
+    sendMessage: (message: string) => void
 }

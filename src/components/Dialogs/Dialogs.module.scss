@@ -19,17 +19,4 @@
   .dialogWrapper {
     flex: 1;
   }
-
-  .newMessage {
-    display: flex;
-    gap: 1rem;
-
-    .messageField {
-      width: 100%;
-      padding: 0.5rem 1rem;
-      font-size: 1.6rem;
-      resize: none;
-      border-radius: 50px;
-    }
-  }
 }

@@ -1,21 +1,18 @@
 import { applyMiddleware, combineReducers, createStore, Store } from 'redux';
 import thunkMiddleware, { ThunkAction } from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
 import {
     profileReducer, addPost, updateNewPostText, setUserProfile, setUserStatus
 } from './profileReducer';
-import messagesReducer, {
-    addMessageActionCreator, updateNewMessageActionCreator
-} from './messagesReducer';
+import messagesReducer, { addMessage } from './messagesReducer';
 import {
     usersReducer, follow, setCurrentPage, setTotalUsersCount, setUsers,
     toggleIsFetching, toggleIsFollowingProgress, unfollow
 } from './usersReducer';
 import { authReducer, setUserData } from './authReducer';
-import { reducer as formReducer } from 'redux-form';
 
 export type AppActionsType =
-    | ReturnType<typeof addMessageActionCreator>
-    | ReturnType<typeof updateNewMessageActionCreator>
+    | ReturnType<typeof addMessage>
     | ReturnType<typeof addPost>
     | ReturnType<typeof updateNewPostText>
     | ReturnType<typeof setUserProfile>

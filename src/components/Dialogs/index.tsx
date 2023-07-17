@@ -1,17 +1,14 @@
-import { ChangeEvent } from 'react';
 import styles from './Dialogs.module.scss';
 import Dialog from './Dialog';
 import Message from './Message';
 import { DialogsPropsType } from './DialogContainer';
-import Button from '../Button';
+import MessageForm, { MessageFormDataType } from './MessageForm';
 
 const Dialogs = (props: DialogsPropsType) => {
-    const { messages, sendMessage, updateNewMessage } = props;
+    const { messages, sendMessage } = props;
 
-    const onChangeMessageHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        let message = e.currentTarget.value;
-        if (!message) message = '';
-        updateNewMessage(message);
+    const onSubmit = (formData: MessageFormDataType) => {
+        sendMessage(formData.message);
     };
 
     const dialogItems = messages.dialogsData.map(user => (
@@ -35,15 +32,7 @@ const Dialogs = (props: DialogsPropsType) => {
                 <div className={styles.dialogWrapper}>
                     {messageItems}
                 </div>
-                <div className={styles.newMessage}>
-                    <textarea
-                        className={styles.messageField}
-                        onChange={onChangeMessageHandler}
-                        value={messages.newMessageText}
-                        rows={1}
-                    />
-                    <Button title={'Send'} callback={sendMessage} />
-                </div>
+                <MessageForm onSubmit={onSubmit} />
             </div>
         </div>
     );
