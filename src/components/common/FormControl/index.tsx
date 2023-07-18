@@ -1,34 +1,31 @@
+import { cloneElement, ReactElement, ReactNode } from 'react';
 import { WrappedFieldProps } from 'redux-form';
 import styles from './FormControl.module.scss';
 
-export const CustomTextarea = ({
+type FormControlPropsType = WrappedFieldProps & {
+    children: ReactNode
+}
+
+const FormControl = ({
     input,
     meta,
+    children,
     ...props
-}: WrappedFieldProps) => {
+}: FormControlPropsType) => {
     const hasError = meta.touched && meta.error;
 
     return (
-        <div className={`${styles.formControl} ${hasError ?
-            styles.error : ''}`}>
-            <textarea {...input}{...props} />
+        <div
+            className={`${styles.formControl} ${hasError ? styles.error : ''}`}>
+            {cloneElement(children as ReactElement<ReactNode>,
+                { ...input, ...props })}
             {hasError && <span>{meta.error}</span>}
         </div>
     );
 };
 
-export const CustomInput = ({
-    input,
-    meta,
-    ...props
-}: WrappedFieldProps) => {
-    const hasError = meta.touched && meta.error;
+export const CustomTextarea = (props: FormControlPropsType) =>
+    (<FormControl {...props}><textarea /></FormControl>);
 
-    return (
-        <div className={`${styles.formControl} ${hasError ?
-            styles.error : ''}`}>
-            <input {...input}{...props} />
-            {hasError && <span>{meta.error}</span>}
-        </div>
-    );
-};
+export const CustomInput = (props: FormControlPropsType) =>
+    (<FormControl {...props}><input /></FormControl>);
