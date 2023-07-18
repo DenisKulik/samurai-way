@@ -1,7 +1,7 @@
 import { WrappedFieldProps } from 'redux-form';
 import styles from './FormControl.module.scss';
 
-export const FormControl = ({
+export const Textarea = ({
     input,
     meta,
     ...props

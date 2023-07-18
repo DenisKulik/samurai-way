@@ -2,7 +2,7 @@ import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import styles from './AddPostForm.module.scss';
 import Button from '../../../common/Button';
 import { maxLengthCreator, requiredField } from '../../../../utils/validators';
-import { FormControl } from '../../../common/FormControl';
+import { Textarea } from '../../../common/FormControl';
 
 export type AddPostFormDataType = {
     post: string
@@ -17,7 +17,7 @@ const AddPostForm = (props: InjectedFormProps<AddPostFormDataType>) => {
         <form className={styles.addPostForm} onSubmit={handleSubmit}>
             <Field
                 className={styles.postField}
-                component={FormControl}
+                component={Textarea}
                 name="post"
                 validate={[ requiredField, maxLength50 ]}
                 placeholder="What's new?"
