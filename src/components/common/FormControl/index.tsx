@@ -12,7 +12,7 @@ export const FormControl = ({
         <div className={`${styles.formControl} ${hasError ?
             styles.error : ''}`}>
             <textarea {...input}{...props} />
-            {hasError && <span>Some Error</span>}
+            {hasError && <span>{meta.error}</span>}
         </div>
     );
 };
