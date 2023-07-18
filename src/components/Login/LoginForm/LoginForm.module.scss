@@ -1,0 +1,11 @@
+.loginForm {
+  position: relative;
+
+  .error {
+    position: absolute;
+    top: -18px;
+    left: 0;
+    font-size: 1.2rem;
+    color: #ea2f64;
+  }
+}

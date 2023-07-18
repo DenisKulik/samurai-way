@@ -22,7 +22,7 @@ const Login = ({ isAuth, login }: LoginPropsType) => {
 
     return (
         <div className={styles.login}>
-            <h1>Login</h1>
+            <h1 className={styles.heading}>Login</h1>
             <LoginForm onSubmit={onSubmit} />
         </div>
     );

@@ -1,6 +1,7 @@
 import { AppActionsType, AppThunkDispatch, AppThunkType } from './reduxStore';
 import { Dispatch } from 'redux';
 import { authAPI, LoginType } from '../api/socialNetworkAPI';
+import { stopSubmit } from 'redux-form';
 
 const initialState: InitialAuthUserDataStateType = {
     id: null,
@@ -43,7 +44,13 @@ export const login = (data: LoginType): AppThunkType => async (
 ) => {
     try {
         const res = await authAPI.login(data);
-        res.resultCode === 0 && dispatch(getAuthUser());
+        if (res.resultCode === 0) {
+            dispatch(getAuthUser());
+        } else {
+            dispatch(stopSubmit('login', {
+                _error: res.messages[0] || 'Something went wrong',
+            }));
+        }
     } catch (e) {
         console.error(e);
     }

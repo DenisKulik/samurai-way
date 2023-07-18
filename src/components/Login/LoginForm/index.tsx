@@ -1,6 +1,7 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { CustomInput } from '../../common/FormControl';
 import { requiredField } from '../../../utils/validators';
+import styles from './LoginForm.module.scss';
 
 export type FormDataType = {
     email: string
@@ -9,10 +10,11 @@ export type FormDataType = {
 }
 
 const LoginForm = (props: InjectedFormProps<FormDataType>) => {
-    const { handleSubmit } = props;
+    const { handleSubmit, error } = props;
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form className={styles.loginForm} onSubmit={handleSubmit}>
+            {error && <div className={styles.error}>{error}</div>}
             <div>
                 <Field
                     name="email"
