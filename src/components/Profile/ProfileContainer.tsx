@@ -12,7 +12,9 @@ import { ProfileType } from '../../api/socialNetworkAPI';
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
         let { userId } = this.props.match.params;
-        if (!userId) userId = '2';
+        if (!userId) {
+            userId = String(this.props.authorizedUserId);
+        }
 
         this.props.getUserProfile(userId);
         this.props.getUserStatus(userId);
@@ -25,7 +27,9 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.profilePage.profile.userId,
+    isAuth: state.auth.isAuth
 });
 
 export default compose<ComponentType>(
@@ -38,6 +42,8 @@ export default compose<ComponentType>(
 type MapStateToPropsType = {
     profile: ProfileType
     status: string
+    authorizedUserId: number
+    isAuth: boolean
 }
 
 type MapDispatchToPropsType = {
