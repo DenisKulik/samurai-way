@@ -1,7 +1,7 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import styles from './MessageForm.module.scss';
 import Button from '../../common/Button';
-import { Textarea } from '../../common/FormControl';
+import { CustomTextarea } from '../../common/FormControl';
 import { maxLengthCreator, requiredField } from '../../../utils/validators';
 
 export type MessageFormDataType = {
@@ -17,7 +17,7 @@ const MessageForm = (props: InjectedFormProps<MessageFormDataType>) => {
         <form className={styles.messageForm} onSubmit={handleSubmit}>
             <Field
                 className={styles.messageField}
-                component={Textarea}
+                component={CustomTextarea}
                 name="message"
                 rows={1}
                 validate={[ requiredField, maxLength100 ]}
