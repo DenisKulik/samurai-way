@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, createStore, Store } from 'redux';
-import thunkMiddleware, { ThunkAction } from 'redux-thunk';
+import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { reducer as formReducer, FormAction } from 'redux-form';
 import { profileReducer, ProfileActionsType } from './profileReducer';
 import messagesReducer, { MessagesActionsType } from './messagesReducer';
@@ -30,6 +30,7 @@ export type AppActionsType =
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>
 export type StoreType = Store<AppStateType, AppActionsType>
+export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AppActionsType>
 export type AppThunkType<ReturnType = void> = ThunkAction<
     ReturnType,
     AppStateType,

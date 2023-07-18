@@ -1,6 +1,6 @@
-import { AppActionsType, AppThunkType } from './reduxStore';
+import { AppActionsType, AppThunkDispatch, AppThunkType } from './reduxStore';
 import { Dispatch } from 'redux';
-import { authAPI } from '../api/socialNetworkAPI';
+import { authAPI, LoginType } from '../api/socialNetworkAPI';
 
 const initialState: InitialAuthUserDataStateType = {
     id: null,
@@ -15,21 +15,45 @@ export const authReducer = (
 ): InitialAuthUserDataStateType => {
     switch (action.type) {
         case 'SET-USER-DATA':
-            return { ...state, ...action.data, isAuth: true };
+            return {
+                ...state, ...action.payload.data,
+                isAuth: action.payload.isAuth
+            };
         default:
             return state;
     }
 };
 
 // actions
-export const setUserData = (data: ResponseAuthUserDataType) =>
-    ({ type: 'SET-USER-DATA', data } as const);
+export const setUserData = (data: ResponseAuthUserDataType, isAuth: boolean) =>
+    ({ type: 'SET-USER-DATA', payload: { data, isAuth } } as const);
 
 // thunks
 export const getAuthUser = (): AppThunkType => async (dispatch: Dispatch<AppActionsType>) => {
     try {
         const res = await authAPI.getAuthUser();
-        res.resultCode === 0 && dispatch(setUserData(res.data));
+        res.resultCode === 0 && dispatch(setUserData(res.data, true));
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+export const login = (data: LoginType): AppThunkType => async (
+    dispatch: AppThunkDispatch
+) => {
+    try {
+        const res = await authAPI.login(data);
+        res.resultCode === 0 && dispatch(getAuthUser());
+    } catch (e) {
+        console.error(e);
+    }
+};
+
+export const logout = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
+    try {
+        const res = await authAPI.logout();
+        res.resultCode === 0 && dispatch(getAuthUser()) &&
+        dispatch(setUserData({ id: null, email: null, login: null }, false));
     } catch (e) {
         console.error(e);
     }

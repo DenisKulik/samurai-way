@@ -6,7 +6,7 @@ import Sidebar from './components/Sidebar';
 import ProfileContainer from './components/Profile/ProfileContainer';
 import DialogsContainer from './components/Dialogs/DialogContainer';
 import UsersContainer from './components/Users/UsersContainer';
-import { Login } from './components/Login';
+import Login from './components/Login';
 
 const App = () => {
     const history = useHistory();
