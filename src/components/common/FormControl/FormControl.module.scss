@@ -1,11 +1,18 @@
 .formControl {
+  width: 100%;
+  position: relative;
+
   &.error {
     input, textarea {
       border: 1px solid #ff2525;
     }
 
     span {
-      color: red;
+      position: absolute;
+      top: -18px;
+      right: 5px;
+      font-size: 1.2rem;
+      color: #ff2525;
     }
   }
 }
