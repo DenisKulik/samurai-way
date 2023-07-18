@@ -1,6 +1,6 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import styles from './AddPostForm.module.scss';
-import Button from '../../../Button';
+import Button from '../../../common/Button';
 import { maxLengthCreator, requiredField } from '../../../../utils/validators';
 import { FormControl } from '../../../common/FormControl';
 

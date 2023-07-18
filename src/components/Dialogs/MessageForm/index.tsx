@@ -1,6 +1,6 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import styles from './MessageForm.module.scss';
-import Button from '../../Button';
+import Button from '../../common/Button';
 
 export type MessageFormDataType = {
     message: string
