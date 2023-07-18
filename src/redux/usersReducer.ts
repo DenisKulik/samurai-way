@@ -1,5 +1,4 @@
-import { AppActionsType, AppThunkType } from './reduxStore';
-import { Dispatch } from 'redux';
+import { AppThunkDispatch, AppThunkType } from './reduxStore';
 import { usersAPI, UserType } from '../api/socialNetworkAPI';
 
 const initialState: InitialUsersStateType = {
@@ -73,7 +72,7 @@ export const getUsers = (
     currentPage: number,
     pageSize: number
 ): AppThunkType => async (
-    dispatch: Dispatch<AppActionsType>
+    dispatch: AppThunkDispatch
 ) => {
     try {
         dispatch(toggleIsFetching(true));
@@ -90,7 +89,7 @@ export const getUsers = (
 export const followUser = (
     userId: number,
 ): AppThunkType => async (
-    dispatch: Dispatch<AppActionsType>
+    dispatch: AppThunkDispatch
 ) => {
     try {
         dispatch(toggleIsFollowingProgress(true, userId));
@@ -106,7 +105,7 @@ export const followUser = (
 export const unfollowUser = (
     userId: number,
 ): AppThunkType => async (
-    dispatch: Dispatch<AppActionsType>
+    dispatch: AppThunkDispatch
 ) => {
     try {
         dispatch(toggleIsFollowingProgress(true, userId));

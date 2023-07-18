@@ -1,5 +1,4 @@
-import { AppActionsType, AppThunkType } from './reduxStore';
-import { Dispatch } from 'redux';
+import { AppThunkDispatch, AppThunkType } from './reduxStore';
 import { profileAPI, ProfileType } from '../api/socialNetworkAPI';
 
 const initialState: InitialProfileStateType = {
@@ -56,7 +55,7 @@ export const setUserStatus = (status: string) =>
 
 // thunks
 export const getUserProfile = (userId: string): AppThunkType => async (
-    dispatch: Dispatch<AppActionsType>
+    dispatch: AppThunkDispatch
 ) => {
     try {
         const res = await profileAPI.getUserProfile(userId);
@@ -67,7 +66,7 @@ export const getUserProfile = (userId: string): AppThunkType => async (
 };
 
 export const getUserStatus = (userId: string): AppThunkType => async (
-    dispatch: Dispatch<AppActionsType>
+    dispatch: AppThunkDispatch
 ) => {
     try {
         const res = await profileAPI.getUserStatus(userId);
@@ -78,7 +77,7 @@ export const getUserStatus = (userId: string): AppThunkType => async (
 };
 
 export const updateUserStatus = (status: string): AppThunkType => async (
-    dispatch: Dispatch<AppActionsType>
+    dispatch: AppThunkDispatch
 ) => {
     try {
         const res = await profileAPI.updateUserStatus(status);

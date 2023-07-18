@@ -1,5 +1,4 @@
-import { AppActionsType, AppThunkDispatch, AppThunkType } from './reduxStore';
-import { Dispatch } from 'redux';
+import { AppThunkDispatch, AppThunkType } from './reduxStore';
 import { authAPI, LoginType } from '../api/socialNetworkAPI';
 import { stopSubmit } from 'redux-form';
 
@@ -30,7 +29,7 @@ export const setUserData = (data: ResponseAuthUserDataType, isAuth: boolean) =>
     ({ type: 'SET-USER-DATA', payload: { data, isAuth } } as const);
 
 // thunks
-export const getAuthUser = (): AppThunkType => async (dispatch: Dispatch<AppActionsType>) => {
+export const getAuthUser = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
     try {
         const res = await authAPI.getAuthUser();
         res.resultCode === 0 && dispatch(setUserData(res.data, true));

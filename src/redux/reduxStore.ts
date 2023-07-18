@@ -5,8 +5,10 @@ import { profileReducer, ProfileActionsType } from './profileReducer';
 import messagesReducer, { MessagesActionsType } from './messagesReducer';
 import { usersReducer, UsersActionsType } from './usersReducer';
 import { AuthActionsType, authReducer } from './authReducer';
+import { AppActionsType, appReducer } from './appReducer';
 
 const rootReducer = combineReducers({
+    app: appReducer,
     profilePage: profileReducer,
     messages: messagesReducer,
     usersPage: usersReducer,
@@ -21,7 +23,8 @@ const store: StoreType = createStore(
 export default store;
 
 // types
-export type AppActionsType =
+export type RootActionsType =
+    | AppActionsType
     | ProfileActionsType
     | MessagesActionsType
     | UsersActionsType
@@ -29,11 +32,11 @@ export type AppActionsType =
     | FormAction
 type RootReducerType = typeof rootReducer;
 export type AppStateType = ReturnType<RootReducerType>
-export type StoreType = Store<AppStateType, AppActionsType>
-export type AppThunkDispatch = ThunkDispatch<AppStateType, any, AppActionsType>
+export type StoreType = Store<AppStateType, RootActionsType>
+export type AppThunkDispatch = ThunkDispatch<AppStateType, any, RootActionsType>
 export type AppThunkType<ReturnType = void> = ThunkAction<
     ReturnType,
     AppStateType,
     unknown,
-    AppActionsType
+    RootActionsType
 >
