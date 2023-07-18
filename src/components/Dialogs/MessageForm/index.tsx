@@ -1,10 +1,14 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import styles from './MessageForm.module.scss';
 import Button from '../../common/Button';
+import { FormControl } from '../../common/FormControl';
+import { maxLengthCreator, requiredField } from '../../../utils/validators';
 
 export type MessageFormDataType = {
     message: string
 }
+
+const maxLength100 = maxLengthCreator(100);
 
 const MessageForm = (props: InjectedFormProps<MessageFormDataType>) => {
     const { handleSubmit } = props;
@@ -13,9 +17,10 @@ const MessageForm = (props: InjectedFormProps<MessageFormDataType>) => {
         <form className={styles.messageForm} onSubmit={handleSubmit}>
             <Field
                 className={styles.messageField}
-                component="textarea"
+                component={FormControl}
                 name="message"
                 rows={1}
+                validate={[ requiredField, maxLength100 ]}
                 placeholder="Enter your message"
             />
             <Button title="Send" type="submit" />
