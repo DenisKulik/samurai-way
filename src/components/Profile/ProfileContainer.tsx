@@ -14,6 +14,10 @@ class ProfileContainer extends Component<ProfileContainerPropsType> {
         let { userId } = this.props.match.params;
         if (!userId) {
             userId = String(this.props.authorizedUserId);
+
+            if (userId === 'undefined') {
+                return;
+            }
         }
 
         this.props.getUserProfile(userId);
@@ -42,7 +46,7 @@ export default compose<ComponentType>(
 type MapStateToPropsType = {
     profile: ProfileType
     status: string
-    authorizedUserId: number
+    authorizedUserId: number | undefined
     isAuth: boolean
 }
 
