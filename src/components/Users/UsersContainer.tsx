@@ -2,45 +2,40 @@ import { connect } from 'react-redux';
 import styles from './Users.module.scss';
 import { AppStateType } from '../../redux/reduxStore';
 import {
-    followUser, getUsers, InitialUsersStateType, setCurrentPage, unfollowUser
+    followUser, requestUsers, setCurrentPage, unfollowUser
 } from '../../redux/usersReducer';
 import { Component } from 'react';
 import { Users } from './index';
 import { Preloader } from '../common/Preloader';
-
-export type UsersContainerPropsType = MapStateToPropsType
-    & MapDispatchToPropsType
-
-type MapStateToPropsType = {
-    usersPage: InitialUsersStateType
-}
-
-type MapDispatchToPropsType = {
-    getUsers: (currentPage: number, pageSize: number) => void
-    followUser: (userId: number) => void
-    unfollowUser: (userId: number) => void
-    setCurrentPage: (currentPage: number) => void
-}
+import {
+    getCurrentPage, getIsFetching, getIsFollowingInProgress, getPageSize,
+    getTotalUsersCount, getUsers
+} from '../../redux/usersSelectors';
+import { UserType } from '../../api/socialNetworkAPI';
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    usersPage: state.usersPage
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFollowingInProgress: getIsFollowingInProgress(state),
+    isFetching: getIsFetching(state),
 });
 
 class UsersContainer extends Component<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.getUsers(this.props.usersPage.currentPage,
-            this.props.usersPage.pageSize);
+        this.props.requestUsers(this.props.currentPage, this.props.pageSize);
     }
 
     changePageNumber = (page: number) => {
         this.props.setCurrentPage(page);
-        this.props.getUsers(page, this.props.usersPage.pageSize);
+        this.props.requestUsers(page, this.props.pageSize);
     };
 
     render = () => (
         <div className={styles.usersContainer}>
             {
-                this.props.usersPage.isFetching ?
+                this.props.isFetching ?
                     <Preloader /> :
                     <Users
                         changePageNumber={this.changePageNumber}
@@ -52,8 +47,28 @@ class UsersContainer extends Component<UsersContainerPropsType> {
 }
 
 export default connect(mapStateToProps, {
-    getUsers,
+    requestUsers,
     followUser,
     unfollowUser,
     setCurrentPage
 })(UsersContainer);
+
+// types
+export type UsersContainerPropsType = MapStateToPropsType
+    & MapDispatchToPropsType
+
+type MapStateToPropsType = {
+    users: UserType[]
+    pageSize: number
+    totalUsersCount: number
+    currentPage: number
+    isFollowingInProgress: number[]
+    isFetching: boolean
+}
+
+type MapDispatchToPropsType = {
+    requestUsers: (currentPage: number, pageSize: number) => void
+    followUser: (userId: number) => void
+    unfollowUser: (userId: number) => void
+    setCurrentPage: (currentPage: number) => void
+}

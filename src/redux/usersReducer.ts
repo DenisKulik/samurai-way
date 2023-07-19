@@ -68,15 +68,15 @@ export const toggleIsFollowingProgress = (
 } as const);
 
 // thunks
-export const getUsers = (
-    currentPage: number,
+export const requestUsers = (
+    page: number,
     pageSize: number
 ): AppThunkType => async (
     dispatch: AppThunkDispatch
 ) => {
     try {
         dispatch(toggleIsFetching(true));
-        const res = await usersAPI.getUsers(currentPage, pageSize);
+        const res = await usersAPI.getUsers(page, pageSize);
         dispatch(setUsers(res.items));
         dispatch(setTotalUsersCount(res.totalCount));
     } catch (e) {

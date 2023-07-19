@@ -3,25 +3,17 @@ import styles from './Users.module.scss';
 import userDefault from '../../img/user-default.png';
 import { UsersContainerPropsType } from './UsersContainer';
 
-type UsersPropsType = UsersContainerPropsType & {
-    changePageNumber: (page: number) => void
-}
-
 export const Users = (props: UsersPropsType) => {
     const {
-        usersPage,
+        users,
+        pageSize,
+        totalUsersCount,
+        currentPage,
+        isFollowingInProgress,
         unfollowUser,
         followUser,
         changePageNumber
     } = props;
-    const {
-        users,
-        totalUsersCount,
-        pageSize,
-        currentPage,
-        isFollowingInProgress
-    } = usersPage;
-
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
     const pages = Array.from({ length: pagesCount }, (_, i) => i + 1);
 
@@ -95,3 +87,8 @@ export const Users = (props: UsersPropsType) => {
         </>
     );
 };
+
+// types
+type UsersPropsType = UsersContainerPropsType & {
+    changePageNumber: (page: number) => void
+}
