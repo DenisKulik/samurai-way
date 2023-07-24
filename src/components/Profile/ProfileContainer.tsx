@@ -3,9 +3,9 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Profile } from './index'
-import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/profileReducer'
-import { AppStateType } from '../../redux/reduxStore'
-import { ProfileType } from '../../api/socialNetworkAPI'
+import { getUserProfile, getUserStatus, updateUserStatus } from 'redux/profileReducer'
+import { AppStateType } from 'redux/reduxStore'
+import { ProfileType } from 'api/socialNetworkAPI'
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
