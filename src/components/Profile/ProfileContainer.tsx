@@ -1,4 +1,4 @@
-import { Component, ComponentType } from 'react'
+import { PureComponent, ComponentType } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
@@ -7,15 +7,13 @@ import { getUserProfile, getUserStatus, updateUserStatus } from 'redux/profileRe
 import { AppStateType } from 'redux/store'
 import { ProfileType } from 'api/socialNetworkAPI'
 
-class ProfileContainer extends Component<ProfileContainerPropsType> {
+class ProfileContainer extends PureComponent<ProfileContainerPropsType> {
     componentDidMount() {
         let { userId } = this.props.match.params
         if (!userId) {
             userId = String(this.props.authorizedUserId)
 
-            if (userId === 'undefined') {
-                return
-            }
+            if (userId === 'undefined') return
         }
 
         this.props.getUserProfile(userId)

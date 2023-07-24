@@ -1,10 +1,11 @@
+import { memo } from 'react'
 import styles from './Dialogs.module.scss'
 import Dialog from './Dialog'
 import Message from './Message'
 import { DialogsPropsType } from './DialogContainer'
 import MessageForm, { MessageFormDataType } from './MessageForm'
 
-const Dialogs = (props: DialogsPropsType) => {
+const Dialogs = memo((props: DialogsPropsType) => {
     const { messages, sendMessage } = props
 
     const onSubmit = (formData: MessageFormDataType) => {
@@ -27,6 +28,6 @@ const Dialogs = (props: DialogsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 export default Dialogs

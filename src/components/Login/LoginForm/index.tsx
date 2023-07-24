@@ -1,7 +1,8 @@
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
-import { CustomInput } from '../../common/FormControl'
-import { requiredField } from '../../../utils/validators'
+import { CustomInput } from 'components/common/FormControl'
+import { requiredField } from 'utils/validators'
 import styles from './LoginForm.module.scss'
+import { memo } from 'react'
 
 export type FormDataType = {
     email: string
@@ -9,7 +10,7 @@ export type FormDataType = {
     rememberMe: boolean
 }
 
-const LoginForm = (props: InjectedFormProps<FormDataType>) => {
+const LoginForm = memo((props: InjectedFormProps<FormDataType>) => {
     const { handleSubmit, error } = props
 
     return (
@@ -40,7 +41,7 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             <button>Login</button>
         </form>
     )
-}
+})
 
 export default reduxForm<FormDataType>({
     form: 'login',

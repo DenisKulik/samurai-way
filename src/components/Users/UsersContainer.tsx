@@ -1,4 +1,4 @@
-import { Component } from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import { AppStateType } from 'redux/store'
 import styles from './Users.module.scss'
@@ -24,7 +24,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     isFetching: getIsFetching(state),
 })
 
-class UsersContainer extends Component<UsersContainerPropsType> {
+class UsersContainer extends PureComponent<UsersContainerPropsType> {
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize)
     }

@@ -1,9 +1,10 @@
+import { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './Users.module.scss'
 import userDefault from '../../img/user-default.png'
 import { UsersContainerPropsType } from './UsersContainer'
 
-export const Users = (props: UsersPropsType) => {
+export const Users = memo((props: UsersPropsType) => {
     const {
         users,
         pageSize,
@@ -74,7 +75,7 @@ export const Users = (props: UsersPropsType) => {
             </div>
         </>
     )
-}
+})
 
 // types
 type UsersPropsType = UsersContainerPropsType & {

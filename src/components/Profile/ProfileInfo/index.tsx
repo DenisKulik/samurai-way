@@ -1,7 +1,8 @@
+import { memo } from 'react'
 import styles from './ProfileInfo.module.scss'
-import userDefault from '../../../img/user-default.png'
-import background from '../../../img/background.jpg'
-import { ProfileType } from '../../../api/socialNetworkAPI'
+import userDefault from 'img/user-default.png'
+import background from 'img/background.jpg'
+import { ProfileType } from 'api/socialNetworkAPI'
 import { Preloader } from '../../common/Preloader'
 import { ProfileStatus } from './ProfileStatus'
 
@@ -11,7 +12,7 @@ type ProfileInfoPropsType = {
     updateUserStatus: (status: string) => void
 }
 
-const ProfileInfo = ({ profile, status, updateUserStatus }: ProfileInfoPropsType) => {
+const ProfileInfo = memo(({ profile, status, updateUserStatus }: ProfileInfoPropsType) => {
     if (!profile) return <Preloader />
 
     return (
@@ -42,6 +43,6 @@ const ProfileInfo = ({ profile, status, updateUserStatus }: ProfileInfoPropsType
             </div>
         </div>
     )
-}
+})
 
 export default ProfileInfo

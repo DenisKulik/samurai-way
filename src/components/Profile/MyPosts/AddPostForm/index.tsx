@@ -1,8 +1,9 @@
+import { memo } from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
 import styles from './AddPostForm.module.scss'
-import Button from '../../../common/Button'
-import { maxLengthCreator, requiredField } from '../../../../utils/validators'
-import { CustomTextarea } from '../../../common/FormControl'
+import Button from 'components/common/Button'
+import { maxLengthCreator, requiredField } from 'utils/validators'
+import { CustomTextarea } from 'components/common/FormControl'
 
 export type AddPostFormDataType = {
     post: string
@@ -10,7 +11,7 @@ export type AddPostFormDataType = {
 
 const maxLength50 = maxLengthCreator(50)
 
-const AddPostForm = (props: InjectedFormProps<AddPostFormDataType>) => {
+const AddPostForm = memo((props: InjectedFormProps<AddPostFormDataType>) => {
     const { handleSubmit } = props
 
     return (
@@ -25,7 +26,7 @@ const AddPostForm = (props: InjectedFormProps<AddPostFormDataType>) => {
             <Button title="Add post" type="submit" />
         </form>
     )
-}
+})
 
 export default reduxForm<AddPostFormDataType>({
     form: 'post',

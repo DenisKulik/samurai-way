@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps } from 'react'
+import React, { DetailedHTMLProps, memo } from 'react'
 import styles from './Button.module.scss'
 
 type DefaultInputProps = DetailedHTMLProps<
@@ -11,7 +11,7 @@ type ButtonPropsType = DefaultInputProps & {
     callback?: () => void
 }
 
-const Button = (props: ButtonPropsType) => {
+const Button = memo((props: ButtonPropsType) => {
     const { title, callback, ...rest } = props
 
     return (
@@ -19,6 +19,6 @@ const Button = (props: ButtonPropsType) => {
             {title}
         </button>
     )
-}
+})
 
 export default Button

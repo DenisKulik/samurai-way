@@ -1,9 +1,10 @@
+import { memo } from 'react'
 import styles from './MyPosts.module.scss'
 import { MyPostsPropsType } from './MyPostsContainer'
 import Post from './Post'
 import AddPostForm, { AddPostFormDataType } from './AddPostForm'
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = memo((props: MyPostsPropsType) => {
     const { profile, addPost } = props
 
     const onSubmit = (formData: AddPostFormDataType) => {
@@ -21,6 +22,6 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 export default MyPosts

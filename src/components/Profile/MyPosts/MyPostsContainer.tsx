@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addPost, InitialProfileStateType } from '../../../redux/profileReducer'
+import { addPost, InitialProfileStateType } from 'redux/profileReducer'
 import { AppStateType } from 'redux/store'
 import MyPosts from './index'
 

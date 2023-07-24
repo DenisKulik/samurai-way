@@ -1,4 +1,4 @@
-import { ChangeEvent, Component } from 'react'
+import { ChangeEvent, PureComponent } from 'react'
 import styles from './ProfileStatus.module.scss'
 
 type ProfileStatusPropsType = {
@@ -6,7 +6,7 @@ type ProfileStatusPropsType = {
     updateUserStatus: (status: string) => void
 }
 
-export class ProfileStatus extends Component<ProfileStatusPropsType> {
+export class ProfileStatus extends PureComponent<ProfileStatusPropsType> {
     state = {
         editMode: false,
         status: this.props.status,

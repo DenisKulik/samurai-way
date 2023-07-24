@@ -1,14 +1,14 @@
-import { Component } from 'react'
+import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Header from './index'
 import { AppStateType } from 'redux/store'
-import { InitialAuthUserDataStateType, logout } from '../../redux/authReducer'
+import { InitialAuthUserDataStateType, logout } from 'redux/authReducer'
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     auth: state.auth,
 })
 
-class HeaderContainer extends Component<HeaderContainerPropsType> {
+class HeaderContainer extends PureComponent<HeaderContainerPropsType> {
     render = () => <Header {...this.props} />
 }
 

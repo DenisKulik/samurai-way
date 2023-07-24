@@ -1,4 +1,4 @@
-import { cloneElement, ReactElement, ReactNode } from 'react'
+import { cloneElement, memo, ReactElement, ReactNode } from 'react'
 import { WrappedFieldProps } from 'redux-form'
 import styles from './FormControl.module.scss'
 
@@ -6,7 +6,7 @@ type FormControlPropsType = WrappedFieldProps & {
     children: ReactNode
 }
 
-const FormControl = ({ input, meta, children, ...props }: FormControlPropsType) => {
+const FormControl = memo(({ input, meta, children, ...props }: FormControlPropsType) => {
     const hasError = meta.touched && meta.error
 
     return (
@@ -15,7 +15,7 @@ const FormControl = ({ input, meta, children, ...props }: FormControlPropsType) 
             {hasError && <span>{meta.error}</span>}
         </div>
     )
-}
+})
 
 export const CustomTextarea = (props: FormControlPropsType) => (
     <FormControl {...props}>

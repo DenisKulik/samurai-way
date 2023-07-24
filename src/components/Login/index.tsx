@@ -1,8 +1,9 @@
+import { memo } from 'react'
 import { connect } from 'react-redux'
 import styles from './Login.module.scss'
 import LoginForm, { FormDataType } from './LoginForm'
-import { login } from '../../redux/authReducer'
-import { LoginType } from '../../api/socialNetworkAPI'
+import { login } from 'redux/authReducer'
+import { LoginType } from 'api/socialNetworkAPI'
 import { Redirect } from 'react-router-dom'
 import { AppStateType } from 'redux/store'
 
@@ -11,7 +12,7 @@ type LoginPropsType = {
     login: (data: LoginType) => void
 }
 
-const Login = ({ isAuth, login }: LoginPropsType) => {
+const Login = memo(({ isAuth, login }: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         login(formData)
     }
@@ -26,7 +27,7 @@ const Login = ({ isAuth, login }: LoginPropsType) => {
             <LoginForm onSubmit={onSubmit} />
         </div>
     )
-}
+})
 
 const mstp = (state: AppStateType) => ({ isAuth: state.auth.isAuth })
 

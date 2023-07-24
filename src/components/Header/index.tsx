@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import styles from './Header.module.scss'
 import logo from '../../img/logo.png'
 import { NavLink } from 'react-router-dom'
@@ -6,7 +7,7 @@ import { HeaderContainerPropsType } from './HeaderContainer'
 
 type HeaderPropsType = HeaderContainerPropsType
 
-const Header = (props: HeaderPropsType) => {
+const Header = memo((props: HeaderPropsType) => {
     const { logout } = props
     const { isAuth, login } = props.auth
 
@@ -31,6 +32,6 @@ const Header = (props: HeaderPropsType) => {
             </div>
         </header>
     )
-}
+})
 
 export default Header
