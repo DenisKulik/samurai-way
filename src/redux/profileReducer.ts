@@ -1,5 +1,5 @@
 import { AppThunkDispatch, AppThunkType } from 'redux/store'
-import { profileAPI, ProfileType } from '../api/socialNetworkAPI'
+import { profileAPI, ProfileType } from 'api/socialNetworkAPI'
 
 const initialState: InitialProfileStateType = {
     profile: {} as ProfileType,
