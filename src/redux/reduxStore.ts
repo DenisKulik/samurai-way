@@ -1,11 +1,11 @@
-import { applyMiddleware, combineReducers, createStore, Store } from 'redux';
-import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk';
-import { reducer as formReducer, FormAction } from 'redux-form';
-import { profileReducer, ProfileActionsType } from './profileReducer';
-import messagesReducer, { MessagesActionsType } from './messagesReducer';
-import { usersReducer, UsersActionsType } from './usersReducer';
-import { AuthActionsType, authReducer } from './authReducer';
-import { AppActionsType, appReducer } from './appReducer';
+import { applyMiddleware, combineReducers, createStore, Store } from 'redux'
+import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk'
+import { reducer as formReducer, FormAction } from 'redux-form'
+import { profileReducer, ProfileActionsType } from './profileReducer'
+import messagesReducer, { MessagesActionsType } from './messagesReducer'
+import { usersReducer, UsersActionsType } from './usersReducer'
+import { AuthActionsType, authReducer } from './authReducer'
+import { AppActionsType, appReducer } from './appReducer'
 
 const rootReducer = combineReducers({
     app: appReducer,
@@ -13,14 +13,12 @@ const rootReducer = combineReducers({
     messages: messagesReducer,
     usersPage: usersReducer,
     auth: authReducer,
-    form: formReducer
-});
+    form: formReducer,
+})
 
-const store: StoreType = createStore(
-    rootReducer, applyMiddleware(thunkMiddleware)
-);
+const store: StoreType = createStore(rootReducer, applyMiddleware(thunkMiddleware))
 
-export default store;
+export default store
 
 // types
 export type RootActionsType =
@@ -30,7 +28,7 @@ export type RootActionsType =
     | UsersActionsType
     | AuthActionsType
     | FormAction
-type RootReducerType = typeof rootReducer;
+type RootReducerType = typeof rootReducer
 export type AppStateType = ReturnType<RootReducerType>
 export type StoreType = Store<AppStateType, RootActionsType>
 export type AppThunkDispatch = ThunkDispatch<AppStateType, any, RootActionsType>

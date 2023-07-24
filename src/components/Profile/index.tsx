@@ -1,20 +1,16 @@
-import ProfileInfo from './ProfileInfo';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
-import { ProfileContainerPropsType } from './ProfileContainer';
+import ProfileInfo from './ProfileInfo'
+import MyPostsContainer from './MyPosts/MyPostsContainer'
+import { ProfileContainerPropsType } from './ProfileContainer'
 
 type ProfilePropsType = ProfileContainerPropsType
 
 export const Profile = (props: ProfilePropsType) => {
-    const { profile, status, updateUserStatus } = props;
+    const { profile, status, updateUserStatus } = props
 
     return (
         <>
-            <ProfileInfo
-                profile={profile}
-                status={status}
-                updateUserStatus={updateUserStatus}
-            />
+            <ProfileInfo profile={profile} status={status} updateUserStatus={updateUserStatus} />
             <MyPostsContainer />
         </>
-    );
-};
+    )
+}

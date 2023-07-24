@@ -1,13 +1,13 @@
 .login {
-  min-height: 60vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: var(--color-secondary);
-  border-radius: 2rem;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-secondary);
+    border-radius: 2rem;
 
-  .heading {
-    margin-bottom: 2rem;
-  }
+    .heading {
+        margin-bottom: 2rem;
+    }
 }

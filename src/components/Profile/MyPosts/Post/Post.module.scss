@@ -1,45 +1,44 @@
 .item {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
 
-  .userImg {
-    border-radius: 50%;
-  }
-
-  .message {
-    width: 100%;
-    padding: 1rem;
-    background-color: var(--color-secondary-light);
-    border-radius: 1rem;
-
-    p {
-      margin-bottom: 0.5rem;
-      color: var(--color-secondary-dark);
+    .userImg {
+        border-radius: 50%;
     }
 
-    .likesContainer {
-      max-width: 2.5rem;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 3px;
-      margin-left: 0.5rem;
-      cursor: pointer;
-      opacity: 0.5;
-      font-size: 1.3rem;
-      color: var(--color-secondary-dark);
+    .message {
+        width: 100%;
+        padding: 1rem;
+        background-color: var(--color-secondary-light);
+        border-radius: 1rem;
 
-      svg {
-        width: 1.4rem;
-        height: 1.4rem;
-      }
+        p {
+            margin-bottom: 0.5rem;
+            color: var(--color-secondary-dark);
+        }
 
-      &:hover {
-        opacity: 0.8;
-      }
+        .likesContainer {
+            max-width: 2.5rem;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 3px;
+            margin-left: 0.5rem;
+            cursor: pointer;
+            opacity: 0.5;
+            font-size: 1.3rem;
+            color: var(--color-secondary-dark);
+
+            svg {
+                width: 1.4rem;
+                height: 1.4rem;
+            }
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
     }
-  }
 }
-

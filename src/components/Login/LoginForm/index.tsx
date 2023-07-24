@@ -1,7 +1,7 @@
-import { Field, InjectedFormProps, reduxForm } from 'redux-form';
-import { CustomInput } from '../../common/FormControl';
-import { requiredField } from '../../../utils/validators';
-import styles from './LoginForm.module.scss';
+import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import { CustomInput } from '../../common/FormControl'
+import { requiredField } from '../../../utils/validators'
+import styles from './LoginForm.module.scss'
 
 export type FormDataType = {
     email: string
@@ -10,7 +10,7 @@ export type FormDataType = {
 }
 
 const LoginForm = (props: InjectedFormProps<FormDataType>) => {
-    const { handleSubmit, error } = props;
+    const { handleSubmit, error } = props
 
     return (
         <form className={styles.loginForm} onSubmit={handleSubmit}>
@@ -21,7 +21,7 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                     type="text"
                     placeholder="email"
                     component={CustomInput}
-                    validate={[ requiredField ]}
+                    validate={[requiredField]}
                 />
             </div>
             <div>
@@ -30,7 +30,7 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                     type="password"
                     placeholder="password"
                     component={CustomInput}
-                    validate={[ requiredField ]}
+                    validate={[requiredField]}
                 />
             </div>
             <div>
@@ -39,9 +39,9 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
             </div>
             <button>Login</button>
         </form>
-    );
-};
+    )
+}
 
 export default reduxForm<FormDataType>({
-    form: 'login'
-})(LoginForm);
+    form: 'login',
+})(LoginForm)

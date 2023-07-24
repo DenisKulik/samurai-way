@@ -11,35 +11,37 @@ const initialState: InitialMessagesStateType = {
         { id: 1, message: 'Any advice for a programming beginner?' },
         { id: 2, message: 'Start with JavaScript and code every day.' },
         { id: 3, message: 'Any recommended resources?' },
-        { id: 4, message: 'Udemy and YouTube tutorials are great resources.' }
-    ]
-};
+        { id: 4, message: 'Udemy and YouTube tutorials are great resources.' },
+    ],
+}
 
 const messagesReducer = (
-    state: InitialMessagesStateType = initialState, action: MessagesActionsType
+    state: InitialMessagesStateType = initialState,
+    action: MessagesActionsType,
 ): InitialMessagesStateType => {
     switch (action.type) {
         case 'ADD-MESSAGE':
             const newMessage: MessageType = {
                 id: new Date().getTime(),
                 message: action.message,
-            };
+            }
             return {
                 ...state,
-                messagesData: [ ...state.messagesData, newMessage ],
-            };
+                messagesData: [...state.messagesData, newMessage],
+            }
         default:
-            return state;
+            return state
     }
-};
+}
 
-export default messagesReducer;
+export default messagesReducer
 
 // actions
-export const addMessage = (message: string) => ({
-    type: 'ADD-MESSAGE',
-    message
-} as const);
+export const addMessage = (message: string) =>
+    ({
+        type: 'ADD-MESSAGE',
+        message,
+    }) as const
 
 // types
 export type DialogType = {

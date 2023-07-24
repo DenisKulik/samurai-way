@@ -1,10 +1,10 @@
-import { connect } from 'react-redux';
-import styles from './Login.module.scss';
-import LoginForm, { FormDataType } from './LoginForm';
-import { login } from '../../redux/authReducer';
-import { LoginType } from '../../api/socialNetworkAPI';
-import { Redirect } from 'react-router-dom';
-import { AppStateType } from '../../redux/reduxStore';
+import { connect } from 'react-redux'
+import styles from './Login.module.scss'
+import LoginForm, { FormDataType } from './LoginForm'
+import { login } from '../../redux/authReducer'
+import { LoginType } from '../../api/socialNetworkAPI'
+import { Redirect } from 'react-router-dom'
+import { AppStateType } from '../../redux/reduxStore'
 
 type LoginPropsType = {
     isAuth: boolean
@@ -13,11 +13,11 @@ type LoginPropsType = {
 
 const Login = ({ isAuth, login }: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
-        login(formData);
-    };
+        login(formData)
+    }
 
     if (isAuth) {
-        return <Redirect to="profile" />;
+        return <Redirect to="profile" />
     }
 
     return (
@@ -25,9 +25,9 @@ const Login = ({ isAuth, login }: LoginPropsType) => {
             <h1 className={styles.heading}>Login</h1>
             <LoginForm onSubmit={onSubmit} />
         </div>
-    );
-};
+    )
+}
 
-const mstp = (state: AppStateType) => ({ isAuth: state.auth.isAuth });
+const mstp = (state: AppStateType) => ({ isAuth: state.auth.isAuth })
 
-export default connect(mstp, { login })(Login);
+export default connect(mstp, { login })(Login)

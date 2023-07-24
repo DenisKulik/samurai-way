@@ -1,9 +1,13 @@
-import { NavLink } from 'react-router-dom';
-import styles from './Sidebar.module.scss';
+import { NavLink } from 'react-router-dom'
+import styles from './Sidebar.module.scss'
 import {
-    RiLayoutTopLine, RiMessage3Line, RiMusic2Line, RiSettings4Line, RiUser3Line,
-} from 'react-icons/ri';
-import { MdDeveloperMode } from 'react-icons/md';
+    RiLayoutTopLine,
+    RiMessage3Line,
+    RiMusic2Line,
+    RiSettings4Line,
+    RiUser3Line,
+} from 'react-icons/ri'
+import { MdDeveloperMode } from 'react-icons/md'
 
 const Sidebar = () => {
     return (
@@ -47,7 +51,7 @@ const Sidebar = () => {
                 </li>
             </ul>
         </nav>
-    );
-};
+    )
+}
 
-export default Sidebar;
+export default Sidebar

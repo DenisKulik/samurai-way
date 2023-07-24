@@ -1,25 +1,23 @@
-import { ComponentType } from 'react';
-import { connect } from 'react-redux';
-import { compose, Dispatch } from 'redux';
-import {
-    addMessage, InitialMessagesStateType,
-} from '../../redux/messagesReducer';
-import { AppStateType } from '../../redux/reduxStore';
-import Dialogs from './index';
-import { withAuthRedirect } from '../../hoc/withAuthRedirect';
+import { ComponentType } from 'react'
+import { connect } from 'react-redux'
+import { compose, Dispatch } from 'redux'
+import { addMessage, InitialMessagesStateType } from '../../redux/messagesReducer'
+import { AppStateType } from '../../redux/reduxStore'
+import Dialogs from './index'
+import { withAuthRedirect } from '../../hoc/withAuthRedirect'
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    messages: state.messages
-});
+    messages: state.messages,
+})
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
-    sendMessage: (message) => dispatch(addMessage(message)),
-});
+    sendMessage: message => dispatch(addMessage(message)),
+})
 
 export default compose<ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
-    withAuthRedirect
-)(Dialogs);
+    withAuthRedirect,
+)(Dialogs)
 
 // types
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType

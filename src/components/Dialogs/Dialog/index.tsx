@@ -1,5 +1,5 @@
-import styles from './Dialog.module.scss';
-import { NavLink } from 'react-router-dom';
+import styles from './Dialog.module.scss'
+import { NavLink } from 'react-router-dom'
 
 type DialogType = {
     id: number
@@ -9,12 +9,10 @@ type DialogType = {
 
 const Dialog = ({ id, name, isActive }: DialogType) => {
     return (
-        <div
-            className={ `${ styles.dialog } ${ isActive ?
-                                               styles.active : '' }` }>
-            <NavLink to={ `/dialogs/${ id }` }>{ name }</NavLink>
+        <div className={`${styles.dialog} ${isActive ? styles.active : ''}`}>
+            <NavLink to={`/dialogs/${id}`}>{name}</NavLink>
         </div>
-    );
-};
+    )
+}
 
-export default Dialog;
+export default Dialog

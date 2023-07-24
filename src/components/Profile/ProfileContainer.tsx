@@ -1,46 +1,41 @@
-import { Component, ComponentType } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter } from 'react-router-dom';
-import { Profile } from './index';
-import {
-    getUserProfile, getUserStatus, updateUserStatus
-} from '../../redux/profileReducer';
-import { AppStateType } from '../../redux/reduxStore';
-import { ProfileType } from '../../api/socialNetworkAPI';
+import { Component, ComponentType } from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { RouteComponentProps, withRouter } from 'react-router-dom'
+import { Profile } from './index'
+import { getUserProfile, getUserStatus, updateUserStatus } from '../../redux/profileReducer'
+import { AppStateType } from '../../redux/reduxStore'
+import { ProfileType } from '../../api/socialNetworkAPI'
 
 class ProfileContainer extends Component<ProfileContainerPropsType> {
     componentDidMount() {
-        let { userId } = this.props.match.params;
+        let { userId } = this.props.match.params
         if (!userId) {
-            userId = String(this.props.authorizedUserId);
+            userId = String(this.props.authorizedUserId)
 
             if (userId === 'undefined') {
-                return;
+                return
             }
         }
 
-        this.props.getUserProfile(userId);
-        this.props.getUserStatus(userId);
+        this.props.getUserProfile(userId)
+        this.props.getUserStatus(userId)
     }
 
-    render = () => (
-        <Profile {...this.props} />
-    );
+    render = () => <Profile {...this.props} />
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: state.profilePage.profile,
     status: state.profilePage.status,
     authorizedUserId: state.profilePage.profile.userId,
-    isAuth: state.auth.isAuth
-});
+    isAuth: state.auth.isAuth,
+})
 
 export default compose<ComponentType>(
-    connect(mapStateToProps,
-        { getUserProfile, getUserStatus, updateUserStatus }),
-    withRouter
-)(ProfileContainer);
+    connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }),
+    withRouter,
+)(ProfileContainer)
 
 // types
 type MapStateToPropsType = {
@@ -60,8 +55,7 @@ type PathParamsType = {
     userId: string
 }
 
-type ownProfileContainerPropsType = MapStateToPropsType
-    & MapDispatchToPropsType
+type ownProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
-export type ProfileContainerPropsType = RouteComponentProps<PathParamsType>
-    & ownProfileContainerPropsType
+export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> &
+    ownProfileContainerPropsType

@@ -1,42 +1,41 @@
 .header {
-  grid-area: header;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 2rem;
-  overflow: hidden;
-  background-color: var(--color-secondary);
-  border-radius: 2rem;
+    grid-area: header;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 2rem;
+    overflow: hidden;
+    background-color: var(--color-secondary);
+    border-radius: 2rem;
 
-  .logo {
-    height: 6rem;
-  }
-
-  .login {
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: white;
-      font-size: 1.4rem;
-      text-decoration: none;
-
-      &.active {
-        color: var(--color-primary);
-      }
-
-      svg {
-        width: 1.5rem;
-        height: 1.5rem;
-        margin-right: 1rem;
-        margin-bottom: -2px;
-      }
+    .logo {
+        height: 6rem;
     }
-  }
 
-  .user {
-    color: white;
-    font-size: 1.4rem;
-  }
+    .login {
+        a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: white;
+            font-size: 1.4rem;
+            text-decoration: none;
+
+            &.active {
+                color: var(--color-primary);
+            }
+
+            svg {
+                width: 1.5rem;
+                height: 1.5rem;
+                margin-right: 1rem;
+                margin-bottom: -2px;
+            }
+        }
+    }
+
+    .user {
+        color: white;
+        font-size: 1.4rem;
+    }
 }

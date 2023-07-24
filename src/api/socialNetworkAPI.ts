@@ -1,63 +1,53 @@
-import axios from 'axios';
+import axios from 'axios'
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
     withCredentials: true,
-});
+})
 
 export const usersAPI = {
     getUsers(page: number = 1, pageSize: number = 5) {
         return instance
             .get<UsersResponseType>(`users?page=${page}&count=${pageSize}`)
-            .then(response => response.data);
+            .then(response => response.data)
     },
     follow(userId: number) {
-        return instance
-            .post<ResponseType>(`follow/${userId}`, {})
-            .then(response => response.data);
+        return instance.post<ResponseType>(`follow/${userId}`, {}).then(response => response.data)
     },
     unfollow(userId: number) {
-        return instance
-            .delete<ResponseType>(`follow/${userId}`, {})
-            .then(response => response.data);
+        return instance.delete<ResponseType>(`follow/${userId}`, {}).then(response => response.data)
     },
-};
+}
 
 export const profileAPI = {
     getUserProfile(userId: string) {
-        return instance
-            .get<ProfileType>(`profile/${userId}`)
-            .then(response => response.data);
+        return instance.get<ProfileType>(`profile/${userId}`).then(response => response.data)
     },
     getUserStatus(userId: string) {
-        return instance
-            .get<any>(`profile/status/${userId}`)
-            .then(response => response.data);
+        return instance.get<any>(`profile/status/${userId}`).then(response => response.data)
     },
     updateUserStatus(status: string) {
         return instance
             .put<ResponseType>(`profile/status`, { status })
-            .then(response => response.data);
-    }
-};
+            .then(response => response.data)
+    },
+}
 
 export const authAPI = {
     getAuthUser() {
         return instance
             .get<ResponseType<AuthResponseType>>(`auth/me`)
-            .then(response => response.data);
+            .then(response => response.data)
     },
     login(data: LoginType) {
         return instance
             .post<ResponseType<{ userId: number }>>(`auth/login`, data)
-            .then(response => response.data);
+            .then(response => response.data)
     },
     logout() {
-        return instance
-            .delete<ResponseType>(`auth/login`)
-            .then(response => response.data);
-    }
-};
+        return instance.delete<ResponseType>(`auth/login`).then(response => response.data)
+    },
+}
 
 // types
 export type UserType = {

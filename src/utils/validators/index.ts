@@ -1,11 +1,11 @@
 export const requiredField = (value: string) => {
-    if (value) return undefined;
+    if (value) return undefined
 
-    return 'Field is required';
-};
+    return 'Field is required'
+}
 
 export const maxLengthCreator = (maxLength: number) => (value: string) => {
-    if (value.length <= maxLength) return undefined;
+    if (value.length <= maxLength) return undefined
 
-    return 'The maximum length must not exceed 50 characters';
-};
+    return 'The maximum length must not exceed 50 characters'
+}

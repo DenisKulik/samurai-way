@@ -1,35 +1,33 @@
 :root {
-  --color-primary: #ea2f64;
-  --color-primary-light: #ff2c60;
-  --color-primary-dark: #b02d59;
+    --color-primary: #ea2f64;
+    --color-primary-light: #ff2c60;
+    --color-primary-dark: #b02d59;
 
-  --color-secondary: #333333;
-  --color-secondary-light: #eeeeee;
-  --color-secondary-dark: #1E1F24;
+    --color-secondary: #333333;
+    --color-secondary-light: #eeeeee;
+    --color-secondary-dark: #1e1f24;
 }
 
 *,
 *::before,
 *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
 }
 
 html {
-  box-sizing: border-box;
-  font-size: 62.5%; // 1rem = 10px
+    box-sizing: border-box;
+    font-size: 62.5%; // 1rem = 10px
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-secondary-dark);
+    font-family: 'Montserrat', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: var(--color-secondary-dark);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-  monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
-

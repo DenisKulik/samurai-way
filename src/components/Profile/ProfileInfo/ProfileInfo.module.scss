@@ -1,47 +1,47 @@
 .profileInfo {
-  margin-bottom: 2rem;
-  padding: 2rem;
-  background-color: #333;
-  border-radius: 2rem;
-
-  .OwnerPageCover {
-    height: 15rem;
-    background-size: cover;
-    background-position: top;
+    margin-bottom: 2rem;
+    padding: 2rem;
+    background-color: #333;
     border-radius: 2rem;
-  }
 
-  .user {
-    display: flex;
-
-    .userImg {
-      margin: 0 2rem;
-      border-radius: 50%;
-      border: 4px solid #333;
-      transform: translateY(-50%);
+    .OwnerPageCover {
+        height: 15rem;
+        background-size: cover;
+        background-position: top;
+        border-radius: 2rem;
     }
 
-    .inner {
-      flex: 1;
+    .user {
+        display: flex;
 
-      .username {
-        font-size: 2.2rem;
-        line-height: 1.5;
-
-        span {
-          margin-left: 0.5rem;
-          vertical-align: super;
-          font-size: 1rem;
-          opacity: 0.5;
-          color: lawngreen;
+        .userImg {
+            margin: 0 2rem;
+            border-radius: 50%;
+            border: 4px solid #333;
+            transform: translateY(-50%);
         }
-      }
-    }
 
-    .jobInfo {
-      margin-top: 1rem;
-      font-size: 1.2rem;
-      opacity: 0.8;
+        .inner {
+            flex: 1;
+
+            .username {
+                font-size: 2.2rem;
+                line-height: 1.5;
+
+                span {
+                    margin-left: 0.5rem;
+                    vertical-align: super;
+                    font-size: 1rem;
+                    opacity: 0.5;
+                    color: lawngreen;
+                }
+            }
+        }
+
+        .jobInfo {
+            margin-top: 1rem;
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
     }
-  }
 }
