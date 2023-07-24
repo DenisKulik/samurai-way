@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
 import Header from './index'
-import { AppStateType } from '../../redux/reduxStore'
+import { AppStateType } from 'redux/store'
 import { InitialAuthUserDataStateType, logout } from '../../redux/authReducer'
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({

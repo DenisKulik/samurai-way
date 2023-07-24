@@ -1,6 +1,6 @@
 import { Component } from 'react'
 import { connect } from 'react-redux'
-import { AppStateType } from 'redux/reduxStore'
+import { AppStateType } from 'redux/store'
 import styles from './Users.module.scss'
 import { followUser, requestUsers, setCurrentPage, unfollowUser } from 'redux/usersReducer'
 import { Users } from './index'

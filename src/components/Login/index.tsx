@@ -4,7 +4,7 @@ import LoginForm, { FormDataType } from './LoginForm'
 import { login } from '../../redux/authReducer'
 import { LoginType } from '../../api/socialNetworkAPI'
 import { Redirect } from 'react-router-dom'
-import { AppStateType } from '../../redux/reduxStore'
+import { AppStateType } from 'redux/store'
 
 type LoginPropsType = {
     isAuth: boolean

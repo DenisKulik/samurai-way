@@ -10,7 +10,7 @@ import DialogsContainer from './components/Dialogs/DialogContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import Login from './components/Login'
 import { initializeApp } from './redux/appReducer'
-import { AppStateType } from './redux/reduxStore'
+import { AppStateType } from 'redux/store'
 import { Preloader } from './components/common/Preloader'
 
 class App extends Component<AppPropsType> {
