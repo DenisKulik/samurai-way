@@ -1,8 +1,8 @@
-import { connect } from 'react-redux'
-import styles from './Users.module.scss'
-import { AppStateType } from '../../redux/reduxStore'
-import { followUser, requestUsers, setCurrentPage, unfollowUser } from '../../redux/usersReducer'
 import { Component } from 'react'
+import { connect } from 'react-redux'
+import { AppStateType } from 'redux/reduxStore'
+import styles from './Users.module.scss'
+import { followUser, requestUsers, setCurrentPage, unfollowUser } from 'redux/usersReducer'
 import { Users } from './index'
 import { Preloader } from '../common/Preloader'
 import {
@@ -12,8 +12,8 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsers,
-} from '../../redux/usersSelectors'
-import { UserType } from '../../api/socialNetworkAPI'
+} from 'redux/usersSelectors'
+import { UserType } from 'api/socialNetworkAPI'
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     users: getUsers(state),
