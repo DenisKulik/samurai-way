@@ -12,6 +12,7 @@ import Login from './components/Login'
 import { initializeApp } from 'redux/appReducer'
 import { AppStateType } from 'redux/store'
 import { Preloader } from 'components/common/Preloader'
+import { getInitialized } from 'redux/appSelectors'
 
 class App extends Component<AppPropsType> {
     componentDidMount() {
@@ -36,7 +37,7 @@ class App extends Component<AppPropsType> {
     }
 }
 
-const mstp = (state: AppStateType) => ({ initialized: state.app.initialized })
+const mstp = (state: AppStateType) => ({ initialized: getInitialized(state) })
 
 export default compose<ComponentType>(withRouter, connect(mstp, { initializeApp }))(App)
 
