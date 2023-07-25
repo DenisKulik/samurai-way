@@ -6,18 +6,16 @@ import { DialogsPropsType } from './DialogContainer'
 import MessageForm, { MessageFormDataType } from './MessageForm'
 
 const Dialogs = memo((props: DialogsPropsType) => {
-    const { messages, sendMessage } = props
+    const { dialogsData, messagesData, sendMessage } = props
 
     const onSubmit = (formData: MessageFormDataType) => {
         sendMessage(formData.message)
     }
 
-    const dialogItems = messages.dialogsData.map(user => (
+    const dialogItems = dialogsData.map(user => (
         <Dialog key={user.id} id={user.id} name={user.name} isActive={false} />
     ))
-    const messageItems = messages.messagesData.map(item => (
-        <Message key={item.id} message={item.message} />
-    ))
+    const messageItems = messagesData.map(item => <Message key={item.id} message={item.message} />)
 
     return (
         <div className={styles.dialogs}>
