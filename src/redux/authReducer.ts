@@ -7,7 +7,6 @@ const initialState: InitialAuthUserDataStateType = {
     email: null,
     login: null,
     isAuth: false,
-    isFetching: true,
 }
 
 export const authReducer = (
@@ -79,7 +78,6 @@ export type ResponseAuthUserDataType = {
 
 export type InitialAuthUserDataStateType = ResponseAuthUserDataType & {
     isAuth: boolean
-    isFetching: boolean
 }
 
 export type AuthActionsType = ReturnType<typeof setUserData>

@@ -7,6 +7,7 @@ import { getUserProfile, getUserStatus, updateUserStatus } from 'redux/profileRe
 import { AppStateType } from 'redux/store'
 import { ProfileType } from 'api/socialNetworkAPI'
 import { getProfile, getStatus, getUserId } from 'redux/profileSelectors'
+import { getIsAuth } from 'redux/authSelectors'
 
 class ProfileContainer extends PureComponent<ProfileContainerPropsType> {
     componentDidMount() {
@@ -28,7 +29,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     profile: getProfile(state),
     status: getStatus(state),
     authorizedUserId: getUserId(state),
-    isAuth: state.auth.isAuth,
+    isAuth: getIsAuth(state),
 })
 
 export default compose<ComponentType>(

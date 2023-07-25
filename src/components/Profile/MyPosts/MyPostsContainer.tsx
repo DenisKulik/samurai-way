@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addPost, InitialProfileStateType } from 'redux/profileReducer'
+import { addPost, PostType } from 'redux/profileReducer'
 import { AppStateType } from 'redux/store'
 import MyPosts from './index'
+import { getPostsData } from 'redux/profileSelectors'
 
 export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 type MapStateToPropsType = {
-    profile: InitialProfileStateType
+    postsData: PostType[]
 }
 
 type MapDispatchToPropsType = {
@@ -15,7 +16,7 @@ type MapDispatchToPropsType = {
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    profile: state.profilePage,
+    postsData: getPostsData(state),
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({

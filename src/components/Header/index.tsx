@@ -8,8 +8,7 @@ import { HeaderContainerPropsType } from './HeaderContainer'
 type HeaderPropsType = HeaderContainerPropsType
 
 const Header = memo((props: HeaderPropsType) => {
-    const { logout } = props
-    const { isAuth, login } = props.auth
+    const { login, isAuth, logout } = props
 
     return (
         <header className={styles.header}>

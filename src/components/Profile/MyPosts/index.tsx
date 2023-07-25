@@ -5,21 +5,21 @@ import Post from './Post'
 import AddPostForm, { AddPostFormDataType } from './AddPostForm'
 
 const MyPosts = memo((props: MyPostsPropsType) => {
-    const { profile, addPost } = props
+    const { postsData, addPost } = props
 
     const onSubmit = (formData: AddPostFormDataType) => {
         addPost(formData.post)
     }
 
+    const posts = postsData.map(post => (
+        <Post key={post.id} message={post.message} likesCount={post.likesCount} />
+    ))
+
     return (
         <div className={styles.container}>
             <h3 className={styles.heading}>My posts</h3>
             <AddPostForm onSubmit={onSubmit} />
-            <div className={styles.posts}>
-                {profile.postsData.map(post => (
-                    <Post key={post.id} message={post.message} likesCount={post.likesCount} />
-                ))}
-            </div>
+            <div className={styles.posts}>{posts}</div>
         </div>
     )
 })
