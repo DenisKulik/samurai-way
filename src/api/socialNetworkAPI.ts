@@ -73,7 +73,7 @@ type UsersResponseType = {
     error: string
 }
 
-type ContactsType = {
+export type ContactsType = {
     github: string
     vk: string
     facebook: string

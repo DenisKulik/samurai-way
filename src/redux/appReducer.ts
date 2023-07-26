@@ -15,7 +15,7 @@ export const appReducer = (state = initialState, action: AppActionsType): Initia
 }
 
 // actions
-const setInitializedSuccess = () => ({ type: 'SET-INITIALIZED-SUCCESS' }) as const
+export const setInitializedSuccess = () => ({ type: 'SET-INITIALIZED-SUCCESS' }) as const
 
 // thunks
 export const initializeApp = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
@@ -28,5 +28,5 @@ export const initializeApp = (): AppThunkType => async (dispatch: AppThunkDispat
 }
 
 // types
-type InitialAppStateType = typeof initialState
+export type InitialAppStateType = typeof initialState
 export type AppActionsType = ReturnType<typeof setInitializedSuccess>
