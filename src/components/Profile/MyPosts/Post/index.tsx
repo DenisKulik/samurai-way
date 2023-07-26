@@ -1,5 +1,5 @@
 import styles from './Post.module.scss'
-import user from '../../../../img/user.jpg'
+import user from 'img/user-default.png'
 import { RiHeart3Line } from 'react-icons/ri'
 
 type PostPropsType = {

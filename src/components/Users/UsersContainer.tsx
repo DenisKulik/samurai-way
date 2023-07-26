@@ -17,23 +17,29 @@ import { UserType } from 'api/socialNetworkAPI'
 
 class UsersContainer extends PureComponent<UsersContainerPropsType> {
     componentDidMount() {
-        this.props.requestUsers(this.props.currentPage, this.props.pageSize)
+        const { requestUsers, currentPage, pageSize } = this.props
+        requestUsers(currentPage, pageSize)
     }
 
     changePageNumber = (page: number) => {
-        this.props.setCurrentPage(page)
-        this.props.requestUsers(page, this.props.pageSize)
+        const { setCurrentPage, requestUsers } = this.props
+        setCurrentPage(page)
+        requestUsers(page, this.props.pageSize)
     }
 
-    render = () => (
-        <div className={styles.usersContainer}>
-            {this.props.isFetching ? (
-                <Preloader />
-            ) : (
-                <Users changePageNumber={this.changePageNumber} {...this.props} />
-            )}
-        </div>
-    )
+    render() {
+        const { isFetching } = this.props
+
+        return (
+            <div className={styles.usersContainer}>
+                {isFetching ? (
+                    <Preloader />
+                ) : (
+                    <Users changePageNumber={this.changePageNumber} {...this.props} />
+                )}
+            </div>
+        )
+    }
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
