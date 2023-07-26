@@ -15,15 +15,6 @@ import {
 } from 'redux/usersSelectors'
 import { UserType } from 'api/socialNetworkAPI'
 
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
-    users: getUsers(state),
-    pageSize: getPageSize(state),
-    totalUsersCount: getTotalUsersCount(state),
-    currentPage: getCurrentPage(state),
-    isFollowingInProgress: getIsFollowingInProgress(state),
-    isFetching: getIsFetching(state),
-})
-
 class UsersContainer extends PureComponent<UsersContainerPropsType> {
     componentDidMount() {
         this.props.requestUsers(this.props.currentPage, this.props.pageSize)
@@ -45,6 +36,15 @@ class UsersContainer extends PureComponent<UsersContainerPropsType> {
     )
 }
 
+const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
+    users: getUsers(state),
+    pageSize: getPageSize(state),
+    totalUsersCount: getTotalUsersCount(state),
+    currentPage: getCurrentPage(state),
+    isFollowingInProgress: getIsFollowingInProgress(state),
+    isFetching: getIsFetching(state),
+})
+
 export default connect(mapStateToProps, {
     requestUsers,
     followUser,
@@ -54,7 +54,6 @@ export default connect(mapStateToProps, {
 
 // types
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 type MapStateToPropsType = {
     users: UserType[]
     pageSize: number
@@ -63,7 +62,6 @@ type MapStateToPropsType = {
     isFollowingInProgress: number[]
     isFetching: boolean
 }
-
 type MapDispatchToPropsType = {
     requestUsers: (currentPage: number, pageSize: number) => void
     followUser: (userId: number) => void

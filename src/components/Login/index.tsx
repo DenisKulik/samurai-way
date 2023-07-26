@@ -7,11 +7,6 @@ import { LoginType } from 'api/socialNetworkAPI'
 import { Redirect } from 'react-router-dom'
 import { AppStateType } from 'redux/store'
 
-type LoginPropsType = {
-    isAuth: boolean
-    login: (data: LoginType) => void
-}
-
 const Login = memo(({ isAuth, login }: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {
         login(formData)
@@ -32,3 +27,9 @@ const Login = memo(({ isAuth, login }: LoginPropsType) => {
 const mstp = (state: AppStateType) => ({ isAuth: state.auth.isAuth })
 
 export default connect(mstp, { login })(Login)
+
+// types
+type LoginPropsType = {
+    isAuth: boolean
+    login: (data: LoginType) => void
+}
