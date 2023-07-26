@@ -1,0 +1,16 @@
+.paginator {
+  max-width: 30rem;
+  margin: 0 auto;
+  display: flex;
+  overflow-x: scroll;
+  white-space: nowrap;
+
+  .page {
+    font-size: 1.6rem;
+    cursor: pointer;
+  }
+
+  .selectedPage {
+    color: var(--color-primary);
+  }
+}

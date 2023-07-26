@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom'
 import styles from './Users.module.scss'
 import userDefault from '../../img/user-default.png'
 import { UsersContainerPropsType } from './UsersContainer'
+import { Paginator } from 'components/Users/Paginator'
 
 export const Users = memo((props: UsersPropsType) => {
     const {
@@ -15,8 +16,6 @@ export const Users = memo((props: UsersPropsType) => {
         followUser,
         changePageNumber,
     } = props
-    const pagesCount = Math.ceil(totalUsersCount / pageSize)
-    const pages = Array.from({ length: pagesCount }, (_, i) => i + 1)
 
     return (
         <>
@@ -59,19 +58,12 @@ export const Users = memo((props: UsersPropsType) => {
                         </div>
                     </div>
                 ))}
-                <div className={styles.navigation}>
-                    {pages.map(page => (
-                        <span
-                            key={page}
-                            className={`${styles.page} ${
-                                currentPage === page ? styles.selectedPage : ''
-                            }`}
-                            onClick={() => changePageNumber(page)}
-                        >
-                            {page}
-                        </span>
-                    ))}
-                </div>
+                <Paginator
+                    pageSize={pageSize}
+                    totalUsersCount={totalUsersCount}
+                    currentPage={currentPage}
+                    changePageNumber={changePageNumber}
+                />
             </div>
         </>
     )
