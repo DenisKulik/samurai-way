@@ -1,14 +1,13 @@
 import {
     usersReducer,
     InitialUsersStateType,
-    follow,
-    unfollow,
     setUsers,
     setCurrentPage,
     setTotalUsersCount,
     toggleIsFetching,
     toggleIsFollowingProgress,
     UsersActionsType,
+    toggleFollowUser,
 } from 'redux/usersReducer'
 
 describe('users-reducer', () => {
@@ -46,24 +45,6 @@ describe('users-reducer', () => {
         }
     })
 
-    it('should follow to the user correctly', () => {
-        const userId = 1
-        const action: UsersActionsType = follow(userId)
-
-        const newState = usersReducer(initialState, action)
-
-        expect(newState.users[0].followed).toBe(true)
-    })
-
-    it('should unfollow to the user correctly', () => {
-        const userId = 2
-        const action: UsersActionsType = unfollow(userId)
-
-        const newState = usersReducer(initialState, action)
-
-        expect(newState.users[1].followed).toBe(false)
-    })
-
     it('should set users to the state correctly', () => {
         const users = [
             {
@@ -82,6 +63,24 @@ describe('users-reducer', () => {
         const newState = usersReducer(initialState, action)
 
         expect(newState.users).toEqual(users)
+    })
+
+    it('should follow to the user correctly', () => {
+        const userId = 1
+        const action: UsersActionsType = toggleFollowUser(userId, true)
+
+        const newState = usersReducer(initialState, action)
+
+        expect(newState.users[0].followed).toBe(true)
+    })
+
+    it('should unfollow to the user correctly', () => {
+        const userId = 2
+        const action: UsersActionsType = toggleFollowUser(userId, false)
+
+        const newState = usersReducer(initialState, action)
+
+        expect(newState.users[1].followed).toBe(false)
     })
 
     it('should set current page correctly', () => {

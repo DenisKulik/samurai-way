@@ -1,4 +1,4 @@
-import messagesReducer, { addMessage, InitialMessagesStateType } from 'redux/messagesReducer'
+import { messagesReducer, addMessage, InitialMessagesStateType } from 'redux/messagesReducer'
 
 describe('messages-reducer', () => {
     let initialState: InitialMessagesStateType

@@ -23,7 +23,7 @@ export const profileReducer = (
     action: ProfileActionsType,
 ): InitialProfileStateType => {
     switch (action.type) {
-        case 'ADD-POST':
+        case 'PROFILE/ADD-POST':
             return {
                 ...state,
                 postsData: [
@@ -35,12 +35,12 @@ export const profileReducer = (
                     ...state.postsData,
                 ],
             }
-        case 'SET-USER-PROFILE':
+        case 'PROFILE/SET-USER-PROFILE':
             return {
                 ...state,
                 profile: action.profile,
             }
-        case 'SET-USER-STATUS':
+        case 'PROFILE/SET-USER-STATUS':
             return {
                 ...state,
                 status: action.status,
@@ -51,10 +51,11 @@ export const profileReducer = (
 }
 
 // actions
-export const addPost = (post: string) => ({ type: 'ADD-POST', post }) as const
+export const addPost = (post: string) => ({ type: 'PROFILE/ADD-POST', post }) as const
 export const setUserProfile = (profile: ProfileType) =>
-    ({ type: 'SET-USER-PROFILE', profile }) as const
-export const setUserStatus = (status: string) => ({ type: 'SET-USER-STATUS', status }) as const
+    ({ type: 'PROFILE/SET-USER-PROFILE', profile }) as const
+export const setUserStatus = (status: string) =>
+    ({ type: 'PROFILE/SET-USER-STATUS', status }) as const
 
 // thunks
 export const getUserProfile =
@@ -84,9 +85,7 @@ export const updateUserStatus =
     async (dispatch: AppThunkDispatch) => {
         try {
             const res = await profileAPI.updateUserStatus(status)
-            if (res.resultCode === 0) {
-                dispatch(setUserStatus(status))
-            }
+            res.resultCode === 0 && dispatch(setUserStatus(status))
         } catch (e) {
             console.error(e)
         }
@@ -98,13 +97,11 @@ export type PostType = {
     message: string
     likesCount: number
 }
-
 export type InitialProfileStateType = {
     profile: ProfileType
     postsData: PostType[]
     status: string
 }
-
 export type ProfileActionsType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>

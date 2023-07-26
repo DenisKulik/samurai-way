@@ -34,7 +34,7 @@ export const profileAPI = {
 }
 
 export const authAPI = {
-    getAuthUser() {
+    me() {
         return instance
             .get<ResponseType<AuthResponseType>>(`auth/me`)
             .then(response => response.data)

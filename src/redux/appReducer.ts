@@ -7,7 +7,7 @@ const initialState = {
 
 export const appReducer = (state = initialState, action: AppActionsType): InitialAppStateType => {
     switch (action.type) {
-        case 'SET-INITIALIZED-SUCCESS':
+        case 'APP/SET-INITIALIZED-SUCCESS':
             return { ...state, initialized: true }
         default:
             return state
@@ -15,7 +15,7 @@ export const appReducer = (state = initialState, action: AppActionsType): Initia
 }
 
 // actions
-export const setInitializedSuccess = () => ({ type: 'SET-INITIALIZED-SUCCESS' }) as const
+export const setInitializedSuccess = () => ({ type: 'APP/SET-INITIALIZED-SUCCESS' }) as const
 
 // thunks
 export const initializeApp = (): AppThunkType => async (dispatch: AppThunkDispatch) => {

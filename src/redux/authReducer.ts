@@ -1,6 +1,6 @@
+import { stopSubmit } from 'redux-form'
 import { AppThunkDispatch, AppThunkType } from 'redux/store'
 import { authAPI, LoginType } from 'api/socialNetworkAPI'
-import { stopSubmit } from 'redux-form'
 
 const initialState: InitialAuthUserDataStateType = {
     id: null,
@@ -14,7 +14,7 @@ export const authReducer = (
     action: AuthActionsType,
 ): InitialAuthUserDataStateType => {
     switch (action.type) {
-        case 'SET-USER-DATA':
+        case 'AUTH/SET-USER-DATA':
             return {
                 ...state,
                 ...action.payload.data,
@@ -27,12 +27,12 @@ export const authReducer = (
 
 // actions
 export const setUserData = (data: ResponseAuthUserDataType, isAuth: boolean) =>
-    ({ type: 'SET-USER-DATA', payload: { data, isAuth } }) as const
+    ({ type: 'AUTH/SET-USER-DATA', payload: { data, isAuth } }) as const
 
 // thunks
 export const getAuthUser = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
     try {
-        const res = await authAPI.getAuthUser()
+        const res = await authAPI.me()
         res.resultCode === 0 && dispatch(setUserData(res.data, true))
     } catch (e) {
         console.error(e)
@@ -75,9 +75,7 @@ export type ResponseAuthUserDataType = {
     email: string | null
     login: string | null
 }
-
 export type InitialAuthUserDataStateType = ResponseAuthUserDataType & {
     isAuth: boolean
 }
-
 export type AuthActionsType = ReturnType<typeof setUserData>

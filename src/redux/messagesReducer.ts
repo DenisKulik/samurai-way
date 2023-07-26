@@ -15,12 +15,12 @@ const initialState: InitialMessagesStateType = {
     ],
 }
 
-const messagesReducer = (
+export const messagesReducer = (
     state: InitialMessagesStateType = initialState,
     action: MessagesActionsType,
 ): InitialMessagesStateType => {
     switch (action.type) {
-        case 'ADD-MESSAGE':
+        case 'MESSAGES/ADD-MESSAGE':
             const newMessage: MessageType = {
                 id: new Date().getTime(),
                 message: action.message,
@@ -34,29 +34,20 @@ const messagesReducer = (
     }
 }
 
-export default messagesReducer
-
 // actions
-export const addMessage = (message: string) =>
-    ({
-        type: 'ADD-MESSAGE',
-        message,
-    }) as const
+export const addMessage = (message: string) => ({ type: 'MESSAGES/ADD-MESSAGE', message }) as const
 
 // types
 export type DialogType = {
     id: number
     name: string
 }
-
 export type MessageType = {
     id: number
     message: string
 }
-
 export type InitialMessagesStateType = {
     dialogsData: DialogType[]
     messagesData: MessageType[]
 }
-
 export type MessagesActionsType = ReturnType<typeof addMessage>
