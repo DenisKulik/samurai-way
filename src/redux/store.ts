@@ -1,4 +1,4 @@
-import { applyMiddleware, combineReducers, createStore, Store } from 'redux'
+import { applyMiddleware, combineReducers, compose, createStore, Store } from 'redux'
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { reducer as formReducer, FormAction } from 'redux-form'
 import { profileReducer, ProfileActionsType } from './profileReducer'
@@ -15,8 +15,11 @@ const rootReducer = combineReducers({
     auth: authReducer,
     form: formReducer,
 })
-
-export const store: StoreType = createStore(rootReducer, applyMiddleware(thunkMiddleware))
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+export const store: StoreType = createStore(
+    rootReducer,
+    composeEnhancers(applyMiddleware(thunkMiddleware)),
+)
 
 // types
 export type RootActionsType =
