@@ -1,7 +1,7 @@
 import { Component, ComponentType } from 'react'
 import { compose } from 'redux'
-import { connect } from 'react-redux'
-import { Route, withRouter } from 'react-router-dom'
+import { connect, Provider } from 'react-redux'
+import { HashRouter, Route, withRouter } from 'react-router-dom'
 import './App.scss'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Sidebar from './components/Sidebar'
@@ -10,7 +10,7 @@ import DialogsContainer from './components/Dialogs/DialogContainer'
 import UsersContainer from './components/Users/UsersContainer'
 import Login from './components/Login'
 import { initializeApp } from 'redux/appReducer'
-import { AppStateType } from 'redux/store'
+import { AppStateType, store } from 'redux/store'
 import { Preloader } from 'components/common/Preloader'
 import { getInitialized } from 'redux/appSelectors'
 
@@ -38,16 +38,23 @@ class App extends Component<AppPropsType> {
 }
 
 const mstp = (state: AppStateType) => ({ initialized: getInitialized(state) })
+const AppContainer = compose<ComponentType>(withRouter, connect(mstp, { initializeApp }))(App)
 
-export default compose<ComponentType>(withRouter, connect(mstp, { initializeApp }))(App)
+export const RootComponent = () => {
+    return (
+        <HashRouter>
+            <Provider store={store}>
+                <AppContainer />
+            </Provider>
+        </HashRouter>
+    )
+}
 
 // types
 type AppPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 type MapStateToPropsType = {
     initialized: boolean
 }
-
 type MapDispatchToPropsType = {
     initializeApp: () => void
 }
