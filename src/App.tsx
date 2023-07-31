@@ -1,18 +1,20 @@
-import { Component, ComponentType } from 'react'
+import { Component, ComponentType, lazy } from 'react'
 import { compose } from 'redux'
 import { connect, Provider } from 'react-redux'
 import { HashRouter, Route, withRouter } from 'react-router-dom'
 import './App.scss'
 import HeaderContainer from './components/Header/HeaderContainer'
 import Sidebar from './components/Sidebar'
-import ProfileContainer from './components/Profile/ProfileContainer'
-import DialogsContainer from './components/Dialogs/DialogContainer'
-import UsersContainer from './components/Users/UsersContainer'
-import Login from './components/Login'
 import { initializeApp } from 'redux/appReducer'
 import { AppStateType, store } from 'redux/store'
 import { Preloader } from 'components/common/Preloader'
 import { getInitialized } from 'redux/appSelectors'
+import { withSuspense } from 'hoc/withSuspense'
+
+const Login = lazy(() => import('components/Login'))
+const ProfileContainer = lazy(() => import('components/Profile/ProfileContainer'))
+const DialogsContainer = lazy(() => import('components/Dialogs/DialogContainer'))
+const UsersContainer = lazy(() => import('components/Users/UsersContainer'))
 
 class App extends Component<AppPropsType> {
     componentDidMount() {
@@ -27,10 +29,15 @@ class App extends Component<AppPropsType> {
                 <HeaderContainer />
                 <Sidebar />
                 <div className="content">
-                    <Route path="/login" render={() => <Login />} />
-                    <Route path="/profile/:userId?" render={() => <ProfileContainer />} />
-                    <Route path="/dialogs" render={() => <DialogsContainer />} />
-                    <Route path="/users" render={() => <UsersContainer />} />
+                    <Route path="/login" render={withSuspense(Login)} />
+                    <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} />
+                    <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
+                    <Route
+                        path="/users"
+                        render={withSuspense(() => (
+                            <UsersContainer />
+                        ))}
+                    />
                 </div>
             </div>
         )
