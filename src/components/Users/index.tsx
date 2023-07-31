@@ -30,7 +30,7 @@ export const Users = memo((props: UsersPropsType) => {
                 ))}
                 <Paginator
                     pageSize={pageSize}
-                    totalUsersCount={totalUsersCount}
+                    totalItemsCount={totalUsersCount}
                     currentPage={currentPage}
                     changePageNumber={changePageNumber}
                 />
