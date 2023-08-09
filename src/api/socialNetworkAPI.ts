@@ -31,6 +31,17 @@ export const profileAPI = {
             .put<ResponseType>(`profile/status`, { status })
             .then(response => response.data)
     },
+    sendPhoto(file: string) {
+        const formData = new FormData()
+        formData.append('image', file)
+        return instance
+            .put<ResponseType<{ photos: PhotosType }>>(`profile/photo`, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            })
+            .then(response => response.data)
+    },
 }
 
 export const authAPI = {
@@ -50,29 +61,27 @@ export const authAPI = {
 }
 
 // types
+export type PhotosType = {
+    large: string
+    small: string
+}
 export type UserType = {
     id: number
     name: string
     status: string
-    photos: {
-        large: string
-        small: string
-    }
+    photos: PhotosType
     followed: boolean
 }
-
 export type ResponseType<T = {}> = {
     resultCode: number
     messages: string[]
     data: T
 }
-
 type UsersResponseType = {
     items: UserType[]
     totalCount: number
     error: string
 }
-
 export type ContactsType = {
     github: string
     vk: string
@@ -83,7 +92,6 @@ export type ContactsType = {
     youtube: string
     mainLink: string
 }
-
 export type ProfileType = {
     userId: number
     lookingForAJob: boolean
@@ -95,13 +103,11 @@ export type ProfileType = {
         small: string
     }
 }
-
 export type AuthResponseType = {
     id: number
     email: string
     login: string
 }
-
 export type LoginType = {
     email: string
     password: string

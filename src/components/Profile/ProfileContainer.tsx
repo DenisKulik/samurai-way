@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Profile } from './index'
-import { getUserProfile, getUserStatus, updateUserStatus } from 'redux/profileReducer'
+import { getUserProfile, getUserStatus, sendPhoto, updateUserStatus } from 'redux/profileReducer'
 import { AppStateType } from 'redux/store'
 import { ProfileType } from 'api/socialNetworkAPI'
 import { getProfile, getStatus } from 'redux/profileSelectors'
@@ -47,7 +47,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus }),
+    connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus, sendPhoto }),
     withRouter,
 )(ProfileContainer)
 
@@ -62,6 +62,7 @@ type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
     getUserStatus: (userId: string) => void
     updateUserStatus: (userId: string) => void
+    sendPhoto: (file: File) => void
 }
 type PathParamsType = {
     userId: string

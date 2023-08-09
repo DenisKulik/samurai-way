@@ -1,5 +1,5 @@
 import { AppThunkDispatch, AppThunkType } from 'redux/store'
-import { profileAPI, ProfileType } from 'api/socialNetworkAPI'
+import { PhotosType, profileAPI, ProfileType } from 'api/socialNetworkAPI'
 
 const initialState: InitialProfileStateType = {
     profile: {} as ProfileType,
@@ -45,6 +45,11 @@ export const profileReducer = (
                 ...state,
                 status: action.status,
             }
+        case 'PROFILE/SET-USER-PHOTOS':
+            return {
+                ...state,
+                profile: { ...state.profile, photos: action.photos },
+            }
         default:
             return state
     }
@@ -56,6 +61,9 @@ export const setUserProfile = (profile: ProfileType) =>
     ({ type: 'PROFILE/SET-USER-PROFILE', profile }) as const
 export const setUserStatus = (status: string) =>
     ({ type: 'PROFILE/SET-USER-STATUS', status }) as const
+export const setUserPhotos = (photos: PhotosType) => {
+    return { type: 'PROFILE/SET-USER-PHOTOS', photos } as const
+}
 
 // thunks
 export const getUserProfile =
@@ -91,6 +99,17 @@ export const updateUserStatus =
         }
     }
 
+export const sendPhoto =
+    (file: string): AppThunkType =>
+    async (dispatch: AppThunkDispatch) => {
+        try {
+            const res = await profileAPI.sendPhoto(file)
+            res.resultCode === 0 && dispatch(setUserPhotos(res.data.photos))
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
 // types
 export type PostType = {
     id: number
@@ -106,3 +125,4 @@ export type ProfileActionsType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserStatus>
+    | ReturnType<typeof setUserPhotos>

@@ -4,7 +4,7 @@ import MyPostsContainer from './MyPosts/MyPostsContainer'
 import { ProfileContainerPropsType } from './ProfileContainer'
 
 export const Profile = memo((props: ProfilePropsType) => {
-    const { profile, status, authorizedUserId, match, updateUserStatus } = props
+    const { profile, status, authorizedUserId, match, updateUserStatus, sendPhoto } = props
     const isOwner = !match.params.userId || Number(match.params.userId) === authorizedUserId
 
     return (
@@ -14,6 +14,7 @@ export const Profile = memo((props: ProfilePropsType) => {
                 profile={profile}
                 status={status}
                 updateUserStatus={updateUserStatus}
+                sendPhoto={sendPhoto}
             />
             <MyPostsContainer />
         </>
