@@ -1,5 +1,5 @@
 import { PureComponent } from 'react'
-import styles from './Paginator.module.scss'
+import styles from 'components/common/Paginator/Paginator.module.scss'
 import Button from 'components/common/Button'
 
 export class Paginator extends PureComponent<PaginatorPropsType, PaginatorStateType> {

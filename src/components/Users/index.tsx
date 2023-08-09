@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import styles from './Users.module.scss'
 import { UsersContainerPropsType } from './UsersContainer'
-import { Paginator } from 'components/Users/Paginator'
+import { Paginator } from 'components/common/Paginator'
 import { User } from 'components/Users/User'
 
 export const Users = memo((props: UsersPropsType) => {
