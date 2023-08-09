@@ -3,15 +3,22 @@ import ProfileInfo from './ProfileInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import { ProfileContainerPropsType } from './ProfileContainer'
 
-type ProfilePropsType = ProfileContainerPropsType
-
 export const Profile = memo((props: ProfilePropsType) => {
-    const { profile, status, updateUserStatus } = props
+    const { profile, status, authorizedUserId, match, updateUserStatus } = props
+    const isOwner = !match.params.userId || Number(match.params.userId) === authorizedUserId
 
     return (
         <>
-            <ProfileInfo profile={profile} status={status} updateUserStatus={updateUserStatus} />
+            <ProfileInfo
+                isOwner={isOwner}
+                profile={profile}
+                status={status}
+                updateUserStatus={updateUserStatus}
+            />
             <MyPostsContainer />
         </>
     )
 })
+
+// types
+type ProfilePropsType = ProfileContainerPropsType

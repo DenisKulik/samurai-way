@@ -7,10 +7,7 @@ export class ProfileStatus extends PureComponent<ProfileStatusPropsType> {
         status: this.props.status,
     }
 
-    componentDidUpdate(
-        prevProps: Readonly<ProfileStatusPropsType>,
-        prevState: Readonly<ProfileStatusPropsType>,
-    ) {
+    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>) {
         const { status } = this.props
         if (prevProps.status !== status) {
             this.setState({ status })
@@ -18,6 +15,8 @@ export class ProfileStatus extends PureComponent<ProfileStatusPropsType> {
     }
 
     activateEditMode = () => {
+        if (!this.props.editable) return
+
         this.setState({
             editMode: true,
         })
@@ -59,6 +58,7 @@ export class ProfileStatus extends PureComponent<ProfileStatusPropsType> {
 
 // types
 type ProfileStatusPropsType = {
+    editable: boolean
     status: string
     updateUserStatus: (status: string) => void
 }

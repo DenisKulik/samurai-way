@@ -3,16 +3,11 @@ import styles from './ProfileInfo.module.scss'
 import userDefault from 'img/user-default.png'
 import background from 'img/background.jpg'
 import { ProfileType } from 'api/socialNetworkAPI'
-import { Preloader } from '../../common/Preloader'
+import { Preloader } from 'components/common/Preloader'
 import { ProfileStatus } from './ProfileStatus'
 
-type ProfileInfoPropsType = {
-    profile: ProfileType
-    status: string
-    updateUserStatus: (status: string) => void
-}
-
-const ProfileInfo = memo(({ profile, status, updateUserStatus }: ProfileInfoPropsType) => {
+const ProfileInfo = memo((props: ProfileInfoPropsType) => {
+    const { isOwner, profile, status, updateUserStatus } = props
     if (!profile) return <Preloader />
 
     return (
@@ -34,7 +29,11 @@ const ProfileInfo = memo(({ profile, status, updateUserStatus }: ProfileInfoProp
                         {profile.fullName}
                         <span>online</span>
                     </h2>
-                    <ProfileStatus status={status} updateUserStatus={updateUserStatus} />
+                    <ProfileStatus
+                        editable={isOwner}
+                        status={status}
+                        updateUserStatus={updateUserStatus}
+                    />
                 </div>
                 <div className={styles.jobInfo}>
                     <p>Looking for a job: {profile.lookingForAJob ? 'yes 🐱‍👤' : 'no 🙅‍♂️'}</p>
@@ -46,3 +45,11 @@ const ProfileInfo = memo(({ profile, status, updateUserStatus }: ProfileInfoProp
 })
 
 export default ProfileInfo
+
+// types
+type ProfileInfoPropsType = {
+    isOwner: boolean
+    profile: ProfileType
+    status: string
+    updateUserStatus: (status: string) => void
+}
