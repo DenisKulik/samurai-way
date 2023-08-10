@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import ProfileInfo from './ProfileInfo'
+import { ProfileInfo } from './ProfileInfo'
 import MyPostsContainer from './MyPosts/MyPostsContainer'
 import { ProfileContainerPropsType } from './ProfileContainer'
 

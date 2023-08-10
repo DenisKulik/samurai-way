@@ -3,13 +3,17 @@ import { ProfileStatus } from 'components/Profile/ProfileInfo/ProfileStatus/inde
 
 describe('ProfileStatus Component', () => {
     it('should display status from props correctly', () => {
-        const component = create(<ProfileStatus status="test" updateUserStatus={() => {}} />)
+        const component = create(
+            <ProfileStatus status="test" editable={true} updateUserStatus={() => {}} />,
+        )
         const instance = component.getInstance()
         expect(instance?.props.status).toBe('test')
     })
 
     it('should display span when editMode equals false correctly', () => {
-        const component = create(<ProfileStatus status="test" updateUserStatus={() => {}} />)
+        const component = create(
+            <ProfileStatus status="test" editable={true} updateUserStatus={() => {}} />,
+        )
         const root = component.root
         // eslint-disable-next-line testing-library/await-async-query
         const span = root.findByType('span')
@@ -17,7 +21,9 @@ describe('ProfileStatus Component', () => {
     })
 
     it('should not display input when editMode equals false', () => {
-        const component = create(<ProfileStatus status="test" updateUserStatus={() => {}} />)
+        const component = create(
+            <ProfileStatus status="test" editable={true} updateUserStatus={() => {}} />,
+        )
         const root = component.root
         expect(() => {
             // eslint-disable-next-line testing-library/await-async-query
@@ -26,7 +32,9 @@ describe('ProfileStatus Component', () => {
     })
 
     it('should display input when editMode equals true correctly', () => {
-        const component = create(<ProfileStatus status="test" updateUserStatus={() => {}} />)
+        const component = create(
+            <ProfileStatus status="test" editable={true} updateUserStatus={() => {}} />,
+        )
         const root = component.root
         // eslint-disable-next-line testing-library/await-async-query
         const span = root.findByType('span')
@@ -37,7 +45,9 @@ describe('ProfileStatus Component', () => {
     })
 
     it('should not display span when editMode equals true correctly', () => {
-        const component = create(<ProfileStatus status="test" updateUserStatus={() => {}} />)
+        const component = create(
+            <ProfileStatus status="test" editable={true} updateUserStatus={() => {}} />,
+        )
         const root = component.root
         // eslint-disable-next-line testing-library/await-async-query
         const span = root.findByType('span')
@@ -51,7 +61,9 @@ describe('ProfileStatus Component', () => {
 
     it('should call callback correctly', () => {
         const mockCallback = jest.fn()
-        const component = create(<ProfileStatus status="test" updateUserStatus={mockCallback} />)
+        const component = create(
+            <ProfileStatus status="test" editable={true} updateUserStatus={mockCallback} />,
+        )
         const instance = component.getInstance()
         // @ts-ignore
         instance.deactivateEditMode()

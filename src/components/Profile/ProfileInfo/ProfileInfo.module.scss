@@ -10,48 +10,53 @@
         background-position: top;
         border-radius: 2rem;
     }
+}
 
-    .user {
-        display: flex;
+.content {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: 0 2rem;
+}
 
-        .avatar {
-            display: flex;
-            flex-direction: column;
+.avatar {
+    display: flex;
+    position: absolute;
 
-            .userImg {
-                margin: 0 2rem;
-                border-radius: 50%;
-                border: 4px solid #333;
-                transform: translateY(-50%);
-            }
+    .userImg {
+        margin-right: 1rem;
+        border-radius: 50%;
+        border: 4px solid #333;
+        transform: translateY(-50%);
+    }
 
-            .uploadImg {
+    .uploadImg {
+        height: 20px;
+    }
+}
 
-            }
+.inner {
+    margin-top: 50px;
+    z-index: 10;
+
+    .username {
+        font-size: 2.2rem;
+
+        span {
+            margin-left: 0.5rem;
+            vertical-align: super;
+            font-size: 1rem;
+            opacity: 0.5;
+            color: lawngreen;
         }
+    }
 
+    .jobInfo {
+        font-size: 1.2rem;
+        opacity: 0.8;
+    }
 
-        .inner {
-            flex: 1;
-
-            .username {
-                font-size: 2.2rem;
-                line-height: 1.5;
-
-                span {
-                    margin-left: 0.5rem;
-                    vertical-align: super;
-                    font-size: 1rem;
-                    opacity: 0.5;
-                    color: lawngreen;
-                }
-            }
-        }
-
-        .jobInfo {
-            margin-top: 1rem;
-            font-size: 1.2rem;
-            opacity: 0.8;
-        }
+    .contacts {
+        padding-left: 0.5rem;
     }
 }
