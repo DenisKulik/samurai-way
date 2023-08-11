@@ -41,6 +41,7 @@ export function createField<FormKeyType extends string>(
 }
 
 // types
+export type GetStringKeys<T> = Extract<keyof T, string>
 type FormControlPropsType = WrappedFieldProps & {
     children: ReactNode
 }

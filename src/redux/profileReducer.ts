@@ -1,5 +1,7 @@
 import { AppThunkDispatch, AppThunkType } from 'redux/store'
 import { PhotosType, profileAPI, ProfileType } from 'api/socialNetworkAPI'
+import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
+import { stopSubmit } from 'redux-form'
 
 const initialState: InitialProfileStateType = {
     profile: {} as ProfileType,
@@ -40,6 +42,11 @@ export const profileReducer = (
                 ...state,
                 profile: action.profile,
             }
+        case 'PROFILE/SET-UPDATED-USER-PROFILE':
+            return {
+                ...state,
+                profile: { ...state.profile, ...action.profile },
+            }
         case 'PROFILE/SET-USER-STATUS':
             return {
                 ...state,
@@ -61,9 +68,10 @@ export const setUserProfile = (profile: ProfileType) =>
     ({ type: 'PROFILE/SET-USER-PROFILE', profile }) as const
 export const setUserStatus = (status: string) =>
     ({ type: 'PROFILE/SET-USER-STATUS', status }) as const
-export const setUserPhotos = (photos: PhotosType) => {
-    return { type: 'PROFILE/SET-USER-PHOTOS', photos } as const
-}
+export const setUserPhotos = (photos: PhotosType) =>
+    ({ type: 'PROFILE/SET-USER-PHOTOS', photos }) as const
+export const setUpdatedUserProfile = (profile: ProfileDataFormType) =>
+    ({ type: 'PROFILE/SET-UPDATED-USER-PROFILE', profile }) as const
 
 // thunks
 export const getUserProfile =
@@ -99,6 +107,27 @@ export const updateUserStatus =
         }
     }
 
+// TODO: add profileUpdateStatus field to state
+export const updateProfile =
+    (profile: ProfileDataFormType): AppThunkType =>
+    async (dispatch: AppThunkDispatch) => {
+        try {
+            const res = await profileAPI.updateUserProfile(profile)
+            if (res.resultCode === 0) {
+                dispatch(setUpdatedUserProfile(profile))
+            } else {
+                dispatch(
+                    stopSubmit('edit-profile', {
+                        _error: res.messages[0] || 'Incorrect data',
+                    }),
+                )
+                return Promise.reject(res.messages[0])
+            }
+        } catch (e) {
+            console.error(e)
+        }
+    }
+
 export const sendPhoto =
     (file: string): AppThunkType =>
     async (dispatch: AppThunkDispatch) => {
@@ -126,3 +155,4 @@ export type ProfileActionsType =
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof setUserPhotos>
+    | ReturnType<typeof setUpdatedUserProfile>

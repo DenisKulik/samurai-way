@@ -3,13 +3,20 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 import { Profile } from './index'
-import { getUserProfile, getUserStatus, sendPhoto, updateUserStatus } from 'redux/profileReducer'
+import {
+    getUserProfile,
+    getUserStatus,
+    sendPhoto,
+    updateProfile,
+    updateUserStatus,
+} from 'redux/profileReducer'
 import { AppStateType } from 'redux/store'
 import { ProfileType } from 'api/socialNetworkAPI'
 import { getProfile, getStatus } from 'redux/profileSelectors'
 import { getAuthUserId, getIsAuth } from 'redux/authSelectors'
+import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
 
-class ProfileContainer extends PureComponent<ProfileContainerPropsType> {
+class ProfileContainer extends PureComponent<ProfilePropsType> {
     refreshProfile() {
         let { userId } = this.props.match.params
 
@@ -30,7 +37,7 @@ class ProfileContainer extends PureComponent<ProfileContainerPropsType> {
         this.refreshProfile()
     }
 
-    componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>) {
+    componentDidUpdate(prevProps: Readonly<ProfilePropsType>) {
         if (this.props.match.params.userId !== prevProps.match.params.userId) {
             this.refreshProfile()
         }
@@ -47,7 +54,13 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
 })
 
 export default compose<ComponentType>(
-    connect(mapStateToProps, { getUserProfile, getUserStatus, updateUserStatus, sendPhoto }),
+    connect(mapStateToProps, {
+        getUserProfile,
+        getUserStatus,
+        updateUserStatus,
+        sendPhoto,
+        updateProfile,
+    }),
     withRouter,
 )(ProfileContainer)
 
@@ -63,10 +76,10 @@ type MapDispatchToPropsType = {
     getUserStatus: (userId: string) => void
     updateUserStatus: (userId: string) => void
     sendPhoto: (file: File) => void
+    updateProfile: (profile: ProfileDataFormType) => Promise<any>
 }
 type PathParamsType = {
     userId: string
 }
 type ownProfileContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
-export type ProfileContainerPropsType = RouteComponentProps<PathParamsType> &
-    ownProfileContainerPropsType
+export type ProfilePropsType = RouteComponentProps<PathParamsType> & ownProfileContainerPropsType

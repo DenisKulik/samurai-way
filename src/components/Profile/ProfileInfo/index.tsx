@@ -5,7 +5,9 @@ import { Preloader } from 'components/common/Preloader'
 import { ProfileStatus } from './ProfileStatus'
 import { ProfileData } from 'components/Profile/ProfileInfo/ProfileData'
 import { Avatar } from 'components/Profile/ProfileInfo/Avatar'
-import { ProfileDataForm } from 'components/Profile/ProfileInfo/ProfileDataForm'
+import ProfileDataForm, {
+    ProfileDataFormType,
+} from 'components/Profile/ProfileInfo/ProfileDataForm'
 import { Component } from 'react'
 
 export class ProfileInfo extends Component<ProfileInfoPropsType, ProfileStateType> {
@@ -19,9 +21,11 @@ export class ProfileInfo extends Component<ProfileInfoPropsType, ProfileStateTyp
         })
     }
 
-    onSaveProfileChanges = () => {
-        this.setState({
-            editMode: false,
+    onSubmit = (formData: ProfileDataFormType) => {
+        this.props.updateProfile(formData).then(() => {
+            this.setState({
+                editMode: false,
+            })
         })
     }
 
@@ -38,7 +42,7 @@ export class ProfileInfo extends Component<ProfileInfoPropsType, ProfileStateTyp
                 <div className={styles.content}>
                     <Avatar photos={profile.photos} isOwner={isOwner} callback={sendPhoto} />
                     {this.state.editMode ? (
-                        <ProfileDataForm profile={profile} callback={this.onSaveProfileChanges} />
+                        <ProfileDataForm onSubmit={this.onSubmit} initialValues={profile} />
                     ) : (
                         <ProfileData
                             profile={profile}
@@ -64,6 +68,7 @@ type ProfileInfoPropsType = {
     status: string
     updateUserStatus: (status: string) => void
     sendPhoto: (file: File) => void
+    updateProfile: (profile: ProfileDataFormType) => Promise<any>
 }
 type ProfileStateType = {
     editMode: boolean

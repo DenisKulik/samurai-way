@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
 
 const instance = axios.create({
     baseURL: 'https://social-network.samuraijs.com/api/1.0/',
@@ -25,6 +26,9 @@ export const profileAPI = {
     },
     getUserStatus(userId: string) {
         return instance.get<any>(`profile/status/${userId}`).then(response => response.data)
+    },
+    updateUserProfile(profile: ProfileDataFormType) {
+        return instance.put<ResponseType>(`profile`, profile).then(response => response.data)
     },
     updateUserStatus(status: string) {
         return instance
@@ -98,6 +102,7 @@ export type ProfileType = {
     lookingForAJobDescription: string
     fullName: string
     contacts: ContactsType
+    aboutMe: string
     photos: {
         large: string
         small: string

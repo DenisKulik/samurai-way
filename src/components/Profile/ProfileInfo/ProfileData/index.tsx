@@ -25,6 +25,7 @@ export const ProfileData = ({ profile, isOwner, callback }: ProfileDataPropsType
                     <p>{`My skills: ${profile.lookingForAJobDescription}`}</p>
                 )}
             </div>
+            <div>{profile.aboutMe && `About me: ${profile.aboutMe}`}</div>
             {contacts.length > 0 && <div className={styles.contacts}>Contacts: {contacts}</div>}
         </div>
     )
