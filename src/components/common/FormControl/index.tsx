@@ -1,21 +1,22 @@
-import { cloneElement, memo, ReactElement, ReactNode } from 'react'
-import { WrappedFieldProps } from 'redux-form'
+import { cloneElement, FC, ReactElement, ReactNode } from 'react'
+import { Field, WrappedFieldProps } from 'redux-form'
 import styles from './FormControl.module.scss'
+import { FieldValidatorType } from 'utils/validators'
 
-type FormControlPropsType = WrappedFieldProps & {
-    children: ReactNode
-}
-
-const FormControl = memo(({ input, meta, children, ...props }: FormControlPropsType) => {
-    const hasError = meta.touched && meta.error
-
+const FormControl = ({
+    input,
+    meta: { touched, error },
+    children,
+    ...props
+}: FormControlPropsType) => {
+    const hasError = touched && error
     return (
         <div className={`${styles.formControl} ${hasError ? styles.error : ''}`}>
             {cloneElement(children as ReactElement<ReactNode>, { ...input, ...props })}
-            {hasError && <span>{meta.error}</span>}
+            {hasError && <span>{error}</span>}
         </div>
     )
-})
+}
 
 export const CustomTextarea = (props: FormControlPropsType) => (
     <FormControl {...props}>
@@ -28,3 +29,18 @@ export const CustomInput = (props: FormControlPropsType) => (
         <input />
     </FormControl>
 )
+
+export function createField<FormKeyType extends string>(
+    type: string,
+    name: FormKeyType,
+    validators: FieldValidatorType[],
+    component: FC<FormControlPropsType>,
+    props = {},
+) {
+    return <Field type={type} name={name} validate={validators} component={component} {...props} />
+}
+
+// types
+type FormControlPropsType = WrappedFieldProps & {
+    children: ReactNode
+}
