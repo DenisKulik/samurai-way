@@ -64,6 +64,14 @@ export const authAPI = {
     },
 }
 
+export const securityAPI = {
+    getCaptchaUrl() {
+        return instance
+            .get<getCaptchaUrlType>(`security/get-captcha-url`)
+            .then(response => response.data)
+    },
+}
+
 // types
 export type PhotosType = {
     large: string
@@ -117,4 +125,8 @@ export type LoginType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha?: string
+}
+export type getCaptchaUrlType = {
+    url: string
 }

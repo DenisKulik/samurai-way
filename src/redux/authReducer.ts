@@ -1,12 +1,13 @@
 import { stopSubmit } from 'redux-form'
 import { AppThunkDispatch, AppThunkType } from 'redux/store'
-import { authAPI, LoginType } from 'api/socialNetworkAPI'
+import { authAPI, LoginType, securityAPI } from 'api/socialNetworkAPI'
 
 const initialState: InitialAuthUserDataStateType = {
     id: null,
     email: null,
     login: null,
     isAuth: false,
+    captchaUrl: null, // if null then captcha is not required
 }
 
 export const authReducer = (
@@ -20,6 +21,11 @@ export const authReducer = (
                 ...action.payload.data,
                 isAuth: action.payload.isAuth,
             }
+        case 'AUTH/SET-CAPTCHA-URL':
+            return {
+                ...state,
+                captchaUrl: action.payload.captchaUrl,
+            }
         default:
             return state
     }
@@ -28,6 +34,8 @@ export const authReducer = (
 // actions
 export const setUserData = (data: ResponseAuthUserDataType, isAuth: boolean) =>
     ({ type: 'AUTH/SET-USER-DATA', payload: { data, isAuth } }) as const
+export const setCaptchaUrl = (captchaUrl: string) =>
+    ({ type: 'AUTH/SET-CAPTCHA-URL', payload: { captchaUrl } }) as const
 
 // thunks
 export const getAuthUser = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
@@ -46,6 +54,8 @@ export const login =
             const res = await authAPI.login(data)
             if (res.resultCode === 0) {
                 dispatch(getAuthUser())
+            } else if (res.resultCode === 10) {
+                dispatch(getCaptchaUrl())
             } else {
                 dispatch(
                     stopSubmit('login', {
@@ -57,6 +67,15 @@ export const login =
             console.error(e)
         }
     }
+
+export const getCaptchaUrl = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
+    try {
+        const res = await securityAPI.getCaptchaUrl()
+        dispatch(setCaptchaUrl(res.url))
+    } catch (e) {
+        console.error(e)
+    }
+}
 
 export const logout = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
     try {
@@ -77,5 +96,6 @@ export type ResponseAuthUserDataType = {
 }
 export type InitialAuthUserDataStateType = ResponseAuthUserDataType & {
     isAuth: boolean
+    captchaUrl: string | null
 }
-export type AuthActionsType = ReturnType<typeof setUserData>
+export type AuthActionsType = ReturnType<typeof setUserData> | ReturnType<typeof setCaptchaUrl>

@@ -1,33 +1,57 @@
 import { InjectedFormProps, reduxForm } from 'redux-form'
-import { createField, CustomInput } from 'components/common/FormControl'
+import { createField, CustomInput, GetStringKeys } from 'components/common/FormControl'
 import { requiredField } from 'utils/validators'
 import styles from './LoginForm.module.scss'
 
-const LoginForm = ({ handleSubmit, error }: InjectedFormProps<FormDataType>) => {
+const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => {
     return (
         <form className={styles.loginForm} onSubmit={handleSubmit}>
             {error && <div className={styles.error}>{error}</div>}
-            {createField('email', 'email', [requiredField], CustomInput, {
+            {createField<LoginFormValuesTypeKeys>('email', 'email', [requiredField], CustomInput, {
                 placeholder: 'Enter your email',
             })}
-            {createField('password', 'password', [requiredField], CustomInput, {
-                placeholder: 'Enter your password',
-            })}
+            {createField<LoginFormValuesTypeKeys>(
+                'password',
+                'password',
+                [requiredField],
+                CustomInput,
+                {
+                    placeholder: 'Enter your password',
+                },
+            )}
             <div className={styles.checkbox}>
-                {createField('checkbox', 'rememberMe', [], CustomInput)}
+                {createField<LoginFormValuesTypeKeys>('checkbox', 'rememberMe', [], CustomInput)}
                 <label>Remember me</label>
             </div>
+            {captchaUrl && <img src={captchaUrl} alt="captcha" />}
+            {captchaUrl &&
+                createField<LoginFormValuesTypeKeys>(
+                    'text',
+                    'captcha',
+                    [requiredField],
+                    CustomInput,
+                    {
+                        placeholder: 'Enter captcha',
+                    },
+                )}
             <button>Login</button>
         </form>
     )
 }
 
-export default reduxForm<FormDataType>({
+export default reduxForm<FormDataType, LoginFormPropsType>({
     form: 'login',
 })(LoginForm)
 
+// types
+type LoginFormPropsType = {
+    captchaUrl: string | null
+}
 export type FormDataType = {
     email: string
     password: string
     rememberMe: boolean
+    captcha: string
 }
+type LoginFormValuesTypeKeys = GetStringKeys<FormDataType>
+type LoginFormDomainType = LoginFormPropsType & InjectedFormProps<FormDataType, LoginFormPropsType>
