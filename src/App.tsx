@@ -6,10 +6,10 @@ import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-do
 import './App.scss'
 import HeaderContainer from 'components/Header/HeaderContainer'
 import Sidebar from 'components/Sidebar'
-import { initializeApp } from 'redux/appReducer'
-import { AppStateType, store } from 'redux/store'
+import { initializeApp } from 'state/reducers/appReducer'
+import { AppStateType, store } from 'state/store'
 import { Preloader } from 'components/common/Preloader'
-import { getInitialized } from 'redux/appSelectors'
+import { getInitialized } from 'state/selectors/appSelectors'
 import { withSuspense } from 'hoc/withSuspense'
 
 const Login = lazy(() => import('components/Login'))

@@ -1,9 +1,9 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
 import Header from './index'
-import { AppStateType } from 'redux/store'
-import { logout } from 'redux/authReducer'
-import { getIsAuth, getUserLogin } from 'redux/authSelectors'
+import { AppStateType } from 'state/store'
+import { logout } from 'state/reducers/authReducer'
+import { getIsAuth, getUserLogin } from 'state/selectors/authSelectors'
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     login: getUserLogin(state),

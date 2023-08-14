@@ -1,4 +1,4 @@
-import { appReducer, InitialAppStateType, setInitializedSuccess } from 'redux/appReducer'
+import { appReducer, InitialAppStateType, setInitializedSuccess } from 'state/reducers/appReducer'
 
 describe('app-reducer', () => {
     let initialState: InitialAppStateType

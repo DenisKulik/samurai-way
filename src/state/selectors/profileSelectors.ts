@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 import { ProfileType } from 'api/socialNetworkAPI'
-import { AppStateType } from 'redux/store'
-import { PostType } from 'redux/profileReducer'
+import { AppStateType } from 'state/store'
+import { PostType } from 'state/reducers/profileReducer'
 
 // selectors
 const getProfileSelector = (state: AppStateType) => state.profilePage.profile

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { AppStateType } from 'redux/store'
+import { AppStateType } from 'state/store'
 
 // selectors
 const getUserIdSelector = (state: AppStateType) => state.auth.id

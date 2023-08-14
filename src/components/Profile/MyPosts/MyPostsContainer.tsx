@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
-import { addPost, PostType } from 'redux/profileReducer'
-import { AppStateType } from 'redux/store'
+import { addPost, PostType } from 'state/reducers/profileReducer'
+import { AppStateType } from 'state/store'
 import MyPosts from './index'
-import { getPostsData } from 'redux/profileSelectors'
+import { getPostsData } from 'state/selectors/profileSelectors'
 
 export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType
 

@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect'
 import { UserType } from 'api/socialNetworkAPI'
-import { AppStateType } from 'redux/store'
+import { AppStateType } from 'state/store'
 
 // selectors
 const getUsersSelector = (state: AppStateType) => state.usersPage.users

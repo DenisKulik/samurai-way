@@ -1,8 +1,8 @@
 import { PureComponent } from 'react'
 import { connect } from 'react-redux'
-import { AppStateType } from 'redux/store'
+import { AppStateType } from 'state/store'
 import styles from './Users.module.scss'
-import { followUser, requestUsers, setCurrentPage, unfollowUser } from 'redux/usersReducer'
+import { followUser, requestUsers, setCurrentPage, unfollowUser } from 'state/reducers/usersReducer'
 import { Users } from './index'
 import { Preloader } from '../common/Preloader'
 import {
@@ -12,7 +12,7 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsers,
-} from 'redux/usersSelectors'
+} from 'state/selectors/usersSelectors'
 import { UserType } from 'api/socialNetworkAPI'
 
 class UsersContainer extends PureComponent<UsersContainerPropsType> {

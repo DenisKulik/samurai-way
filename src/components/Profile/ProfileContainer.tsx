@@ -4,16 +4,16 @@ import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
 import { ProfileType } from 'api/socialNetworkAPI'
-import { AppStateType } from 'redux/store'
+import { AppStateType } from 'state/store'
 import {
     getUserProfile,
     getUserStatus,
     sendPhoto,
     updateProfile,
     updateUserStatus,
-} from 'redux/profileReducer'
-import { getProfile, getStatus } from 'redux/profileSelectors'
-import { getAuthUserId, getIsAuth } from 'redux/authSelectors'
+} from 'state/reducers/profileReducer'
+import { getProfile, getStatus } from 'state/selectors/profileSelectors'
+import { getAuthUserId, getIsAuth } from 'state/selectors/authSelectors'
 import { Profile } from './index'
 import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
 

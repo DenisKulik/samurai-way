@@ -1,4 +1,4 @@
-import { AppStateType } from 'redux/store'
+import { AppStateType } from 'state/store'
 import { createSelector } from 'reselect'
 
 // selectors

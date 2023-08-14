@@ -1,4 +1,4 @@
-import { AppThunkDispatch, AppThunkType } from 'redux/store'
+import { AppThunkDispatch, AppThunkType } from 'state/store'
 import { PhotosType, profileAPI, ProfileType } from 'api/socialNetworkAPI'
 import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
 import { stopSubmit } from 'redux-form'

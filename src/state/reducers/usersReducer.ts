@@ -1,4 +1,4 @@
-import { AppThunkDispatch, AppThunkType } from 'redux/store'
+import { AppThunkDispatch, AppThunkType } from 'state/store'
 import { ResponseType, usersAPI, UserType } from 'api/socialNetworkAPI'
 
 const initialState: InitialUsersStateType = {

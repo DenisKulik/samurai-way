@@ -1,5 +1,5 @@
-import { AppThunkDispatch, AppThunkType } from 'redux/store'
-import { getAuthUser } from './authReducer'
+import { AppThunkDispatch, AppThunkType } from 'state/store'
+import { getAuthUser } from 'state/reducers/authReducer'
 
 const initialState = {
     initialized: false,

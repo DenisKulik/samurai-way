@@ -2,10 +2,10 @@ import { memo } from 'react'
 import { connect } from 'react-redux'
 import styles from './Login.module.scss'
 import LoginForm, { FormDataType } from './LoginForm'
-import { login } from 'redux/authReducer'
+import { login } from 'state/reducers/authReducer'
 import { LoginType } from 'api/socialNetworkAPI'
 import { Redirect } from 'react-router-dom'
-import { AppStateType } from 'redux/store'
+import { AppStateType } from 'state/store'
 
 const Login = memo(({ isAuth, captchaUrl, login }: LoginPropsType) => {
     const onSubmit = (formData: FormDataType) => {

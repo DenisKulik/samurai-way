@@ -4,7 +4,7 @@ import {
     setUserProfile,
     setUserStatus,
     InitialProfileStateType,
-} from 'redux/profileReducer'
+} from 'state/reducers/profileReducer'
 import { ContactsType, ProfileType } from 'api/socialNetworkAPI'
 
 describe('profile-reducer', () => {

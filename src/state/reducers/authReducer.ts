@@ -1,5 +1,5 @@
 import { stopSubmit } from 'redux-form'
-import { AppThunkDispatch, AppThunkType } from 'redux/store'
+import { AppThunkDispatch, AppThunkType } from 'state/store'
 import { authAPI, LoginType, securityAPI } from 'api/socialNetworkAPI'
 
 const initialState: InitialAuthUserDataStateType = {
