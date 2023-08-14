@@ -1,8 +1,10 @@
-import { PureComponent, ComponentType } from 'react'
+import { Component, ComponentType } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
-import { Profile } from './index'
+
+import { ProfileType } from 'api/socialNetworkAPI'
+import { AppStateType } from 'redux/store'
 import {
     getUserProfile,
     getUserStatus,
@@ -10,13 +12,12 @@ import {
     updateProfile,
     updateUserStatus,
 } from 'redux/profileReducer'
-import { AppStateType } from 'redux/store'
-import { ProfileType } from 'api/socialNetworkAPI'
 import { getProfile, getStatus } from 'redux/profileSelectors'
 import { getAuthUserId, getIsAuth } from 'redux/authSelectors'
+import { Profile } from './index'
 import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
 
-class ProfileContainer extends PureComponent<ProfilePropsType> {
+class ProfileContainer extends Component<ProfilePropsType> {
     refreshProfile() {
         let { userId } = this.props.match.params
 
@@ -43,7 +44,9 @@ class ProfileContainer extends PureComponent<ProfilePropsType> {
         }
     }
 
-    render = () => <Profile {...this.props} />
+    render() {
+        return <Profile {...this.props} />
+    }
 }
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
