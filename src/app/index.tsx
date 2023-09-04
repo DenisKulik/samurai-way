@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect, Provider } from 'react-redux'
 import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
 
-import './App.scss'
+import styles from 'app/app.module.scss'
 import HeaderContainer from 'components/Header/HeaderContainer'
 import Sidebar from 'components/Sidebar'
 import { initializeApp } from 'state/reducers/appReducer'
@@ -26,10 +26,10 @@ class App extends Component<AppPropsType> {
         if (!this.props.initialized) return <Preloader />
 
         return (
-            <div className="App">
+            <div className={styles.app}>
                 <HeaderContainer />
                 <Sidebar />
-                <div className="content">
+                <div className={styles.content}>
                     <Switch>
                         <Redirect exact from="/" to="/profile" />
                         <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} />
