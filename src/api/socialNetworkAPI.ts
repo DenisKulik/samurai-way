@@ -117,9 +117,9 @@ export type ProfileType = {
     }
 }
 export type AuthResponseType = {
-    id: number
-    email: string
-    login: string
+    id: number | null
+    email: string | null
+    login: string | null
 }
 export type LoginType = {
     email: string

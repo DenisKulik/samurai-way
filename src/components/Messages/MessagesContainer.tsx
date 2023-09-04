@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { compose, Dispatch } from 'redux'
 import { AppStateType } from 'state/store'
 import { addMessage, DialogType, MessageType } from 'state/reducers/messagesReducer'
-import Dialogs from './index'
+import Messages from './index'
 import { withAuthRedirect } from 'hoc/withAuthRedirect'
 import { getDialogsData, getMessagesData } from 'state/selectors/messagesSelectors'
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
 export default compose<ComponentType>(
     connect(mapStateToProps, mapDispatchToProps),
     withAuthRedirect,
-)(Dialogs)
+)(Messages)
 
 // types
 export type DialogsPropsType = MapStateToPropsType & MapDispatchToPropsType

@@ -4,10 +4,10 @@ import { AppStateType } from 'state/store'
 import { PostType } from 'state/reducers/profileReducer'
 
 // selectors
-const getProfileSelector = (state: AppStateType) => state.profilePage.profile
-const getStatusSelector = (state: AppStateType) => state.profilePage.status
-const getUserIdSelector = (state: AppStateType) => state.profilePage.profile.userId
-const getPostsDataSelector = (state: AppStateType) => state.profilePage.postsData
+const getProfileSelector = (state: AppStateType) => state.profile.profileData
+const getStatusSelector = (state: AppStateType) => state.profile.status
+const getUserIdSelector = (state: AppStateType) => state.profile.profileData.userId
+const getPostsDataSelector = (state: AppStateType) => state.profile.postsData
 
 // selectors with reselect
 export const getProfile = createSelector(getProfileSelector, (profile: ProfileType) => profile)

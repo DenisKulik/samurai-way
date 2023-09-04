@@ -11,4 +11,4 @@ const getIsAuthSelector = (state: AppStateType) => state.auth.isAuth
 export const getAuthUserId = createSelector(getUserIdSelector, (id: number | null) => id)
 export const getUserEmail = createSelector(getUserEmailSelector, (email: string | null) => email)
 export const getUserLogin = createSelector(getUserLoginSelector, (login: string | null) => login)
-export const getIsAuth = createSelector(getIsAuthSelector, (isAuth: boolean) => isAuth)
+export const getIsAuth = createSelector(getIsAuthSelector, (isAuth: boolean | null) => isAuth)

@@ -14,7 +14,7 @@ import { withSuspense } from 'hoc/withSuspense'
 
 const Login = lazy(() => import('components/Login'))
 const ProfileContainer = lazy(() => import('components/Profile/ProfileContainer'))
-const DialogsContainer = lazy(() => import('components/Dialogs/DialogContainer'))
+const DialogsContainer = lazy(() => import('components/Messages/MessagesContainer'))
 const UsersContainer = lazy(() => import('components/Users/UsersContainer'))
 
 class App extends Component<AppPropsType> {

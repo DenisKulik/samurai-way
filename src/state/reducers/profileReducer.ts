@@ -1,10 +1,11 @@
+import { stopSubmit } from 'redux-form'
+
 import { AppThunkDispatch, AppThunkType } from 'state/store'
 import { PhotosType, profileAPI, ProfileType } from 'api/socialNetworkAPI'
 import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
-import { stopSubmit } from 'redux-form'
 
-const initialState: InitialProfileStateType = {
-    profile: {} as ProfileType,
+const initialState = {
+    profileData: {} as ProfileType,
     postsData: [
         {
             id: 1,
@@ -31,7 +32,7 @@ export const profileReducer = (
                 postsData: [
                     {
                         id: new Date().getTime(),
-                        message: action.post,
+                        message: action.payload.post,
                         likesCount: 0,
                     },
                     ...state.postsData,
@@ -40,22 +41,22 @@ export const profileReducer = (
         case 'PROFILE/SET-USER-PROFILE':
             return {
                 ...state,
-                profile: action.profile,
+                profileData: action.payload.profile,
             }
         case 'PROFILE/SET-UPDATED-USER-PROFILE':
             return {
                 ...state,
-                profile: { ...state.profile, ...action.profile },
+                profileData: { ...state.profileData, ...action.payload.profile },
             }
         case 'PROFILE/SET-USER-STATUS':
             return {
                 ...state,
-                status: action.status,
+                status: action.payload.status,
             }
         case 'PROFILE/SET-USER-PHOTOS':
             return {
                 ...state,
-                profile: { ...state.profile, photos: action.photos },
+                profileData: { ...state.profileData, photos: action.payload.photos },
             }
         default:
             return state
@@ -63,15 +64,15 @@ export const profileReducer = (
 }
 
 // actions
-export const addPost = (post: string) => ({ type: 'PROFILE/ADD-POST', post }) as const
+export const addPost = (post: string) => ({ type: 'PROFILE/ADD-POST', payload: { post } }) as const
 export const setUserProfile = (profile: ProfileType) =>
-    ({ type: 'PROFILE/SET-USER-PROFILE', profile }) as const
+    ({ type: 'PROFILE/SET-USER-PROFILE', payload: { profile } }) as const
 export const setUserStatus = (status: string) =>
-    ({ type: 'PROFILE/SET-USER-STATUS', status }) as const
+    ({ type: 'PROFILE/SET-USER-STATUS', payload: { status } }) as const
 export const setUserPhotos = (photos: PhotosType) =>
-    ({ type: 'PROFILE/SET-USER-PHOTOS', photos }) as const
+    ({ type: 'PROFILE/SET-USER-PHOTOS', payload: { photos } }) as const
 export const setUpdatedUserProfile = (profile: ProfileDataFormType) =>
-    ({ type: 'PROFILE/SET-UPDATED-USER-PROFILE', profile }) as const
+    ({ type: 'PROFILE/SET-UPDATED-USER-PROFILE', payload: { profile } }) as const
 
 // thunks
 export const getUserProfile =
@@ -145,11 +146,7 @@ export type PostType = {
     message: string
     likesCount: number
 }
-export type InitialProfileStateType = {
-    profile: ProfileType
-    postsData: PostType[]
-    status: string
-}
+export type InitialProfileStateType = typeof initialState
 export type ProfileActionsType =
     | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>

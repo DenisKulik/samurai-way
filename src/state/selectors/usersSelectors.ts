@@ -3,13 +3,12 @@ import { UserType } from 'api/socialNetworkAPI'
 import { AppStateType } from 'state/store'
 
 // selectors
-const getUsersSelector = (state: AppStateType) => state.usersPage.users
-const getPageSizeSelector = (state: AppStateType) => state.usersPage.pageSize
-const getTotalUsersCountSelector = (state: AppStateType) => state.usersPage.totalUsersCount
-const getCurrentPageSelector = (state: AppStateType) => state.usersPage.currentPage
-const getIsFollowingInProgressSelector = (state: AppStateType) =>
-    state.usersPage.isFollowingInProgress
-export const getIsFetchingSelector = (state: AppStateType) => state.usersPage.isFetching
+const getUsersSelector = (state: AppStateType) => state.users.users
+const getPageSizeSelector = (state: AppStateType) => state.users.pageSize
+const getTotalUsersCountSelector = (state: AppStateType) => state.users.totalUsersCount
+const getCurrentPageSelector = (state: AppStateType) => state.users.currentPage
+const getIsFollowingInProgressSelector = (state: AppStateType) => state.users.isFollowingInProgress
+export const getIsFetchingSelector = (state: AppStateType) => state.users.isFetching
 
 // selectors with reselect
 export const getUsers = createSelector(getUsersSelector, (users: UserType[]) => users)

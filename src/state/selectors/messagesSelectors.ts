@@ -3,7 +3,7 @@ import { AppStateType } from 'state/store'
 import { createSelector } from 'reselect'
 import { DialogType, MessageType } from 'state/reducers/messagesReducer'
 
-const getDialogsDataSelector = (state: AppStateType) => state.messages.dialogsData
+const getDialogsDataSelector = (state: AppStateType) => state.messages.dialogsList
 const getMessagesDataSelector = (state: AppStateType) => state.messages.messagesData
 
 // selectors with reselect

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux'
 import { Dispatch } from 'redux'
+
 import { addPost, PostType } from 'state/reducers/profileReducer'
 import { AppStateType } from 'state/store'
 import MyPosts from './index'

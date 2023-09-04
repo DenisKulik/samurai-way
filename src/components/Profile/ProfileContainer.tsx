@@ -72,7 +72,7 @@ type MapStateToPropsType = {
     profile: ProfileType
     status: string
     authorizedUserId: number | null
-    isAuth: boolean
+    isAuth: boolean | null
 }
 type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void

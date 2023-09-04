@@ -1,8 +1,9 @@
 import { memo } from 'react'
+
 import styles from './MyPosts.module.scss'
 import { MyPostsPropsType } from './MyPostsContainer'
-import Post from './Post'
 import AddPostForm, { AddPostFormDataType } from './AddPostForm'
+import Post from './Post'
 
 const MyPosts = memo((props: MyPostsPropsType) => {
     const { postsData, addPost } = props

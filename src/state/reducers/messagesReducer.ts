@@ -1,5 +1,5 @@
-const initialState: InitialMessagesStateType = {
-    dialogsData: [
+const initialState = {
+    dialogsList: [
         { id: 1, name: 'William' },
         { id: 2, name: 'Emma' },
         { id: 3, name: 'James' },
@@ -46,8 +46,5 @@ export type MessageType = {
     id: number
     message: string
 }
-export type InitialMessagesStateType = {
-    dialogsData: DialogType[]
-    messagesData: MessageType[]
-}
+export type InitialMessagesStateType = typeof initialState
 export type MessagesActionsType = ReturnType<typeof addMessage>

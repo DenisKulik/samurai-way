@@ -30,7 +30,7 @@ const mstp = (state: AppStateType) => ({
 export default connect(mstp, { login })(Login)
 
 type LoginPropsType = {
-    isAuth: boolean
+    isAuth: boolean | null
     captchaUrl: string | null
     login: (data: LoginType) => void
 }

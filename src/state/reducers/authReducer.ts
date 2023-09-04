@@ -1,13 +1,13 @@
 import { stopSubmit } from 'redux-form'
 import { AppThunkDispatch, AppThunkType } from 'state/store'
-import { authAPI, LoginType, securityAPI } from 'api/socialNetworkAPI'
+import { authAPI, AuthResponseType, LoginType, securityAPI } from 'api/socialNetworkAPI'
 
-const initialState: InitialAuthUserDataStateType = {
-    id: null,
-    email: null,
-    login: null,
-    isAuth: false,
-    captchaUrl: null, // if null then captcha is not required
+const initialState = {
+    id: null as number | null,
+    email: null as string | null,
+    login: null as string | null,
+    isAuth: false as boolean | null,
+    captchaUrl: null as string | null, // if null then captcha is not required
 }
 
 export const authReducer = (
@@ -32,7 +32,7 @@ export const authReducer = (
 }
 
 // actions
-export const setUserData = (data: ResponseAuthUserDataType, isAuth: boolean) =>
+export const setUserData = (data: AuthResponseType, isAuth: boolean) =>
     ({ type: 'AUTH/SET-USER-DATA', payload: { data, isAuth } }) as const
 export const setCaptchaUrl = (captchaUrl: string) =>
     ({ type: 'AUTH/SET-CAPTCHA-URL', payload: { captchaUrl } }) as const
@@ -89,13 +89,5 @@ export const logout = (): AppThunkType => async (dispatch: AppThunkDispatch) => 
 }
 
 // types
-export type ResponseAuthUserDataType = {
-    id: number | null
-    email: string | null
-    login: string | null
-}
-export type InitialAuthUserDataStateType = ResponseAuthUserDataType & {
-    isAuth: boolean
-    captchaUrl: string | null
-}
+export type InitialAuthUserDataStateType = typeof initialState
 export type AuthActionsType = ReturnType<typeof setUserData> | ReturnType<typeof setCaptchaUrl>

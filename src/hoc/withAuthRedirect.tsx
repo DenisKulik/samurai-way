@@ -22,5 +22,5 @@ export function withAuthRedirect<T>(Component: ComponentType<T>) {
 
 // types
 type MapStateToPropsType = {
-    isAuth: boolean
+    isAuth: boolean | null
 }

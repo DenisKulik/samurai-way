@@ -1,13 +1,13 @@
 import { AppThunkDispatch, AppThunkType } from 'state/store'
 import { ResponseType, usersAPI, UserType } from 'api/socialNetworkAPI'
 
-const initialState: InitialUsersStateType = {
-    users: [],
+const initialState = {
+    users: [] as UserType[],
     pageSize: 5,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
-    isFollowingInProgress: [],
+    isFollowingInProgress: [] as number[], // array of user id
 }
 
 export const usersReducer = (
@@ -101,14 +101,7 @@ export const unfollowUser =
     }
 
 // types
-export type InitialUsersStateType = {
-    users: UserType[]
-    pageSize: number
-    totalUsersCount: number
-    currentPage: number
-    isFetching: boolean
-    isFollowingInProgress: number[]
-}
+export type InitialUsersStateType = typeof initialState
 export type UsersActionsType =
     | ReturnType<typeof setUsers>
     | ReturnType<typeof toggleFollowUser>

@@ -21,7 +21,7 @@ export type HeaderContainerPropsType = MapStateToPropsType & MapDispatchToPropsT
 
 type MapStateToPropsType = {
     login: string | null
-    isAuth: boolean
+    isAuth: boolean | null
 }
 
 type MapDispatchToPropsType = {

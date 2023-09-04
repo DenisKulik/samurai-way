@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+
 import styles from './MessageForm.module.scss'
 import Button from 'components/common/Button'
 import { CustomTextarea } from 'components/common/FormControl'

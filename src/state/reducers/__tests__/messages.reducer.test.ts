@@ -9,7 +9,7 @@ describe('messages-reducer', () => {
 
     beforeEach(() => {
         initialState = {
-            dialogsData: [
+            dialogsList: [
                 { id: 1, name: 'William' },
                 { id: 2, name: 'Emma' },
                 { id: 3, name: 'James' },

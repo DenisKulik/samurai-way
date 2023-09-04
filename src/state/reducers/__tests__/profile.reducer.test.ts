@@ -12,7 +12,7 @@ describe('profile-reducer', () => {
 
     beforeEach(() => {
         initialState = {
-            profile: {} as ProfileType,
+            profileData: {} as ProfileType,
             postsData: [
                 {
                     id: 1,
@@ -46,6 +46,7 @@ describe('profile-reducer', () => {
             lookingForAJobDescription: 'react-developer',
             fullName: 'John Doe',
             contacts: {} as ContactsType,
+            aboutMe: '',
             photos: {
                 large: 'large',
                 small: 'small',
@@ -54,7 +55,7 @@ describe('profile-reducer', () => {
         const action = setUserProfile(profile)
         const newState = profileReducer(initialState, action)
 
-        expect(newState.profile).toEqual(profile)
+        expect(newState.profileData).toEqual(profile)
     })
 
     it('should set the user status in the state correctly', () => {
