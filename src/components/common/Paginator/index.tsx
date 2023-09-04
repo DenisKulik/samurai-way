@@ -16,7 +16,7 @@ type State = {
 }
 
 export class Paginator extends Component<Props, State> {
-    state: State = {
+    state = {
         portionNumber: Math.ceil(this.props.currentPageNumber / (this.props?.portionSize || 10)),
     }
 
