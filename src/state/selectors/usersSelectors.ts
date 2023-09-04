@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect'
+
 import { UserType } from 'api/socialNetworkAPI'
 import { AppStateType } from 'state/store'
 

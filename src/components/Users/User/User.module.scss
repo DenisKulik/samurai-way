@@ -19,12 +19,6 @@
 
   .info {
     flex: 1 1;
-    display: flex;
-    justify-content: space-between;
-
-    .details {
-      display: flex;
-      flex-direction: column;
 
       .username {
         flex: 1 0;
@@ -34,11 +28,5 @@
       .status {
         font-size: 1.4rem;
       }
-    }
-
-    .location {
-      font-size: 1.5rem;
-      color: var(--color-primary);
-    }
   }
 }

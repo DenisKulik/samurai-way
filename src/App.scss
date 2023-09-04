@@ -1,7 +1,6 @@
 .App {
     max-width: 120rem;
     display: grid;
-    grid-auto-rows: 6rem 1fr;
     grid-auto-columns: minmax(10rem, 16rem) 1fr;
     gap: 2rem;
     grid-template-areas:

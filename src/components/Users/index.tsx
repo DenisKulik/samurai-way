@@ -1,10 +1,13 @@
-import { memo } from 'react'
 import styles from './Users.module.scss'
 import { UsersContainerPropsType } from './UsersContainer'
 import { Paginator } from 'components/common/Paginator'
 import { User } from 'components/Users/User'
 
-export const Users = memo((props: UsersPropsType) => {
+type Props = UsersContainerPropsType & {
+    changePageNumber: (page: number) => void
+}
+
+export const Users = (props: Props) => {
     const {
         users,
         pageSize,
@@ -31,15 +34,10 @@ export const Users = memo((props: UsersPropsType) => {
                 <Paginator
                     pageSize={pageSize}
                     totalItemsCount={totalUsersCount}
-                    currentPage={currentPage}
+                    currentPageNumber={currentPage}
                     changePageNumber={changePageNumber}
                 />
             </div>
         </>
     )
-})
-
-// types
-type UsersPropsType = UsersContainerPropsType & {
-    changePageNumber: (page: number) => void
 }

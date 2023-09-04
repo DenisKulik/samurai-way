@@ -1,5 +1,6 @@
-import { PureComponent } from 'react'
+import { Component } from 'react'
 import { connect } from 'react-redux'
+
 import { AppStateType } from 'state/store'
 import styles from './Users.module.scss'
 import { followUser, requestUsers, setCurrentPage, unfollowUser } from 'state/reducers/usersReducer'
@@ -15,7 +16,9 @@ import {
 } from 'state/selectors/usersSelectors'
 import { UserType } from 'api/socialNetworkAPI'
 
-class UsersContainer extends PureComponent<UsersContainerPropsType> {
+export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
+
+class UsersContainer extends Component<UsersContainerPropsType> {
     componentDidMount() {
         const { requestUsers, currentPage, pageSize } = this.props
         requestUsers(currentPage, pageSize)
@@ -59,7 +62,6 @@ export default connect(mapStateToProps, {
 })(UsersContainer)
 
 // types
-export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 type MapStateToPropsType = {
     users: UserType[]
     pageSize: number

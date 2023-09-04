@@ -1,10 +1,16 @@
-import { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 import styles from './User.module.scss'
 import userDefault from 'img/user-default.png'
 import { UserType } from 'api/socialNetworkAPI'
 
-export const User = memo((props: UserPropsType) => {
+type Props = {
+    user: UserType
+    isFollowingInProgress: number[]
+    unfollowUser: (userId: number) => void
+    followUser: (userId: number) => void
+}
+
+export const User = (props: Props) => {
     const { user, isFollowingInProgress, followUser, unfollowUser } = props
 
     return (
@@ -36,22 +42,9 @@ export const User = memo((props: UserPropsType) => {
                 )}
             </div>
             <div className={styles.info}>
-                <div className={styles.details}>
-                    <h3 className={styles.username}>{user.name}</h3>
-                    <p className={styles.status}>{user.status}</p>
-                </div>
-                <p className={styles.location}>
-                    {`${'user.location.city'}, ${'user.location.country'}`}
-                </p>
+                <h3 className={styles.username}>{user.name}</h3>
+                <p className={styles.status}>{user.status}</p>
             </div>
         </div>
     )
-})
-
-// types
-type UserPropsType = {
-    user: UserType
-    isFollowingInProgress: number[]
-    unfollowUser: (userId: number) => void
-    followUser: (userId: number) => void
 }
