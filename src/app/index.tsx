@@ -4,18 +4,18 @@ import { connect, Provider } from 'react-redux'
 import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-dom'
 
 import styles from 'app/app.module.scss'
-import HeaderContainer from 'components/Header/HeaderContainer'
-import Sidebar from 'components/Sidebar'
+import HeaderContainer from 'components/header/header-container'
+import { Sidebar } from 'components/sidebar'
 import { initializeApp } from 'state/reducers/app.reducer'
 import { AppStateType, store } from 'state/store'
-import { Preloader } from 'components/common/Preloader'
+import { Preloader } from 'components/common/preloader'
 import { getInitialized } from 'state/selectors/app.selectors'
-import { withSuspense } from 'hoc/withSuspense'
+import { withSuspense } from 'hoc'
 
-const Login = lazy(() => import('components/Login'))
-const ProfileContainer = lazy(() => import('components/Profile/ProfileContainer'))
-const DialogsContainer = lazy(() => import('components/Messages/MessagesContainer'))
-const UsersContainer = lazy(() => import('components/Users/UsersContainer'))
+const Login = lazy(() => import('components/login'))
+const ProfileContainer = lazy(() => import('components/profile/profile-container'))
+const DialogsContainer = lazy(() => import('components/messages/messages-container'))
+const UsersContainer = lazy(() => import('components/users/users-container'))
 
 class App extends Component<AppPropsType> {
     componentDidMount() {

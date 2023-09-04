@@ -1,4 +1,4 @@
-import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
+import { ProfileDataFormType } from 'components/profile/profile-info/profile-data-form'
 import { instance, ResponseType, PhotosType, ProfileType } from 'api'
 
 export const profileAPI = {

@@ -2,7 +2,7 @@ import { stopSubmit } from 'redux-form'
 
 import { AppThunkDispatch, AppThunkType } from 'state/store'
 import { PhotosType, profileAPI, ProfileType, ResultCode } from 'api'
-import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
+import { ProfileDataFormType } from 'components/profile/profile-info/profile-data-form'
 
 const initialState = {
     profileData: {} as ProfileType,
