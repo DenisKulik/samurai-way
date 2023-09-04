@@ -1,6 +1,6 @@
 import { stopSubmit } from 'redux-form'
 import { AppThunkDispatch, AppThunkType } from 'state/store'
-import { authAPI, AuthResponseType, LoginType, securityAPI } from 'api/socialNetworkAPI'
+import { authAPI, AuthResponseType, LoginType, ResultCode, securityAPI } from 'api'
 
 const initialState = {
     id: null as number | null,
@@ -41,7 +41,7 @@ export const setCaptchaUrl = (captchaUrl: string) =>
 export const getAuthUser = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
     try {
         const res = await authAPI.me()
-        res.resultCode === 0 && dispatch(setUserData(res.data, true))
+        res.resultCode === ResultCode.SUCCESS && dispatch(setUserData(res.data, true))
     } catch (e) {
         console.error(e)
     }
@@ -52,9 +52,9 @@ export const login =
     async (dispatch: AppThunkDispatch) => {
         try {
             const res = await authAPI.login(data)
-            if (res.resultCode === 0) {
+            if (res.resultCode === ResultCode.SUCCESS) {
                 dispatch(getAuthUser())
-            } else if (res.resultCode === 10) {
+            } else if (res.resultCode === ResultCode.ERROR_CAPTCHA) {
                 dispatch(getCaptchaUrl())
             } else {
                 dispatch(
@@ -80,7 +80,7 @@ export const getCaptchaUrl = (): AppThunkType => async (dispatch: AppThunkDispat
 export const logout = (): AppThunkType => async (dispatch: AppThunkDispatch) => {
     try {
         const res = await authAPI.logout()
-        res.resultCode === 0 &&
+        res.resultCode === ResultCode.SUCCESS &&
             dispatch(getAuthUser()) &&
             dispatch(setUserData({ id: null, email: null, login: null }, false))
     } catch (e) {

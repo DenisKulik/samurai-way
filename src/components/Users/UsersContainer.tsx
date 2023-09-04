@@ -14,7 +14,7 @@ import {
     getTotalUsersCount,
     getUsers,
 } from 'state/selectors/usersSelectors'
-import { UserType } from 'api/socialNetworkAPI'
+import { UserType } from 'api'
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 

@@ -1,7 +1,7 @@
 import { stopSubmit } from 'redux-form'
 
 import { AppThunkDispatch, AppThunkType } from 'state/store'
-import { PhotosType, profileAPI, ProfileType } from 'api/socialNetworkAPI'
+import { PhotosType, profileAPI, ProfileType, ResultCode } from 'api'
 import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
 
 const initialState = {
@@ -102,7 +102,7 @@ export const updateUserStatus =
     async (dispatch: AppThunkDispatch) => {
         try {
             const res = await profileAPI.updateUserStatus(status)
-            res.resultCode === 0 && dispatch(setUserStatus(status))
+            res.resultCode === ResultCode.SUCCESS && dispatch(setUserStatus(status))
         } catch (e) {
             console.error(e)
         }
@@ -114,7 +114,7 @@ export const updateProfile =
     async (dispatch: AppThunkDispatch) => {
         try {
             const res = await profileAPI.updateUserProfile(profile)
-            if (res.resultCode === 0) {
+            if (res.resultCode === ResultCode.SUCCESS) {
                 dispatch(setUpdatedUserProfile(profile))
             } else {
                 dispatch(
@@ -134,7 +134,7 @@ export const sendPhoto =
     async (dispatch: AppThunkDispatch) => {
         try {
             const res = await profileAPI.sendPhoto(file)
-            res.resultCode === 0 && dispatch(setUserPhotos(res.data.photos))
+            res.resultCode === ResultCode.SUCCESS && dispatch(setUserPhotos(res.data.photos))
         } catch (e) {
             console.error(e)
         }

@@ -2,7 +2,7 @@ import { Component } from 'react'
 
 import styles from './ProfileInfo.module.scss'
 import background from 'img/background.jpg'
-import { ProfileType } from 'api/socialNetworkAPI'
+import { ProfileType } from 'api'
 import { Preloader } from 'components/common/Preloader'
 import { ProfileStatus } from './ProfileStatus'
 import { ProfileData } from 'components/Profile/ProfileInfo/ProfileData'

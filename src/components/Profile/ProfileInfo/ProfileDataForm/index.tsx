@@ -1,7 +1,7 @@
 import { InjectedFormProps, reduxForm } from 'redux-form'
 
 import styles from 'components/Profile/ProfileInfo/ProfileInfo.module.scss'
-import { ContactsType, ProfileType } from 'api/socialNetworkAPI'
+import { ContactsType, ProfileType } from 'api'
 import { Contact } from 'components/Profile/Contact'
 import {
     createField,

@@ -1,6 +1,6 @@
 import { Contact } from 'components/Profile/Contact'
 import styles from 'components/Profile/ProfileInfo/ProfileInfo.module.scss'
-import { ProfileType } from 'api/socialNetworkAPI'
+import { ProfileType } from 'api'
 
 type Props = {
     profile: ProfileType

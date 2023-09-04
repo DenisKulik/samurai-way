@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
 
-import { UserType } from 'api/socialNetworkAPI'
 import { AppStateType } from 'state/store'
+import { UserType } from 'api'
 
 // selectors
 const getUsersSelector = (state: AppStateType) => state.users.users

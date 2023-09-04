@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom'
+
 import styles from './User.module.scss'
 import userDefault from 'img/user-default.png'
-import { UserType } from 'api/socialNetworkAPI'
+import { UserType } from 'api'
 
 type Props = {
     user: UserType

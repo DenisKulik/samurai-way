@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import styles from './Login.module.scss'
 import LoginForm, { FormDataType } from './LoginForm'
 import { login } from 'state/reducers/authReducer'
-import { LoginType } from 'api/socialNetworkAPI'
+import { LoginType } from 'api'
 import { Redirect } from 'react-router-dom'
 import { AppStateType } from 'state/store'
 

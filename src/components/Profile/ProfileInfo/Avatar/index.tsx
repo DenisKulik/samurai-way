@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react'
 
 import styles from 'components/Profile/ProfileInfo/ProfileInfo.module.scss'
 import userDefault from 'img/user-default.png'
-import { PhotosType } from 'api/socialNetworkAPI'
+import { PhotosType } from 'api'
 
 type Props = {
     photos: PhotosType

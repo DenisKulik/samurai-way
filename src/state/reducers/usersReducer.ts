@@ -1,5 +1,5 @@
 import { AppThunkDispatch, AppThunkType } from 'state/store'
-import { ResponseType, usersAPI, UserType } from 'api/socialNetworkAPI'
+import { usersAPI, UserType, ResponseType, ResultCode } from 'api'
 
 const initialState = {
     users: [] as UserType[],
@@ -80,7 +80,7 @@ const toggleFollowStatus = async (
     try {
         dispatch(toggleIsFollowingProgress(true, userId))
         const res = await toggleFollowMethod(userId)
-        res.resultCode === 0 && dispatch(toggleFollowUser(userId, isFollow))
+        res.resultCode === ResultCode.SUCCESS && dispatch(toggleFollowUser(userId, isFollow))
     } catch (e) {
         console.error(e)
     } finally {

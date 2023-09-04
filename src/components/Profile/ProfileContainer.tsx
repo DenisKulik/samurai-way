@@ -3,7 +3,7 @@ import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { RouteComponentProps, withRouter } from 'react-router-dom'
 
-import { ProfileType } from 'api/socialNetworkAPI'
+import { ProfileType } from 'api'
 import { AppStateType } from 'state/store'
 import {
     getUserProfile,
