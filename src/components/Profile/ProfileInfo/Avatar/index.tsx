@@ -1,9 +1,16 @@
+import { ChangeEvent } from 'react'
+
 import styles from 'components/Profile/ProfileInfo/ProfileInfo.module.scss'
 import userDefault from 'img/user-default.png'
-import { ChangeEvent } from 'react'
 import { PhotosType } from 'api/socialNetworkAPI'
 
-export const Avatar = (props: AvatarPropsType) => {
+type Props = {
+    photos: PhotosType
+    isOwner: boolean
+    callback: (file: File) => void
+}
+
+export const Avatar = (props: Props) => {
     const { photos, isOwner, callback } = props
 
     const onUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -29,10 +36,4 @@ export const Avatar = (props: AvatarPropsType) => {
             )}
         </div>
     )
-}
-
-type AvatarPropsType = {
-    photos: PhotosType
-    isOwner: boolean
-    callback: (file: File) => void
 }

@@ -1,22 +1,31 @@
-import { ChangeEvent, PureComponent } from 'react'
+import { ChangeEvent, Component } from 'react'
+
 import styles from './ProfileStatus.module.scss'
 
-export class ProfileStatus extends PureComponent<ProfileStatusPropsType> {
+type Props = {
+    editable: boolean
+    status: string
+    updateUserStatus: (status: string) => void
+}
+
+type State = {
+    editMode: boolean
+    status: string
+}
+
+export class ProfileStatus extends Component<Props, State> {
     state = {
         editMode: false,
         status: this.props.status,
     }
 
-    componentDidUpdate(prevProps: Readonly<ProfileStatusPropsType>) {
+    componentDidUpdate(prevProps: Props) {
         const { status } = this.props
-        if (prevProps.status !== status) {
-            this.setState({ status })
-        }
+        if (prevProps.status !== status) this.setState({ status })
     }
 
     activateEditMode = () => {
         if (!this.props.editable) return
-
         this.setState({
             editMode: true,
         })
@@ -54,11 +63,4 @@ export class ProfileStatus extends PureComponent<ProfileStatusPropsType> {
             </div>
         )
     }
-}
-
-// types
-type ProfileStatusPropsType = {
-    editable: boolean
-    status: string
-    updateUserStatus: (status: string) => void
 }

@@ -1,3 +1,5 @@
+import { Component } from 'react'
+
 import styles from './ProfileInfo.module.scss'
 import background from 'img/background.jpg'
 import { ProfileType } from 'api/socialNetworkAPI'
@@ -8,10 +10,22 @@ import { Avatar } from 'components/Profile/ProfileInfo/Avatar'
 import ProfileDataForm, {
     ProfileDataFormType,
 } from 'components/Profile/ProfileInfo/ProfileDataForm'
-import { Component } from 'react'
 
-export class ProfileInfo extends Component<ProfileInfoPropsType, ProfileStateType> {
-    state: ProfileStateType = {
+type Props = {
+    isOwner: boolean
+    profile: ProfileType
+    status: string
+    updateUserStatus: (status: string) => void
+    sendPhoto: (file: File) => void
+    updateProfile: (profile: ProfileDataFormType) => Promise<any>
+}
+
+type State = {
+    editMode: boolean
+}
+
+export class ProfileInfo extends Component<Props, State> {
+    state = {
         editMode: false,
     }
 
@@ -59,17 +73,4 @@ export class ProfileInfo extends Component<ProfileInfoPropsType, ProfileStateTyp
             </div>
         )
     }
-}
-
-// types
-type ProfileInfoPropsType = {
-    isOwner: boolean
-    profile: ProfileType
-    status: string
-    updateUserStatus: (status: string) => void
-    sendPhoto: (file: File) => void
-    updateProfile: (profile: ProfileDataFormType) => Promise<any>
-}
-type ProfileStateType = {
-    editMode: boolean
 }

@@ -2,7 +2,13 @@ import { Contact } from 'components/Profile/Contact'
 import styles from 'components/Profile/ProfileInfo/ProfileInfo.module.scss'
 import { ProfileType } from 'api/socialNetworkAPI'
 
-export const ProfileData = ({ profile, isOwner, callback }: ProfileDataPropsType) => {
+type Props = {
+    profile: ProfileType
+    isOwner: boolean
+    callback: () => void
+}
+
+export const ProfileData = ({ profile, isOwner, callback }: Props) => {
     const contacts = Object.entries(profile.contacts)
         .filter(([_, value]) => value)
         .map(([title, value]) => {
@@ -29,10 +35,4 @@ export const ProfileData = ({ profile, isOwner, callback }: ProfileDataPropsType
             {contacts.length > 0 && <div className={styles.contacts}>Contacts: {contacts}</div>}
         </div>
     )
-}
-
-type ProfileDataPropsType = {
-    profile: ProfileType
-    isOwner: boolean
-    callback: () => void
 }
