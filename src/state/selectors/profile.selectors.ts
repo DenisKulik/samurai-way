@@ -2,7 +2,7 @@ import { createSelector } from 'reselect'
 
 import { ProfileType } from 'api'
 import { AppStateType } from 'state/store'
-import { PostType } from 'state/reducers/profileReducer'
+import { PostType } from 'state/reducers/profile.reducer'
 
 // selectors
 const getProfileSelector = (state: AppStateType) => state.profile.profileData

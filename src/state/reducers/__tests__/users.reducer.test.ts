@@ -8,7 +8,7 @@ import {
     toggleIsFollowingProgress,
     UsersActionsType,
     toggleFollowUser,
-} from 'state/reducers/usersReducer'
+} from 'state/reducers/users.reducer'
 
 describe('users-reducer', () => {
     let initialState: InitialUsersStateType

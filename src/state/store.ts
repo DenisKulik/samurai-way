@@ -2,11 +2,11 @@ import { applyMiddleware, combineReducers, compose, createStore, Store } from 'r
 import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { reducer as formReducer, FormAction } from 'redux-form'
 
-import { profileReducer, ProfileActionsType } from 'state/reducers/profileReducer'
-import { messagesReducer, MessagesActionsType } from 'state/reducers/messagesReducer'
-import { usersReducer, UsersActionsType } from 'state/reducers/usersReducer'
-import { AuthActionsType, authReducer } from 'state/reducers/authReducer'
-import { AppActionsType, appReducer } from 'state/reducers/appReducer'
+import { profileReducer, ProfileActionsType } from 'state/reducers/profile.reducer'
+import { messagesReducer, MessagesActionsType } from 'state/reducers/messages.reducer'
+import { usersReducer, UsersActionsType } from 'state/reducers/users.reducer'
+import { AuthActionsType, authReducer } from 'state/reducers/auth.reducer'
+import { AppActionsType, appReducer } from 'state/reducers/app.reducer'
 
 const rootReducer = combineReducers({
     app: appReducer,

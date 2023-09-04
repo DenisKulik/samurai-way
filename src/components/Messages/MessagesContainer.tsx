@@ -2,10 +2,10 @@ import { ComponentType } from 'react'
 import { connect } from 'react-redux'
 import { compose, Dispatch } from 'redux'
 import { AppStateType } from 'state/store'
-import { addMessage, DialogType, MessageType } from 'state/reducers/messagesReducer'
+import { addMessage, DialogType, MessageType } from 'state/reducers/messages.reducer'
 import Messages from './index'
 import { withAuthRedirect } from 'hoc/withAuthRedirect'
-import { getDialogsData, getMessagesData } from 'state/selectors/messagesSelectors'
+import { getDialogsData, getMessagesData } from 'state/selectors/messages.selectors'
 
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     dialogsData: getDialogsData(state),

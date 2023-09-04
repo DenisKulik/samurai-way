@@ -1,4 +1,4 @@
-import { authReducer, InitialAuthUserDataStateType, setUserData } from 'state/reducers/authReducer'
+import { authReducer, InitialAuthUserDataStateType, setUserData } from 'state/reducers/auth.reducer'
 
 describe('auth-reducer', () => {
     let initialState: InitialAuthUserDataStateType

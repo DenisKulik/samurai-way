@@ -2,7 +2,7 @@ import {
     messagesReducer,
     addMessage,
     InitialMessagesStateType,
-} from 'state/reducers/messagesReducer'
+} from 'state/reducers/messages.reducer'
 
 describe('messages-reducer', () => {
     let initialState: InitialMessagesStateType

@@ -3,7 +3,12 @@ import { connect } from 'react-redux'
 
 import { AppStateType } from 'state/store'
 import styles from './Users.module.scss'
-import { followUser, requestUsers, setCurrentPage, unfollowUser } from 'state/reducers/usersReducer'
+import {
+    followUser,
+    requestUsers,
+    setCurrentPage,
+    unfollowUser,
+} from 'state/reducers/users.reducer'
 import { Users } from './index'
 import { Preloader } from '../common/Preloader'
 import {
@@ -13,7 +18,7 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsers,
-} from 'state/selectors/usersSelectors'
+} from 'state/selectors/users.selectors'
 import { UserType } from 'api'
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType

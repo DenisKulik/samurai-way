@@ -4,7 +4,7 @@ import {
     setUserProfile,
     setUserStatus,
     InitialProfileStateType,
-} from 'state/reducers/profileReducer'
+} from 'state/reducers/profile.reducer'
 import { ContactsType, ProfileType } from 'api/common.api'
 
 describe('profile-reducer', () => {

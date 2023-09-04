@@ -11,9 +11,9 @@ import {
     sendPhoto,
     updateProfile,
     updateUserStatus,
-} from 'state/reducers/profileReducer'
-import { getProfile, getStatus } from 'state/selectors/profileSelectors'
-import { getAuthUserId, getIsAuth } from 'state/selectors/authSelectors'
+} from 'state/reducers/profile.reducer'
+import { getProfile, getStatus } from 'state/selectors/profile.selectors'
+import { getAuthUserId, getIsAuth } from 'state/selectors/auth.selectors'
 import { Profile } from './index'
 import { ProfileDataFormType } from 'components/Profile/ProfileInfo/ProfileDataForm'
 
