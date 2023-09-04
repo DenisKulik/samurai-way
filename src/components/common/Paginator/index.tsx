@@ -1,10 +1,23 @@
-import { PureComponent } from 'react'
+import { Component } from 'react'
+
 import styles from 'components/common/Paginator/Paginator.module.scss'
 import Button from 'components/common/Button'
 
-export class Paginator extends PureComponent<PaginatorPropsType, PaginatorStateType> {
-    state: PaginatorStateType = {
-        portionNumber: Math.ceil(this.props.currentPage / (this.props?.portionSize || 10)),
+type Props = {
+    pageSize: number
+    totalItemsCount: number
+    currentPageNumber: number
+    portionSize?: number
+    changePageNumber: (page: number) => void
+}
+
+type State = {
+    portionNumber: number
+}
+
+export class Paginator extends Component<Props, State> {
+    state: State = {
+        portionNumber: Math.ceil(this.props.currentPageNumber / (this.props?.portionSize || 10)),
     }
 
     onPageClick = (page: number) => {
@@ -25,7 +38,7 @@ export class Paginator extends PureComponent<PaginatorPropsType, PaginatorStateT
     }
 
     render() {
-        const { pageSize, totalItemsCount, currentPage, portionSize = 10 } = this.props
+        const { pageSize, totalItemsCount, currentPageNumber, portionSize = 10 } = this.props
 
         const pagesCount = Math.ceil(totalItemsCount / pageSize)
         const pagesArray = Array.from({ length: pagesCount }, (_, i) => i + 1)
@@ -38,7 +51,9 @@ export class Paginator extends PureComponent<PaginatorPropsType, PaginatorStateT
             .map(page => (
                 <span
                     key={page}
-                    className={`${styles.page} ${currentPage === page ? styles.selectedPage : ''}`}
+                    className={`${styles.page} ${
+                        currentPageNumber === page ? styles.selectedPage : ''
+                    }`}
                     onClick={() => this.onPageClick(page)}
                 >
                     {page}
@@ -56,17 +71,4 @@ export class Paginator extends PureComponent<PaginatorPropsType, PaginatorStateT
             </div>
         )
     }
-}
-
-// types
-type PaginatorPropsType = {
-    pageSize: number
-    totalItemsCount: number
-    currentPage: number
-    portionSize?: number
-    changePageNumber: (page: number) => void
-}
-
-type PaginatorStateType = {
-    portionNumber: number
 }
