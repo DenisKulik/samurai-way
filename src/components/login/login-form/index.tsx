@@ -3,6 +3,7 @@ import { InjectedFormProps, reduxForm } from 'redux-form'
 import { createField, CustomInput, GetStringKeys } from 'components/common/form-control'
 import styles from 'components/login/login-form/login-form.module.scss'
 import { requiredField } from 'utils/validators/validators'
+import { LoginType } from 'api'
 
 const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => {
     return (
@@ -48,11 +49,6 @@ export default reduxForm<FormDataType, LoginFormPropsType>({
 type LoginFormPropsType = {
     captchaUrl: string | null
 }
-export type FormDataType = {
-    email: string
-    password: string
-    rememberMe: boolean
-    captcha: string
-}
+export type FormDataType = Required<LoginType>
 type LoginFormValuesTypeKeys = GetStringKeys<FormDataType>
 type LoginFormDomainType = LoginFormPropsType & InjectedFormProps<FormDataType, LoginFormPropsType>
