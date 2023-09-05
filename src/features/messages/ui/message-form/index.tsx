@@ -1,13 +1,9 @@
-import { Field, InjectedFormProps, reduxForm } from 'redux-form'
+import { InjectedFormProps, reduxForm } from 'redux-form'
 
 import styles from 'features/messages/ui/message-form/message-form.module.scss'
 import { Button } from 'common/components/button'
-import { CustomTextarea } from 'common/components/form-control'
+import { createField, CustomTextarea, GetStringKeys } from 'common/components/form-control'
 import { maxLengthCreator, requiredField } from 'common/utils/validators'
-
-export type MessageFormDataType = {
-    message: string
-}
 
 const maxLength100 = maxLengthCreator(100)
 
@@ -16,14 +12,17 @@ const MessageForm = (props: InjectedFormProps<MessageFormDataType>) => {
 
     return (
         <form className={styles.messageForm} onSubmit={handleSubmit}>
-            <Field
-                className={styles.messageField}
-                component={CustomTextarea}
-                name="message"
-                rows={1}
-                validate={[requiredField, maxLength100]}
-                placeholder="Enter your message"
-            />
+            {createField<LoginFormValuesTypeKeys>(
+                'text',
+                'message',
+                [requiredField, maxLength100],
+                CustomTextarea,
+                {
+                    className: styles.messageField,
+                    placeholder: 'Enter your message',
+                    rows: 1,
+                },
+            )}
             <Button title="Send" type="submit" />
         </form>
     )
@@ -32,3 +31,9 @@ const MessageForm = (props: InjectedFormProps<MessageFormDataType>) => {
 export default reduxForm<MessageFormDataType>({
     form: 'message',
 })(MessageForm)
+
+// types
+export type MessageFormDataType = {
+    message: string
+}
+type LoginFormValuesTypeKeys = GetStringKeys<MessageFormDataType>
