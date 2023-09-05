@@ -1,5 +1,5 @@
 export type ResponseType<T = {}> = {
-    resultCode: number
+    resultCode: ResultCode
     messages: string[]
     data: T
 }
