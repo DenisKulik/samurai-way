@@ -1,0 +1,32 @@
+.user {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 2rem;
+  background-color: var(--color-secondary);
+
+  .subsBlock {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    .userImg {
+      border-radius: 50%;
+    }
+  }
+
+  .info {
+    flex: 1 1;
+
+      .username {
+        flex: 1 0;
+        font-size: 1.6rem;
+      }
+
+      .status {
+        font-size: 1.4rem;
+      }
+  }
+}
