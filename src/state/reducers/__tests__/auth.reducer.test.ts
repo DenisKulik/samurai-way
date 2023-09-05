@@ -9,6 +9,7 @@ describe('auth-reducer', () => {
             email: null,
             login: null,
             isAuth: false,
+            captchaUrl: null,
         }
     })
 
