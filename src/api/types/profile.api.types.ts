@@ -1,8 +1,3 @@
-export type PhotosType = {
-    large: string
-    small: string
-}
-
 export type ContactsType = {
     github: string
     vk: string

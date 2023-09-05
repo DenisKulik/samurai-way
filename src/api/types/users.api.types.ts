@@ -1,4 +1,7 @@
-import { PhotosType } from 'api'
+export type PhotosType = {
+    large: string
+    small: string
+}
 
 export type UserType = {
     id: number
