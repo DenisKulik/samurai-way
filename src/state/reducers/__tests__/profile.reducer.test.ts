@@ -5,7 +5,7 @@ import {
     setUserStatus,
     InitialProfileStateType,
 } from 'state/reducers/profile.reducer'
-import { ContactsType, ProfileType } from 'api/common.api'
+import { ContactsType, ProfileType } from 'api'
 
 describe('profile-reducer', () => {
     let initialState: InitialProfileStateType

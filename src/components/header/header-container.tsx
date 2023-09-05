@@ -19,12 +19,10 @@ export default connect(mapStateToProps, { logout })(HeaderContainer)
 
 // types
 export type HeaderContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
-
 type MapStateToPropsType = {
     login: string | null
     isAuth: boolean | null
 }
-
 type MapDispatchToPropsType = {
     logout: () => void
 }

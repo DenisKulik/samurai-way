@@ -1,8 +1,8 @@
 import { ComponentType } from 'react'
 import { connect } from 'react-redux'
-import { compose, Dispatch } from 'redux'
+import { compose } from 'redux'
 
-import { AppStateType } from 'state/store'
+import { AppStateType, AppThunkDispatch } from 'state/store'
 import { withAuthRedirect } from 'hoc'
 import { addMessage, DialogType, MessageType } from 'state/reducers/messages.reducer'
 import { getDialogsData, getMessagesData } from 'state/selectors/messages.selectors'
@@ -13,7 +13,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     messagesData: getMessagesData(state),
 })
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
+const mapDispatchToProps = (dispatch: AppThunkDispatch): MapDispatchToPropsType => ({
     sendMessage: message => dispatch(addMessage(message)),
 })
 

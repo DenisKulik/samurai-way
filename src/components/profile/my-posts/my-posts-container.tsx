@@ -1,8 +1,7 @@
 import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
 
 import { addPost, PostType } from 'state/reducers/profile.reducer'
-import { AppStateType } from 'state/store'
+import { AppStateType, AppThunkDispatch } from 'state/store'
 import MyPosts from './index'
 import { getPostsData } from 'state/selectors/profile.selectors'
 
@@ -20,10 +19,8 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     postsData: getPostsData(state),
 })
 
-const mapDispatchToProps = (dispatch: Dispatch): MapDispatchToPropsType => ({
+const mapDispatchToProps = (dispatch: AppThunkDispatch): MapDispatchToPropsType => ({
     addPost: (post: string) => dispatch(addPost(post)),
 })
 
-const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)
-
-export default MyPostsContainer
+export const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts)

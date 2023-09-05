@@ -14,7 +14,7 @@ import { withSuspense } from 'hoc'
 
 const Login = lazy(() => import('components/login'))
 const ProfileContainer = lazy(() => import('components/profile/profile-container'))
-const DialogsContainer = lazy(() => import('components/messages/messages-container'))
+const MessagesContainer = lazy(() => import('components/messages/messages-container'))
 const UsersContainer = lazy(() => import('components/users/users-container'))
 
 class App extends Component<AppPropsType> {
@@ -33,7 +33,7 @@ class App extends Component<AppPropsType> {
                     <Switch>
                         <Redirect exact from="/" to="/profile" />
                         <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} />
-                        <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
+                        <Route path="/dialogs" render={withSuspense(MessagesContainer)} />
                         <Route
                             path="/users"
                             render={withSuspense(() => (
