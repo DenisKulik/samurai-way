@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import { addPost, PostType } from 'features/profile/model/profile.reducer'
 import { AppStateType, AppThunkDispatch } from 'app/model/store'
-import MyPosts from 'features/profile/ui/my-posts/index'
+import { MyPosts } from 'features/profile/ui/my-posts/index'
 import { getPostsData } from 'features/profile/model/profile.selectors'
 
 export type MyPostsPropsType = MapStateToPropsType & MapDispatchToPropsType

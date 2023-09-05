@@ -1,13 +1,9 @@
-import { memo } from 'react'
-
 import styles from 'features/profile/ui/my-posts/my-posts.module.scss'
 import { MyPostsPropsType } from 'features/profile/ui/my-posts/my-posts-container'
 import AddPostForm, { AddPostFormDataType } from 'features/profile/ui/my-posts/add-post-form'
 import { Post } from 'features/profile/ui/my-posts/post'
 
-const MyPosts = memo((props: MyPostsPropsType) => {
-    const { postsData, addPost } = props
-
+export const MyPosts = ({ postsData, addPost }: MyPostsPropsType) => {
     const onSubmit = (formData: AddPostFormDataType) => {
         addPost(formData.post)
     }
@@ -23,6 +19,4 @@ const MyPosts = memo((props: MyPostsPropsType) => {
             <div className={styles.posts}>{posts}</div>
         </div>
     )
-})
-
-export default MyPosts
+}
