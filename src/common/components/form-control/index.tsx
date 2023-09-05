@@ -31,13 +31,12 @@ export const CustomInput = (props: Props) => (
 )
 
 export function createField<FormKeyType extends string>(
-    type: string,
     name: FormKeyType,
     validators: FieldValidatorType[],
     component: FC<Props>,
     props = {},
 ) {
-    return <Field type={type} name={name} validate={validators} component={component} {...props} />
+    return <Field name={name} validate={validators} component={component} {...props} />
 }
 
 // types

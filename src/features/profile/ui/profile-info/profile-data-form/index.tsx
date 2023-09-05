@@ -15,7 +15,7 @@ const ProfileDataForm = ({ initialValues, handleSubmit, error }: ProfileDataForm
         return (
             <div key={title}>
                 <Contact title={title} value="" />
-                {createField(title, `contacts.${title}`, [], CustomInput)}
+                {createField(`contacts.${title}`, [], CustomInput, { placeholder: title })}
             </div>
         )
     })
@@ -24,19 +24,15 @@ const ProfileDataForm = ({ initialValues, handleSubmit, error }: ProfileDataForm
         <form className={styles.inner} onSubmit={handleSubmit}>
             <div>
                 <p className={styles.username}>Full Name:</p>
-                {createField<ProfileDataFormValuesTypeKeys>('text', 'fullName', [], CustomInput)}
+                {createField<ProfileDataFormValuesTypeKeys>('fullName', [], CustomInput)}
             </div>
             <div className={styles.jobInfo}>
                 <p>Looking for a job:</p>
-                {createField<ProfileDataFormValuesTypeKeys>(
-                    'checkbox',
-                    'lookingForAJob',
-                    [],
-                    CustomInput,
-                )}
+                {createField<ProfileDataFormValuesTypeKeys>('lookingForAJob', [], CustomInput, {
+                    type: 'checkbox',
+                })}
                 <p>My skills:</p>
                 {createField<ProfileDataFormValuesTypeKeys>(
-                    '',
                     'lookingForAJobDescription',
                     [],
                     CustomTextarea,
@@ -47,12 +43,9 @@ const ProfileDataForm = ({ initialValues, handleSubmit, error }: ProfileDataForm
             </div>
             <div>
                 <p>About me:</p>
-                {createField<ProfileDataFormValuesTypeKeys>(
-                    'About me',
-                    'aboutMe',
-                    [],
-                    CustomTextarea,
-                )}
+                {createField<ProfileDataFormValuesTypeKeys>('aboutMe', [], CustomTextarea, {
+                    placeholder: 'About me',
+                })}
             </div>
             {contacts.length > 0 && <div className={styles.contacts}>Contacts: {contacts}</div>}
             <button>Save</button>

@@ -13,7 +13,6 @@ const MessageForm = (props: InjectedFormProps<MessageFormDataType>) => {
     return (
         <form className={styles.messageForm} onSubmit={handleSubmit}>
             {createField<LoginFormValuesTypeKeys>(
-                'text',
                 'message',
                 [requiredField, maxLength100],
                 CustomTextarea,
