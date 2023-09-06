@@ -8,7 +8,7 @@ export const profileAPI = {
         return instance.get<ProfileType>(`profile/${userId}`).then(response => response.data)
     },
     getUserStatus(userId: string) {
-        return instance.get<any>(`profile/status/${userId}`).then(response => response.data)
+        return instance.get<string>(`profile/status/${userId}`).then(response => response.data)
     },
     updateUserProfile(profile: ProfileDataFormType) {
         return instance.put<ResponseType>(`profile`, profile).then(response => response.data)
