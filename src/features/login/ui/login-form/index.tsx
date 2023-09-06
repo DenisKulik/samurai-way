@@ -19,6 +19,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => 
             })}
             <div className={styles.checkbox}>
                 {createField<LoginFormValuesTypeKeys>('rememberMe', [], CustomInput, {
+                    type: 'checkbox',
                     placeholder: 'checkbox',
                 })}
                 <label>Remember me</label>
