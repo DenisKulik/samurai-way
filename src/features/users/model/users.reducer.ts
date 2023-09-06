@@ -93,13 +93,13 @@ const toggleFollowStatus = async (
 export const followUser =
     (userId: number): AppThunkType =>
     async dispatch => {
-        await toggleFollowStatus(userId, usersAPI.follow, true, dispatch)
+        await toggleFollowStatus(userId, usersAPI.follow.bind(usersAPI), true, dispatch)
     }
 
 export const unfollowUser =
     (userId: number): AppThunkType =>
     async dispatch => {
-        await toggleFollowStatus(userId, usersAPI.unfollow, false, dispatch)
+        await toggleFollowStatus(userId, usersAPI.unfollow.bind(usersAPI), false, dispatch)
     }
 
 // types
