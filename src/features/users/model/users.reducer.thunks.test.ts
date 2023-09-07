@@ -1,8 +1,10 @@
 import {
     followUser,
     requestUsers,
+    setCurrentPage,
     setTotalUsersCount,
     setUsers,
+    setUsersFilter,
     toggleFollowUser,
     toggleIsFetching,
     toggleIsFollowingProgress,
@@ -66,15 +68,20 @@ describe('users-reducer-thunks', () => {
             totalCount: 10,
             error: '',
         }
+        const page = 1
+        const pageSize = 10
+        const term = ''
 
         userAPIMock.getUsers.mockReturnValue(Promise.resolve(res))
-        const thunk = requestUsers(1, 10)
+        const thunk = requestUsers(page, pageSize, { term })
         await thunk(dispatchMock, getStateMock, {})
 
-        expect(dispatchMock).toBeCalledTimes(4)
+        expect(dispatchMock).toBeCalledTimes(6)
         expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleIsFetching(true))
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, setUsers(res.items))
-        expect(dispatchMock).toHaveBeenNthCalledWith(3, setTotalUsersCount(res.totalCount))
-        expect(dispatchMock).toHaveBeenNthCalledWith(4, toggleIsFetching(false))
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, setCurrentPage(page))
+        expect(dispatchMock).toHaveBeenNthCalledWith(3, setUsersFilter({ term }))
+        expect(dispatchMock).toHaveBeenNthCalledWith(4, setUsers(res.items))
+        expect(dispatchMock).toHaveBeenNthCalledWith(5, setTotalUsersCount(res.totalCount))
+        expect(dispatchMock).toHaveBeenNthCalledWith(6, toggleIsFetching(false))
     })
 })

@@ -9,6 +9,7 @@ import {
     UsersActionsType,
     toggleFollowUser,
 } from 'features/users/model/users.reducer'
+import { FilterType } from 'features/users/api/users.api.types'
 
 describe('users-reducer', () => {
     let initialState: InitialUsersStateType
@@ -40,6 +41,7 @@ describe('users-reducer', () => {
             pageSize: 5,
             totalUsersCount: 0,
             currentPage: 1,
+            filter: {} as FilterType,
             isFetching: true,
             isFollowingInProgress: [],
         }

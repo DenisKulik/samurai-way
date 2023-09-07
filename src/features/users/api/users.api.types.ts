@@ -3,6 +3,11 @@ export type PhotosType = {
     small: string
 }
 
+export type FilterType = {
+    term?: string
+    friend?: null | boolean
+}
+
 export type UserType = {
     id: number
     name: string

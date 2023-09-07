@@ -18,21 +18,27 @@ import {
     getPageSize,
     getTotalUsersCount,
     getUsers,
+    getUsersFilter,
 } from 'features/users/model/users.selectors'
-import { UserType } from 'features/users/api/users.api.types'
+import { FilterType, UserType } from 'features/users/api/users.api.types'
 
 export type UsersContainerPropsType = MapStateToPropsType & MapDispatchToPropsType
 
 class UsersContainer extends Component<UsersContainerPropsType> {
     componentDidMount() {
         const { requestUsers, currentPage, pageSize } = this.props
-        requestUsers(currentPage, pageSize)
+        requestUsers(currentPage, pageSize, { term: '' })
     }
 
     changePageNumber = (page: number) => {
-        const { setCurrentPage, requestUsers } = this.props
+        const { filter, setCurrentPage, requestUsers } = this.props
         setCurrentPage(page)
-        requestUsers(page, this.props.pageSize)
+        requestUsers(page, this.props.pageSize, filter)
+    }
+
+    changeUsersFilter = (filter: FilterType) => {
+        const { pageSize, requestUsers } = this.props
+        requestUsers(1, pageSize, filter)
     }
 
     render() {
@@ -43,7 +49,11 @@ class UsersContainer extends Component<UsersContainerPropsType> {
                 {isFetching ? (
                     <Preloader />
                 ) : (
-                    <Users changePageNumber={this.changePageNumber} {...this.props} />
+                    <Users
+                        changePageNumber={this.changePageNumber}
+                        changeUsersFilter={this.changeUsersFilter}
+                        {...this.props}
+                    />
                 )}
             </div>
         )
@@ -53,6 +63,7 @@ class UsersContainer extends Component<UsersContainerPropsType> {
 const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     users: getUsers(state),
     pageSize: getPageSize(state),
+    filter: getUsersFilter(state),
     totalUsersCount: getTotalUsersCount(state),
     currentPage: getCurrentPage(state),
     isFollowingInProgress: getIsFollowingInProgress(state),
@@ -70,13 +81,14 @@ export default connect(mapStateToProps, {
 type MapStateToPropsType = {
     users: UserType[]
     pageSize: number
+    filter: FilterType
     totalUsersCount: number
     currentPage: number
     isFollowingInProgress: number[]
     isFetching: boolean
 }
 type MapDispatchToPropsType = {
-    requestUsers: (currentPage: number, pageSize: number) => void
+    requestUsers: (currentPage: number, pageSize: number, filter: FilterType) => void
     followUser: (userId: number) => void
     unfollowUser: (userId: number) => void
     setCurrentPage: (currentPage: number) => void

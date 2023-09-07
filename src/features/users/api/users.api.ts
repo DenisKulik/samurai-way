@@ -1,10 +1,14 @@
 import { instance, ResponseType } from 'common/api'
-import { UsersResponseType } from 'features/users/api/users.api.types'
+import { FilterType, UsersResponseType } from 'features/users/api/users.api.types'
 
 export const usersAPI = {
-    getUsers(page: number = 1, pageSize: number = 5) {
+    getUsers(page: number = 1, pageSize: number = 5, filter: FilterType) {
+        debugger
+        const { term = '', friend = null } = filter
         return instance
-            .get<UsersResponseType>(`users?page=${page}&count=${pageSize}`)
+            .get<UsersResponseType>(
+                `users?page=${page}&count=${pageSize}&term=${term}&friend=${friend ? friend : ''}`,
+            )
             .then(response => response.data)
     },
     follow(userId: number) {
