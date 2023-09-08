@@ -9,7 +9,7 @@ const initialState = {
     filter: {} as FilterType,
     totalUsersCount: 0,
     currentPage: 1,
-    isFetching: true,
+    isFetching: false,
     isFollowingInProgress: [] as number[], // array of user id
 }
 
