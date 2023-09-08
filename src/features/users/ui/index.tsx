@@ -1,46 +1,31 @@
-import styles from 'features/users/ui/users.module.scss'
-import { UsersContainerPropsType } from 'features/users/ui/users-container'
-import { Paginator } from 'common/components/paginator'
-import { User } from 'features/users/ui/user'
-import { UsersSearchForm } from 'features/users/ui/users-search-form'
-import { FilterType } from 'features/users/api/users.api.types'
+import { useDispatch, useSelector } from 'react-redux'
 
-type Props = UsersContainerPropsType & {
-    changePageNumber: (page: number) => void
-    changeUsersFilter: (filter: FilterType) => void
+import styles from 'features/users/ui/users-list/users-list.module.scss'
+import { UsersList } from 'features/users/ui/users-list'
+import { Preloader } from 'common/components/preloader'
+import {
+    getCurrentPage,
+    getIsFetching,
+    getPageSize,
+    getUsersFilter,
+} from 'features/users/model/users.selectors'
+import { useEffect } from 'react'
+import { requestUsers } from 'features/users/model/users.reducer'
+
+const Users = () => {
+    const isFetching = useSelector(getIsFetching)
+    const currentPage = useSelector(getCurrentPage)
+    const pageSize = useSelector(getPageSize)
+    const filter = useSelector(getUsersFilter)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(requestUsers(currentPage, pageSize, filter))
+        // eslint-disable-next-line
+    }, [])
+
+    return <div className={styles.usersContainer}>{isFetching ? <Preloader /> : <UsersList />}</div>
 }
 
-export const Users = ({
-    users,
-    pageSize,
-    totalUsersCount,
-    currentPage,
-    isFollowingInProgress,
-    followUser,
-    unfollowUser,
-    changePageNumber,
-    changeUsersFilter,
-}: Props) => {
-    return (
-        <>
-            <div className={styles.users}>
-                <UsersSearchForm changeUsersFilter={changeUsersFilter} />
-                {users.map(user => (
-                    <User
-                        key={user.id}
-                        user={user}
-                        isFollowingInProgress={isFollowingInProgress}
-                        unfollowUser={unfollowUser}
-                        followUser={followUser}
-                    />
-                ))}
-                <Paginator
-                    pageSize={pageSize}
-                    totalItemsCount={totalUsersCount}
-                    currentPageNumber={currentPage}
-                    changePageNumber={changePageNumber}
-                />
-            </div>
-        </>
-    )
-}
+export default Users

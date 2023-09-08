@@ -15,7 +15,7 @@ import { withSuspense } from 'common/hoc'
 const Login = lazy(() => import('features/login/ui'))
 const ProfileContainer = lazy(() => import('features/profile/ui/profile-container'))
 const MessagesContainer = lazy(() => import('features/messages/ui/messages-container'))
-const UsersContainer = lazy(() => import('features/users/ui/users-container'))
+const Users = lazy(() => import('features/users/ui'))
 
 class App extends Component<AppPropsType> {
     componentDidMount() {
@@ -37,7 +37,7 @@ class App extends Component<AppPropsType> {
                         <Route
                             path="/users"
                             render={withSuspense(() => (
-                                <UsersContainer />
+                                <Users />
                             ))}
                         />
                         <Route path="/login" render={withSuspense(Login)} />

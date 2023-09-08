@@ -2,16 +2,16 @@ import { Formik, Form, Field, FormikHelpers } from 'formik'
 import { FilterType } from 'features/users/api/users.api.types'
 
 type Props = {
-    changeUsersFilter: (filter: FilterType) => void
+    onChangeUsersFilter: (filter: FilterType) => void
 }
 
-export const UsersSearchForm = ({ changeUsersFilter }: Props) => {
+export const UsersSearchForm = ({ onChangeUsersFilter }: Props) => {
     const submit = (values: FormType, { setSubmitting }: FormikHelpers<FormType>) => {
         const filter: FilterType = {
             term: values.term,
             friend: values.friend === 'null' ? null : values.friend !== 'false',
         }
-        changeUsersFilter(filter)
+        onChangeUsersFilter(filter)
         setSubmitting(false)
     }
 

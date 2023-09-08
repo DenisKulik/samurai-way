@@ -1,17 +1,29 @@
+import { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import styles from 'features/users/ui/user/user.module.scss'
 import userDefault from 'common/img/user-default.png'
 import { UserType } from 'features/users/api/users.api.types'
+import { followUser, unfollowUser } from 'features/users/model/users.reducer'
+import { useDispatch, useSelector } from 'react-redux'
+import { getIsFollowingInProgress } from 'features/users/model/users.selectors'
 
 type Props = {
     user: UserType
-    isFollowingInProgress: number[]
-    unfollowUser: (userId: number) => void
-    followUser: (userId: number) => void
 }
 
-export const User = ({ user, isFollowingInProgress, followUser, unfollowUser }: Props) => {
+export const User = memo(({ user }: Props) => {
+    const isFollowingInProgress = useSelector(getIsFollowingInProgress)
+
+    const dispatch = useDispatch()
+
+    const onFollowUser = (userId: number) => {
+        dispatch(followUser(userId))
+    }
+    const onUnfollowUser = (userId: number) => {
+        dispatch(unfollowUser(userId))
+    }
+
     return (
         <div className={styles.user}>
             <div className={styles.subsBlock}>
@@ -27,14 +39,14 @@ export const User = ({ user, isFollowingInProgress, followUser, unfollowUser }: 
                 {user.followed ? (
                     <button
                         disabled={isFollowingInProgress.some(id => user.id === id)}
-                        onClick={() => unfollowUser(user.id)}
+                        onClick={() => onUnfollowUser(user.id)}
                     >
                         Unfollow
                     </button>
                 ) : (
                     <button
                         disabled={isFollowingInProgress.some(id => user.id === id)}
-                        onClick={() => followUser(user.id)}
+                        onClick={() => onFollowUser(user.id)}
                     >
                         Follow
                     </button>
@@ -46,4 +58,4 @@ export const User = ({ user, isFollowingInProgress, followUser, unfollowUser }: 
             </div>
         </div>
     )
-}
+})

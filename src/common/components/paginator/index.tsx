@@ -8,7 +8,7 @@ type Props = {
     totalItemsCount: number
     currentPageNumber: number
     portionSize?: number
-    changePageNumber: (page: number) => void
+    onChangePageNumber: (page: number) => void
 }
 
 type State = {
@@ -21,8 +21,8 @@ export class Paginator extends Component<Props, State> {
     }
 
     onPageClick = (page: number) => {
-        const { changePageNumber } = this.props
-        changePageNumber(page)
+        const { onChangePageNumber } = this.props
+        onChangePageNumber(page)
     }
 
     onPrevClick = () => {
