@@ -1,21 +1,19 @@
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 
 import styles from 'features/login/ui/login.module.scss'
 import LoginForm, { FormDataType } from 'features/login/ui/login-form'
 import { login } from 'features/login/model/auth.reducer'
-import { AppStateType } from 'app/model/store'
-import { LoginType } from 'features/login/api/auth.api.types'
+import { getCaptchaUrl, getIsAuth } from 'features/login/model/auth.selectors'
 
-type Props = {
-    isAuth: boolean | null
-    captchaUrl: string | null
-    login: (data: LoginType) => void
-}
+const Login = () => {
+    const isAuth = useSelector(getIsAuth)
+    const captchaUrl = useSelector(getCaptchaUrl)
 
-const Login = ({ isAuth, captchaUrl, login }: Props) => {
+    const dispatch = useDispatch()
+
     const onSubmit = (formData: FormDataType) => {
-        login(formData)
+        dispatch(login(formData))
     }
 
     if (isAuth) return <Redirect to="profile" />
@@ -28,9 +26,4 @@ const Login = ({ isAuth, captchaUrl, login }: Props) => {
     )
 }
 
-const mstp = (state: AppStateType) => ({
-    isAuth: state.auth.isAuth,
-    captchaUrl: state.auth.captchaUrl,
-})
-
-export default connect(mstp, { login })(Login)
+export default Login
