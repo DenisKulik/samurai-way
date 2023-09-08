@@ -3,7 +3,6 @@ import { FilterType, UsersResponseType } from 'features/users/api/users.api.type
 
 export const usersAPI = {
     getUsers(page: number = 1, pageSize: number = 5, filter: FilterType) {
-        debugger
         const { term = '', friend = null } = filter
         return instance
             .get<UsersResponseType>(
