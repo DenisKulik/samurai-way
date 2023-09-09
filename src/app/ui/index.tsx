@@ -34,12 +34,7 @@ class App extends Component<AppPropsType> {
                         <Redirect exact from="/" to="/profile" />
                         <Route path="/profile/:userId?" render={withSuspense(ProfileContainer)} />
                         <Route path="/dialogs" render={withSuspense(MessagesContainer)} />
-                        <Route
-                            path="/users"
-                            render={withSuspense(() => (
-                                <Users />
-                            ))}
-                        />
+                        <Route path="/users" render={withSuspense(Users)} />
                         <Route path="/login" render={withSuspense(Login)} />
                         <Route path="*" render={() => <div>404 NOT FOUND</div>} />
                     </Switch>
