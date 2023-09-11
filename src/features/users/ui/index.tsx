@@ -25,13 +25,15 @@ const Users = () => {
     useEffect(() => {
         if (!Object.keys(filter).length) return
 
-        const query = {} as QueryParamsType
-        if (filter.term) query.term = filter.term
-        if (filter.friend !== null) query.friend = String(filter.friend)
-        if (currentPage !== 1) query.page = String(currentPage)
+        const query = {
+            ...(filter.term && { term: filter.term }),
+            ...(filter.friend !== null && { friend: String(filter.friend) }),
+            ...(currentPage !== 1 && { page: String(currentPage) }),
+        }
 
         const searchQuery = new URLSearchParams(query).toString()
         const currentSearch = history.location.search
+
         if (currentSearch !== searchQuery) {
             history.push({
                 pathname: '/users',
@@ -44,19 +46,13 @@ const Users = () => {
         const currentSearch = new URLSearchParams(history.location.search)
         const parsed = Object.fromEntries(currentSearch.entries()) as QueryParamsType
 
-        let actualPage = currentPage
-        let actualFilter = filter
-        if (parsed.page) actualPage = Number(parsed.page)
-        if (parsed.term && parsed.term !== 'undefined') {
-            actualFilter = { ...actualFilter, term: parsed.term }
-        } else {
-            actualFilter = { ...actualFilter, term: '' }
-        }
-        if (parsed.friend) {
-            actualFilter = {
-                ...actualFilter,
-                friend: parsed.friend === 'null' ? null : parsed.friend === 'true',
-            }
+        const { page: parsedPage, term: parsedTerm, friend: parsedFriend } = parsed
+
+        const actualPage = parsedPage ? Number(parsedPage) : currentPage
+        const actualFilter = {
+            ...filter,
+            term: parsedTerm && parsedTerm !== 'undefined' ? parsedTerm : '',
+            friend: parsedFriend ? parsedFriend === 'true' : null,
         }
 
         dispatch(requestUsers(actualPage, pageSize, actualFilter))
