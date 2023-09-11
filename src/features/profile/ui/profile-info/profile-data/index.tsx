@@ -21,16 +21,10 @@ export const ProfileData = ({ profile, isOwner, callback }: Props) => {
                 <span className={styles.username}>{profile.fullName}</span>
                 {isOwner && <button onClick={callback}>Edit</button>}
             </div>
-            <div className={styles.jobInfo}>
-                <span>
-                    {profile.lookingForAJob
-                        ? 'Looking for a job 🐱‍💻'
-                        : 'Not looking for a job 😎'}
-                </span>
-                {profile.lookingForAJob && (
-                    <p>{`My skills: ${profile.lookingForAJobDescription}`}</p>
-                )}
-            </div>
+            <span>
+                {profile.lookingForAJob ? 'Looking for a job 🐱‍💻' : 'Not looking for a job 😎'}
+            </span>
+            {profile.lookingForAJob && <p>{`My skills: ${profile.lookingForAJobDescription}`}</p>}
             <div>{profile.aboutMe && `About me: ${profile.aboutMe}`}</div>
             {contacts.length > 0 && <div className={styles.contacts}>Contacts: {contacts}</div>}
         </div>
