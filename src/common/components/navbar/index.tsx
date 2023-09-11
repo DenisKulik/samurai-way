@@ -1,16 +1,10 @@
 import { NavLink } from 'react-router-dom'
-
-import styles from 'app/ui/sidebar/sidebar.module.scss'
-import {
-    RiLayoutTopLine,
-    RiMessage3Line,
-    RiMusic2Line,
-    RiSettings4Line,
-    RiUser3Line,
-} from 'react-icons/ri'
+import { RiMessage3Line, RiUser3Line } from 'react-icons/ri'
 import { MdDeveloperMode } from 'react-icons/md'
 
-export const Sidebar = () => {
+import styles from 'common/components/navbar/navbar.module.scss'
+
+export const Navbar = () => {
     return (
         <nav className={styles.sidebar}>
             <ul className={styles.nav}>
@@ -30,24 +24,6 @@ export const Sidebar = () => {
                     <NavLink to="/users" activeClassName={styles.active}>
                         <MdDeveloperMode />
                         Developers
-                    </NavLink>
-                </li>
-                <li className={styles.item}>
-                    <NavLink to="/news" activeClassName={styles.active}>
-                        <RiLayoutTopLine />
-                        News
-                    </NavLink>
-                </li>
-                <li className={styles.item}>
-                    <NavLink to="/music" activeClassName={styles.active}>
-                        <RiMusic2Line />
-                        Music
-                    </NavLink>
-                </li>
-                <li className={styles.item}>
-                    <NavLink to="/settings" activeClassName={styles.active}>
-                        <RiSettings4Line />
-                        Settings
                     </NavLink>
                 </li>
             </ul>

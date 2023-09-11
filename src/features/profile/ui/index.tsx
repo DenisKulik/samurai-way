@@ -1,6 +1,7 @@
 import { ProfilePropsType } from 'features/profile/ui/profile-container'
 import { ProfileInfo } from 'features/profile/ui/profile-info'
 import { MyPostsContainer } from 'features/profile/ui/my-posts/my-posts-container'
+import styles from './profile.module.scss'
 
 export const Profile = (props: ProfilePropsType) => {
     const { profile, status, authorizedUserId, match, updateUserStatus, sendPhoto, updateProfile } =
@@ -8,7 +9,7 @@ export const Profile = (props: ProfilePropsType) => {
     const isOwner = !match.params.userId || Number(match.params.userId) === authorizedUserId
 
     return (
-        <>
+        <div className={styles.profile}>
             <ProfileInfo
                 isOwner={isOwner}
                 profile={profile}
@@ -18,6 +19,6 @@ export const Profile = (props: ProfilePropsType) => {
                 updateProfile={updateProfile}
             />
             <MyPostsContainer />
-        </>
+        </div>
     )
 }

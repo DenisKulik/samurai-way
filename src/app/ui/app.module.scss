@@ -1,17 +1,9 @@
 .app {
     max-width: 120rem;
-    display: grid;
-    grid-auto-columns: minmax(10rem, 16rem) 1fr;
-    gap: 2rem;
-    grid-template-areas:
-        'header header'
-        'sidebar content';
+    width: 100%;
+    min-height: 100%;
     margin: 0 auto;
-    padding: 1rem;
-
-    .content {
-        grid-area: content;
-        font-size: 1.6rem;
-        color: white;
-    }
+    padding: 1.5rem;
+    font-size: 1.6rem;
+    color: white;
 }

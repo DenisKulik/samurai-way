@@ -5,7 +5,6 @@ import { HashRouter, Redirect, Route, Switch, withRouter } from 'react-router-do
 
 import styles from 'app/ui/app.module.scss'
 import HeaderContainer from 'app/ui/header/header-container'
-import { Sidebar } from 'app/ui/sidebar'
 import { initializeApp } from 'app/model/app.reducer'
 import { AppStateType, store } from 'app/model/store'
 import { Preloader } from 'common/components/preloader'
@@ -28,7 +27,6 @@ class App extends Component<AppPropsType> {
         return (
             <div className={styles.app}>
                 <HeaderContainer />
-                <Sidebar />
                 <div className={styles.content}>
                     <Switch>
                         <Redirect exact from="/" to="/profile" />

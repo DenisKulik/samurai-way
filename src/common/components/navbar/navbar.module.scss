@@ -1,13 +1,10 @@
 .sidebar {
-    align-self: start;
-    grid-area: sidebar;
     font-size: 1.6rem;
     color: white;
-    background-color: var(--color-secondary);
-    border-radius: 2rem;
 
     .nav {
-        padding: 2rem;
+        display: flex;
+        gap: 1rem;
         list-style: none;
 
         .item {
@@ -24,7 +21,7 @@
                 svg {
                     width: 1.5rem;
                     height: 1.5rem;
-                    margin-right: 1rem;
+                    margin-right: 4px;
                     margin-bottom: -2px;
                 }
             }
