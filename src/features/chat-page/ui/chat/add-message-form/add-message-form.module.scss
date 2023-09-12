@@ -1,0 +1,17 @@
+.addMessageForm {
+    display: flex;
+    gap: 1rem;
+
+    & > textarea {
+        flex: 1;
+    }
+
+    .messageField {
+        width: 100%;
+        height: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 1.6rem;
+        resize: none;
+        border-radius: 50px;
+    }
+}

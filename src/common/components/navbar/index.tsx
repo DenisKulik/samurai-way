@@ -15,9 +15,9 @@ export const Navbar = () => {
                     </NavLink>
                 </li>
                 <li className={styles.item}>
-                    <NavLink to="/dialogs" activeClassName={styles.active}>
+                    <NavLink to="/chat" activeClassName={styles.active}>
                         <RiMessage3Line />
-                        Messages
+                        Chat
                     </NavLink>
                 </li>
                 <li className={styles.item}>
