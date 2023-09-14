@@ -3,7 +3,6 @@ import thunkMiddleware, { ThunkAction, ThunkDispatch } from 'redux-thunk'
 import { reducer as formReducer, FormAction } from 'redux-form'
 
 import { profileReducer, ProfileActionsType } from 'features/profile/model/profile.reducer'
-import { messagesReducer, MessagesActionsType } from 'features/messages/model/messages.reducer'
 import { usersReducer, UsersActionsType } from 'features/users/model/users.reducer'
 import { AuthActionsType, authReducer } from 'features/login/model/auth.reducer'
 import { AppActionsType, appReducer } from 'app/model/app.reducer'
@@ -13,7 +12,6 @@ const rootReducer = combineReducers({
     app: appReducer,
     profile: profileReducer,
     chat: chatReducer,
-    messages: messagesReducer,
     users: usersReducer,
     auth: authReducer,
     form: formReducer,
@@ -29,7 +27,6 @@ export type RootActionsType =
     | AppActionsType
     | ProfileActionsType
     | ChatActionsType
-    | MessagesActionsType
     | UsersActionsType
     | AuthActionsType
     | FormAction
