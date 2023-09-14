@@ -1,5 +1,5 @@
-import styles from './message.module.scss'
-import { MessageType } from 'features/chat-page/ui/chat/messages/index'
+import styles from 'features/chat/ui/messages/message/message.module.scss'
+import { MessageType } from 'features/chat/api/chat.api'
 
 type Props = {
     message: MessageType

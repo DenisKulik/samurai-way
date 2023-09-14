@@ -13,7 +13,7 @@ import { withSuspense } from 'common/hoc'
 
 const Login = lazy(() => import('features/login/ui'))
 const Profile = lazy(() => import('features/profile/ui/profile-container'))
-const ChatPage = lazy(() => import('features/chat-page/ui/index'))
+const Chat = lazy(() => import('features/chat/ui/index'))
 const Users = lazy(() => import('features/users/ui'))
 
 class App extends Component<AppPropsType> {
@@ -31,7 +31,7 @@ class App extends Component<AppPropsType> {
                     <Switch>
                         <Redirect exact from="/" to="/profile" />
                         <Route path="/profile/:userId?" render={withSuspense(Profile)} />
-                        <Route path="/chat" render={withSuspense(ChatPage)} />
+                        <Route path="/chat" render={withSuspense(Chat)} />
                         <Route path="/users" render={withSuspense(Users)} />
                         <Route path="/login" render={withSuspense(Login)} />
                         <Route path="*" render={() => <div>404 NOT FOUND</div>} />

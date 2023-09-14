@@ -7,10 +7,12 @@ import { messagesReducer, MessagesActionsType } from 'features/messages/model/me
 import { usersReducer, UsersActionsType } from 'features/users/model/users.reducer'
 import { AuthActionsType, authReducer } from 'features/login/model/auth.reducer'
 import { AppActionsType, appReducer } from 'app/model/app.reducer'
+import { ChatActionsType, chatReducer } from 'features/chat/model/chat.reducer'
 
 const rootReducer = combineReducers({
     app: appReducer,
     profile: profileReducer,
+    chat: chatReducer,
     messages: messagesReducer,
     users: usersReducer,
     auth: authReducer,
@@ -26,6 +28,7 @@ export const store: StoreType = createStore(
 export type RootActionsType =
     | AppActionsType
     | ProfileActionsType
+    | ChatActionsType
     | MessagesActionsType
     | UsersActionsType
     | AuthActionsType
