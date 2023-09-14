@@ -1,19 +1,26 @@
 import { useEffect, useState } from 'react'
+
 import { Message } from 'features/chat-page/ui/chat/messages/message'
 import styles from './messages.module.scss'
 
-const wsChannel = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+type Props = {
+    wsChannel: WebSocket | null
+}
 
-export const Messages = () => {
+export const Messages = ({ wsChannel }: Props) => {
     const [messages, setMessages] = useState<MessageType[]>([])
 
     useEffect(() => {
-        wsChannel.addEventListener('message', e => {
+        const messageHandler = (e: MessageEvent) => {
             const newMessages = JSON.parse(e.data)
             setMessages(prevMessages => [...prevMessages, ...newMessages])
-        })
-        // eslint-disable-next-line
-    }, [])
+        }
+        wsChannel?.addEventListener('message', messageHandler)
+
+        return () => {
+            wsChannel?.removeEventListener('message', messageHandler)
+        }
+    }, [wsChannel])
 
     const messagesItems = messages.map((message, idx) => <Message key={idx} message={message} />)
     return <div className={styles.messages}>{messagesItems}</div>

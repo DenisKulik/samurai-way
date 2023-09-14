@@ -1,15 +1,30 @@
+import { useEffect, useState } from 'react'
+
 import { Button } from 'common/components/button'
 import styles from './add-message-form.module.scss'
-import { useState } from 'react'
 
-const wsChannel = new WebSocket('wss://social-network.samuraijs.com/handlers/ChatHandler.ashx')
+type Props = {
+    wsChannel: WebSocket | null
+}
 
-export const AddMessageForm = () => {
+export const AddMessageForm = ({ wsChannel }: Props) => {
     const [message, setMessage] = useState('')
+    const [readyStatus, setReadyStatus] = useState<'pending' | 'ready'>('pending')
+
+    useEffect(() => {
+        const openHandler = () => {
+            setReadyStatus('ready')
+        }
+        wsChannel?.addEventListener('open', openHandler)
+
+        return () => {
+            wsChannel?.removeEventListener('open', openHandler)
+        }
+    }, [wsChannel])
 
     const onSendMessage = () => {
         if (!message) return
-        wsChannel.send(message)
+        wsChannel?.send(message)
         setMessage('')
     }
     return (
@@ -20,7 +35,12 @@ export const AddMessageForm = () => {
                 value={message}
                 rows={1}
             ></textarea>
-            <Button onClick={onSendMessage} title="Send" type="submit" />
+            <Button
+                onClick={onSendMessage}
+                title="Send"
+                type="submit"
+                disabled={wsChannel !== null && readyStatus !== 'ready'}
+            />
         </form>
     )
 }
