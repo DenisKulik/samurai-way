@@ -76,6 +76,10 @@ export type MessageType = {
     userId: number
     userName: string
 }
+
+export type DomainMessageType = MessageType & {
+    id: string
+}
 export type EventsType = 'message-received' | 'status-changed'
 export type StatusType = 'pending' | 'ready' | 'error'
 type MessagesReceivedSubscriberType = (messages: MessageType[]) => void

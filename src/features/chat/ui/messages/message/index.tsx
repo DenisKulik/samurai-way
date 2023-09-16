@@ -1,11 +1,13 @@
+import { memo } from 'react'
+
 import styles from 'features/chat/ui/messages/message/message.module.scss'
-import { MessageType } from 'features/chat/api/chat.api'
+import { DomainMessageType } from 'features/chat/api/chat.api'
 
 type Props = {
-    message: MessageType
+    message: DomainMessageType
 }
 
-export const Message = ({ message }: Props) => {
+export const Message = memo(({ message }: Props) => {
     return (
         <div className={styles.message}>
             <img className={styles.photo} src={message.photo} alt="avatar" />
@@ -13,4 +15,4 @@ export const Message = ({ message }: Props) => {
             <p>{message.message}</p>
         </div>
     )
-}
+})

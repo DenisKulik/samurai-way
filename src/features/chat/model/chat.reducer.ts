@@ -1,8 +1,9 @@
 import { AppThunkDispatch, AppThunkType } from 'app/model/store'
-import { chatAPI, MessageType, StatusType } from 'features/chat/api/chat.api'
+import { chatAPI, DomainMessageType, MessageType, StatusType } from 'features/chat/api/chat.api'
+import { v1 } from 'uuid'
 
 const initialState = {
-    messages: [] as MessageType[],
+    messages: [] as DomainMessageType[],
     status: 'pending' as StatusType,
 }
 
@@ -14,7 +15,13 @@ export const chatReducer = (
         case 'CHAT/SET-MESSAGES':
             return {
                 ...state,
-                messages: [...state.messages, ...action.payload.messages],
+                messages: [
+                    ...state.messages,
+                    ...action.payload.messages.map(message => ({
+                        ...message,
+                        id: v1(),
+                    })),
+                ].filter((_, idx, array) => idx >= array.length - 100),
             }
         case 'CHAT/CHANGE-STATUS':
             return {
