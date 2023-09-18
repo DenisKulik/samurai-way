@@ -1,6 +1,5 @@
 import { ProfilePropsType } from 'features/profile/ui/profile-container'
 import { ProfileInfo } from 'features/profile/ui/profile-info'
-import { MyPostsContainer } from 'features/profile/ui/my-posts/my-posts-container'
 import styles from './profile.module.scss'
 
 export const Profile = (props: ProfilePropsType) => {
@@ -18,7 +17,6 @@ export const Profile = (props: ProfilePropsType) => {
                 sendPhoto={sendPhoto}
                 updateProfile={updateProfile}
             />
-            <MyPostsContainer />
         </div>
     )
 }

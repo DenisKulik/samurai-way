@@ -1,6 +1,5 @@
 import {
     profileReducer,
-    addPost,
     setUserProfile,
     setUserStatus,
     InitialProfileStateType,
@@ -13,30 +12,8 @@ describe('profile-reducer', () => {
     beforeEach(() => {
         initialState = {
             profileData: {} as ProfileType,
-            postsData: [
-                {
-                    id: 1,
-                    message: 'Have fun creating amazing things!',
-                    likesCount: 3,
-                },
-                {
-                    id: 2,
-                    message: 'JavaScript powers modern web development.',
-                    likesCount: 5,
-                },
-            ],
             status: '',
         }
-    })
-
-    it('should add a new post to the state correctly', () => {
-        const post = 'New post'
-        const action = addPost(post)
-        const newState = profileReducer(initialState, action)
-
-        expect(newState.postsData.length).toBe(3)
-        expect(newState.postsData[0].message).toBe(post)
-        expect(newState.postsData[0].likesCount).toBe(0)
     })
 
     it('should set the user profile in the state correctly', () => {

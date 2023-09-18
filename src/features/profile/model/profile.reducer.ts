@@ -9,18 +9,6 @@ import { profileAPI } from 'features/profile/api/profile.api'
 
 const initialState = {
     profileData: {} as ProfileType,
-    postsData: [
-        {
-            id: 1,
-            message: 'Have fun creating amazing things!',
-            likesCount: 3,
-        },
-        {
-            id: 2,
-            message: 'JavaScript powers modern web development.',
-            likesCount: 5,
-        },
-    ],
     status: '',
 }
 
@@ -29,18 +17,6 @@ export const profileReducer = (
     action: ProfileActionsType,
 ): InitialProfileStateType => {
     switch (action.type) {
-        case 'PROFILE/ADD-POST':
-            return {
-                ...state,
-                postsData: [
-                    {
-                        id: new Date().getTime(),
-                        message: action.payload.post,
-                        likesCount: 0,
-                    },
-                    ...state.postsData,
-                ],
-            }
         case 'PROFILE/SET-USER-PROFILE':
             return {
                 ...state,
@@ -67,7 +43,6 @@ export const profileReducer = (
 }
 
 // actions
-export const addPost = (post: string) => ({ type: 'PROFILE/ADD-POST', payload: { post } }) as const
 export const setUserProfile = (profile: ProfileType) =>
     ({ type: 'PROFILE/SET-USER-PROFILE', payload: { profile } }) as const
 export const setUserStatus = (status: string) =>
@@ -144,14 +119,8 @@ export const sendPhoto =
     }
 
 // types
-export type PostType = {
-    id: number
-    message: string
-    likesCount: number
-}
 export type InitialProfileStateType = typeof initialState
 export type ProfileActionsType =
-    | ReturnType<typeof addPost>
     | ReturnType<typeof setUserProfile>
     | ReturnType<typeof setUserStatus>
     | ReturnType<typeof setUserPhotos>
