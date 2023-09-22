@@ -1,5 +1,11 @@
+import { RiEditFill } from 'react-icons/ri'
+import { MdOutlineScreenSearchDesktop } from 'react-icons/md'
+import { GiSkills } from 'react-icons/gi'
+import { IoIosContacts } from 'react-icons/io'
+import { AiOutlineInfoCircle } from 'react-icons/ai'
+
 import { Contact } from 'features/profile/ui/profile-info/contact'
-import styles from 'features/profile/ui/profile-info/profile-info.module.scss'
+import styles from 'features/profile/ui/profile-info/profile-data/profile-data.module.scss'
 import { ProfileType } from 'features/profile/api/profile.api.types'
 
 type Props = {
@@ -16,17 +22,40 @@ export const ProfileData = ({ profile, isOwner, callback }: Props) => {
         })
 
     return (
-        <div className={styles.inner}>
-            <div>
-                <span className={styles.username}>{profile.fullName}</span>
-                {isOwner && <button onClick={callback}>Edit</button>}
+        <div className={styles.profileData}>
+            <div className={styles.inner}>
+                <span>Profile</span>
+                {isOwner && (
+                    <button className={styles.editButton} onClick={callback}>
+                        <RiEditFill />
+                    </button>
+                )}
             </div>
-            <span>
-                {profile.lookingForAJob ? 'Looking for a job 🐱‍💻' : 'Not looking for a job 😎'}
+            <span className={styles.item}>
+                <MdOutlineScreenSearchDesktop /> Looking for a job:{' '}
+                <b>{profile.lookingForAJob ? ' Yes 🐱‍💻' : ' No 😎'}</b>
             </span>
-            {profile.lookingForAJob && <p>{`My skills: ${profile.lookingForAJobDescription}`}</p>}
-            <div>{profile.aboutMe && `About me: ${profile.aboutMe}`}</div>
-            {contacts.length > 0 && <div className={styles.contacts}>Contacts: {contacts}</div>}
+            {profile.lookingForAJob && (
+                <span className={styles.item}>
+                    <GiSkills /> Skills: <b>{profile.lookingForAJobDescription}</b>
+                </span>
+            )}
+            <div>
+                {profile.aboutMe && (
+                    <span className={styles.item}>
+                        <AiOutlineInfoCircle />
+                        About me: <b>{profile.aboutMe}</b>
+                    </span>
+                )}
+            </div>
+            {contacts.length > 0 && (
+                <div className={styles.contacts}>
+                    <span className={styles.item}>
+                        <IoIosContacts /> Contacts:
+                    </span>{' '}
+                    {contacts}
+                </div>
+            )}
         </div>
     )
 }

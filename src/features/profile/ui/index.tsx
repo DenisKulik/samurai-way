@@ -1,4 +1,5 @@
 import { ProfilePropsType } from 'features/profile/ui/profile-container'
+import { ProfileHeader } from 'features/profile/ui/profile-header'
 import { ProfileInfo } from 'features/profile/ui/profile-info'
 import styles from './profile.module.scss'
 
@@ -9,14 +10,14 @@ export const Profile = (props: ProfilePropsType) => {
 
     return (
         <div className={styles.profile}>
-            <ProfileInfo
+            <ProfileHeader
                 isOwner={isOwner}
                 profile={profile}
                 status={status}
                 updateUserStatus={updateUserStatus}
                 sendPhoto={sendPhoto}
-                updateProfile={updateProfile}
             />
+            <ProfileInfo isOwner={isOwner} profile={profile} updateProfile={updateProfile} />
         </div>
     )
 }

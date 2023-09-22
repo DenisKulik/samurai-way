@@ -1,0 +1,40 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+        button {
+        align-self: flex-start;
+        margin-left: 0;
+    }
+}
+
+.item {
+    .heading {
+        margin-bottom: 0.6rem;
+    }
+
+    .input,
+    .textarea {
+        width: 100%;
+        height: 100%;
+        padding: 0.5rem 1rem;
+        font-size: 1.6rem;
+        border: none;
+        border-radius: 5rem;
+    }
+
+    .textarea {
+        resize: none;
+    }
+}
+
+.job {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.error {
+    color: #ff3f3f;
+}

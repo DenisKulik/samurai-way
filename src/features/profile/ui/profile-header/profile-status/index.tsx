@@ -1,6 +1,6 @@
 import { ChangeEvent, Component } from 'react'
 
-import styles from 'features/profile/ui/profile-info/profile-status/profile-status.module.scss'
+import styles from 'features/profile/ui/profile-header/profile-status/profile-status.module.scss'
 
 type Props = {
     editable: boolean

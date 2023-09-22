@@ -5,9 +5,9 @@ type Props = {
 
 export const Contact = ({ title, value }: Props) => {
     return (
-        <div>
+        <div style={{ marginBottom: '0.4rem' }}>
             <p>
-                {title}: {value}
+                {title}: <b>{value}</b>
             </p>
         </div>
     )

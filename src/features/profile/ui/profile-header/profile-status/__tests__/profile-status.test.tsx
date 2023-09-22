@@ -1,5 +1,5 @@
 import { create } from 'react-test-renderer'
-import { ProfileStatus } from 'features/profile/ui/profile-info/profile-status/index'
+import { ProfileStatus } from 'features/profile/ui/profile-header/profile-status/index'
 
 describe('profile-status Component', () => {
     it('should display status from props correctly', () => {
