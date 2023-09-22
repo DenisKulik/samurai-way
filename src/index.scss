@@ -6,7 +6,13 @@
     --color-secondary: #333333;
     --color-secondary-light: #eeeeee;
     --color-secondary-dark: #1e1f24;
+
+
 }
+
+$bp-largest: 75rem; // 1200px
+$bp-medium: 56.25em; // 900px
+$bp-small: 37.5em; // 600px
 
 *,
 *::before,
@@ -19,6 +25,10 @@
 html {
     box-sizing: border-box;
     font-size: 62.5%; // 1rem = 10px
+
+    @media only screen and (max-width: $bp-medium) {
+        font-size: 50%;
+    }
 }
 
 body {
