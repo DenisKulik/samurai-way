@@ -21,6 +21,22 @@ const Login = () => {
     return (
         <div className={styles.login}>
             <h1 className={styles.heading}>Login</h1>
+            <div className={styles.info}>
+                <p>
+                    To log in get registered
+                    <a
+                        className={styles.link}
+                        href="https://social-network.samuraijs.com/"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
+                        here
+                    </a>
+                </p>
+                <p>or use common test account:</p>
+                <p>Email: free@samuraijs.com</p>
+                <p>Password: free</p>
+            </div>
             <LoginForm onSubmit={onSubmit} captchaUrl={captchaUrl} />
         </div>
     )

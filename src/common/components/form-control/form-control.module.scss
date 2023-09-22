@@ -4,15 +4,16 @@
     &.error {
         input,
         textarea {
-            border: 1px solid #ff2525;
+            border: none;
+            outline: 1px solid #ff2525;
         }
 
         span {
             position: absolute;
-            top: -18px;
-            right: 5px;
-            font-size: 1.2rem;
-            color: #ff2525;
+            top: -1.5rem;
+            right: 0.5rem;
+            font-size: 1rem;
+            color: #ff3f3f;
         }
     }
 }

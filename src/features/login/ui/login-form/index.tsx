@@ -4,6 +4,7 @@ import { createField, CustomInput, GetStringKeys } from 'common/components/form-
 import styles from 'features/login/ui/login-form/login-form.module.scss'
 import { requiredField } from 'common/utils/validators/validators'
 import { LoginType } from 'features/login/api/auth.api.types'
+import { Button } from 'common/components/button'
 
 const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => {
     return (
@@ -12,15 +13,18 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => 
             {createField<LoginFormValuesTypeKeys>('email', [requiredField], CustomInput, {
                 type: 'email',
                 placeholder: 'Enter your email',
+                className: styles.input,
             })}
             {createField<LoginFormValuesTypeKeys>('password', [requiredField], CustomInput, {
                 type: 'password',
                 placeholder: 'Enter your password',
+                className: styles.input,
             })}
             <div className={styles.checkbox}>
                 {createField<LoginFormValuesTypeKeys>('rememberMe', [], CustomInput, {
                     type: 'checkbox',
                     placeholder: 'checkbox',
+                    className: styles.checkbox,
                 })}
                 <label>Remember me</label>
             </div>
@@ -29,7 +33,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => 
                 createField<LoginFormValuesTypeKeys>('captcha', [requiredField], CustomInput, {
                     placeholder: 'Enter captcha',
                 })}
-            <button>Login</button>
+            <Button title="Login" />
         </form>
     )
 }
