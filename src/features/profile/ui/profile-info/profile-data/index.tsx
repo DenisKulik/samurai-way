@@ -24,7 +24,7 @@ export const ProfileData = ({ profile, isOwner, callback }: Props) => {
     return (
         <div className={styles.profileData}>
             <div className={styles.inner}>
-                <span>Profile</span>
+                <h3>Profile</h3>
                 {isOwner && (
                     <button className={styles.editButton} onClick={callback}>
                         <RiEditFill />

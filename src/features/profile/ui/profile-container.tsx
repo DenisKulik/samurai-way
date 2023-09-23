@@ -16,6 +16,9 @@ import { getAuthUserId, getIsAuth } from 'features/login/model/auth.selectors'
 import { Profile } from 'features/profile/ui/index'
 import { ProfileDataFormType } from 'features/profile/ui/profile-info/profile-data-form'
 import { ProfileType } from 'features/profile/api/profile.api.types'
+import { FilterType, UserType } from 'features/users/api/users.api.types'
+import { getUsers } from 'features/users/model/users.selectors'
+import { requestUsers } from 'features/users/model/users.reducer'
 
 class ProfileContainer extends Component<ProfilePropsType> {
     refreshProfile() {
@@ -36,6 +39,7 @@ class ProfileContainer extends Component<ProfilePropsType> {
 
     componentDidMount() {
         this.refreshProfile()
+        this.props.requestUsers(1, 10, { friend: true })
     }
 
     componentDidUpdate(prevProps: ProfilePropsType) {
@@ -54,6 +58,7 @@ const mapStateToProps = (state: AppStateType): MapStateToPropsType => ({
     status: getStatus(state),
     authorizedUserId: getAuthUserId(state),
     isAuth: getIsAuth(state),
+    users: getUsers(state),
 })
 
 export default compose<ComponentType>(
@@ -63,6 +68,7 @@ export default compose<ComponentType>(
         updateUserStatus,
         sendPhoto,
         updateProfile,
+        requestUsers,
     }),
     withRouter,
 )(ProfileContainer)
@@ -73,6 +79,7 @@ type MapStateToPropsType = {
     status: string
     authorizedUserId: number | null
     isAuth: boolean | null
+    users: UserType[]
 }
 type MapDispatchToPropsType = {
     getUserProfile: (userId: string) => void
@@ -80,6 +87,7 @@ type MapDispatchToPropsType = {
     updateUserStatus: (userId: string) => void
     sendPhoto: (file: File) => void
     updateProfile: (profile: ProfileDataFormType) => Promise<any>
+    requestUsers: (page: number, pageSize: number, filter: FilterType) => void
 }
 type PathParamsType = {
     userId: string

@@ -2,10 +2,19 @@ import { ProfilePropsType } from 'features/profile/ui/profile-container'
 import { ProfileHeader } from 'features/profile/ui/profile-header'
 import { ProfileInfo } from 'features/profile/ui/profile-info'
 import styles from './profile.module.scss'
+import { Friends } from 'features/profile/ui/friends'
 
 export const Profile = (props: ProfilePropsType) => {
-    const { profile, status, authorizedUserId, match, updateUserStatus, sendPhoto, updateProfile } =
-        props
+    const {
+        profile,
+        status,
+        authorizedUserId,
+        users,
+        match,
+        updateUserStatus,
+        sendPhoto,
+        updateProfile,
+    } = props
     const isOwner = !match.params.userId || Number(match.params.userId) === authorizedUserId
 
     return (
@@ -17,7 +26,10 @@ export const Profile = (props: ProfilePropsType) => {
                 updateUserStatus={updateUserStatus}
                 sendPhoto={sendPhoto}
             />
-            <ProfileInfo isOwner={isOwner} profile={profile} updateProfile={updateProfile} />
+            <div className={styles.content}>
+                <ProfileInfo isOwner={isOwner} profile={profile} updateProfile={updateProfile} />
+                <Friends users={users} />
+            </div>
         </div>
     )
 }
