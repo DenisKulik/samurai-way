@@ -3,6 +3,7 @@ import { ProfileHeader } from 'features/profile/ui/profile-header'
 import { ProfileInfo } from 'features/profile/ui/profile-info'
 import styles from './profile.module.scss'
 import { Friends } from 'features/profile/ui/friends'
+import { Preloader } from 'common/components/preloader'
 
 export const Profile = (props: ProfilePropsType) => {
     const {
@@ -16,6 +17,8 @@ export const Profile = (props: ProfilePropsType) => {
         updateProfile,
     } = props
     const isOwner = !match.params.userId || Number(match.params.userId) === authorizedUserId
+
+    if (!Object.keys(profile).length) return <Preloader />
 
     return (
         <div className={styles.profile}>

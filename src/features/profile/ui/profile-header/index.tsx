@@ -3,7 +3,6 @@ import { Component } from 'react'
 import styles from 'features/profile/ui/profile-header/profile-header.module.scss'
 import background from 'common/img/background.jpg'
 import { ProfileType } from 'features/profile/api/profile.api.types'
-import { Preloader } from 'common/components/preloader'
 import { Avatar } from 'features/profile/ui/profile-header/avatar'
 import { ProfileStatus } from 'features/profile/ui/profile-header/profile-status'
 
@@ -32,7 +31,6 @@ export class ProfileHeader extends Component<Props, State> {
 
     render() {
         const { isOwner, profile, status, updateUserStatus, sendPhoto } = this.props
-        if (!Object.keys(profile).length) return <Preloader />
 
         return (
             <div className={styles.header}>

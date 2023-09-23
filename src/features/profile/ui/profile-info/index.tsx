@@ -2,7 +2,6 @@ import { Component } from 'react'
 
 import styles from 'features/profile/ui/profile-info/profile-info.module.scss'
 import { ProfileType } from 'features/profile/api/profile.api.types'
-import { Preloader } from 'common/components/preloader'
 import { ProfileData } from 'features/profile/ui/profile-info/profile-data'
 import ProfileDataForm, {
     ProfileDataFormType,
@@ -39,7 +38,6 @@ export class ProfileInfo extends Component<Props, State> {
 
     render() {
         const { isOwner, profile } = this.props
-        if (!Object.keys(profile).length) return <Preloader />
 
         return (
             <div className={styles.profileInfo}>

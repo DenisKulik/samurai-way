@@ -19,6 +19,9 @@
 
   .info {
     flex: 1 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 
       .username {
         flex: 1 0;
