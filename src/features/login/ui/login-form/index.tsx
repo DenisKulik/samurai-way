@@ -33,7 +33,7 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => 
                 createField<LoginFormValuesTypeKeys>('captcha', [requiredField], CustomInput, {
                     placeholder: 'Enter captcha',
                 })}
-            <Button title="Login" />
+            <Button type="submit" title="Login" />
         </form>
     )
 }
