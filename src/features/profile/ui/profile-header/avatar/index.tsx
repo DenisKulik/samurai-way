@@ -2,7 +2,7 @@ import { ChangeEvent } from 'react'
 import { MdOutlinePhotoCamera } from 'react-icons/md'
 
 import styles from 'features/profile/ui/profile-header/avatar/avatar.module.scss'
-import userDefault from 'common/img/user-default.png'
+import userDefault from 'common/img/user-default.jpg'
 import { PhotosType } from 'features/users/api/users.api.types'
 
 type Props = {

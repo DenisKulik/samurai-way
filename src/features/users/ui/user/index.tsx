@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { NavLink } from 'react-router-dom'
 
 import styles from 'features/users/ui/user/user.module.scss'
-import userDefault from 'common/img/user-default.png'
+import userDefault from 'common/img/user-default.jpg'
 import { UserType } from 'features/users/api/users.api.types'
 import { followUser, unfollowUser } from 'features/users/model/users.reducer'
 import { useDispatch, useSelector } from 'react-redux'

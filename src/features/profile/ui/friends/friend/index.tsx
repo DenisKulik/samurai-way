@@ -2,7 +2,7 @@ import { NavLink } from 'react-router-dom'
 
 import { UserType } from 'features/users/api/users.api.types'
 import styles from './friend.module.scss'
-import userDefault from 'common/img/user-default.png'
+import userDefault from 'common/img/user-default.jpg'
 
 type Props = {
     friend: UserType
