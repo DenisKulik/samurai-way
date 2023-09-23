@@ -10,8 +10,10 @@ type Props = {
 export const Message = memo(({ message }: Props) => {
     return (
         <div className={styles.message}>
-            <img className={styles.photo} src={message.photo} alt="avatar" />
-            <b>{message.userName}</b>
+            <div className={styles.userInfo}>
+                <img className={styles.photo} src={message.photo} alt="avatar" />
+                <b>{message.userName}</b>
+            </div>
             <p>{message.message}</p>
         </div>
     )
