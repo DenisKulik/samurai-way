@@ -6,10 +6,9 @@
     gap: 1rem;
 
     .input {
+        @include input;
+
         height: auto;
-        padding: 0.5rem 1rem;
         font-size: 1.4rem;
-        border-radius: 50px;
-        border: none;
     }
 }
