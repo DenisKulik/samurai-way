@@ -1,6 +1,5 @@
 import { NavLink } from 'react-router-dom'
-import { RiMessage3Line, RiUser3Line } from 'react-icons/ri'
-import { MdDeveloperMode } from 'react-icons/md'
+import { HiOutlineUser, HiOutlineUsers, HiOutlineChatBubbleOvalLeftEllipsis } from 'react-icons/hi2'
 
 import styles from 'common/components/navbar/navbar.module.scss'
 
@@ -10,20 +9,20 @@ export const Navbar = () => {
             <ul className={styles.nav}>
                 <li className={styles.item}>
                     <NavLink to="/profile" activeClassName={styles.active}>
-                        <RiUser3Line />
+                        <HiOutlineUser />
                         Profile
                     </NavLink>
                 </li>
                 <li className={styles.item}>
                     <NavLink to="/chat" activeClassName={styles.active}>
-                        <RiMessage3Line />
+                        <HiOutlineChatBubbleOvalLeftEllipsis />
                         Chat
                     </NavLink>
                 </li>
                 <li className={styles.item}>
                     <NavLink to="/users" activeClassName={styles.active}>
-                        <MdDeveloperMode />
-                        Developers
+                        <HiOutlineUsers />
+                        Users
                     </NavLink>
                 </li>
             </ul>
