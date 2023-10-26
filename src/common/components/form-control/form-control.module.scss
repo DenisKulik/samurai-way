@@ -5,7 +5,11 @@
         input,
         textarea {
             border: none;
-            outline: 1px solid #ff2525;
+            outline: 1px solid #ff6363;
+
+            &::placeholder {
+                color: #ff6363;
+            }
         }
 
         span {
@@ -13,7 +17,7 @@
             top: -1.5rem;
             right: 0.5rem;
             font-size: 1rem;
-            color: #ff3f3f;
+            color: #ff6363;
         }
     }
 }
