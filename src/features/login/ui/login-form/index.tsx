@@ -25,8 +25,9 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }: LoginFormDomainType) => 
                     type: 'checkbox',
                     placeholder: 'checkbox',
                     className: styles.checkbox,
+                    id: 'rememberMe',
                 })}
-                <label>Remember me</label>
+                <label htmlFor="rememberMe">remember me</label>
             </div>
             {captchaUrl && <img src={captchaUrl} alt="captcha" />}
             {captchaUrl &&
